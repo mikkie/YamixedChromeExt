@@ -10,7 +10,8 @@ POPUP = (function($){
 	   	  chrome.tabs.query({active : true}, function(tabs) {
              var tab = tabs[0];
              chrome.tabs.sendRequest(tab.id,{title : tab.title,url : tab.url},function(response) {
-                
+                window.sessionStorage.setItem('newMix',JSON.stringify(response));
+                window.location.href="newMix.html";
              });
           });
 	   });	

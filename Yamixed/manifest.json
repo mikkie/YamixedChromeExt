@@ -6,12 +6,12 @@
     "default_icon": "icon.png",
     "default_popup" : "html/popup.html"
   },
-  "permissions": ["tabs"],
+  "permissions": ["tabs","http://*/"],
   "manifest_version": 2,
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["jquery/jquery-1.11.1.min.js", "js/content.js"]
+      "js": ["jquery/jquery-1.11.1.min.js","js/base64.min.js","js/config.js","js/content.js"]
     }
   ]
 }
