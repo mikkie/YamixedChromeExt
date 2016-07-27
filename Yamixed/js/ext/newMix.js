@@ -114,6 +114,9 @@ NEW_MIX = (function($){
            return;
 		}
 		var data = JSON.parse(mixStr);
+		if(!data.mix){
+           return;
+		}
 		$('#' + ELS_IDS.URL_ADDRESS).val(data.mix.url);
 		$('#' + ELS_IDS.TITLE).val(data.mix.title);
 		$('#' + ELS_IDS.DESC).val(data.mix.description);
