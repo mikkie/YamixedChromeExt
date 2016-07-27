@@ -1,7 +1,21 @@
 POPUP = (function($){
 
   var ELS_IDS = {
-	 NEW_MIX : 'newMix'	  
+	  NEW_MIX : 'newMix'	  
+  };
+
+
+  var getCategories = function(){
+    var categories = null;
+    COMMON.ajax({
+      url : CONFIG.host + CONFIG.url.getCategories,
+      type : 'get',
+      async : false,
+      callback : function(data){
+        categories = data;  
+      }
+    });
+    return categories;
   };	
   
   var bind = {
@@ -10,7 +24,8 @@ POPUP = (function($){
 	   	  chrome.tabs.query({active : true}, function(tabs) {
              var tab = tabs[0];
              chrome.tabs.sendRequest(tab.id,{title : tab.title,url : tab.url},function(response) {
-                window.sessionStorage.setItem('newMix',JSON.stringify(response));
+                var categories = getCategories();
+                window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));
                 window.location.href="newMix.html";
              });
           });

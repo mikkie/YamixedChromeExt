@@ -25,28 +25,8 @@ CONTENT = (function(){
      };
   }; 
 
-
-  var getCategories = function(){
-    var categories = null;
-    $.ajax({
-  		url : CONFIG.host + '/rest/api/v1/category/all',
-  		beforeSend: function (xhr) {
-          xhr.setRequestHeader ("Authorization", "Basic " + Base64.encode(CONFIG.basicAuth.username + ":" + CONFIG.basicAuth.password));
-      },
-  		type : 'get',
-  		dataType : 'json',
-      async : false
-  	}).done(function(data){
-        categories = data;  
-  	});
-    return categories;
-  };
-
-   
   chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   	var mix = parseMix(request);
-    var categories = getCategories();
-    sendResponse({'mix' : mix,'categories' : categories}); 
-  	// alert('title=' + mix.title + ',url=' + mix.url + ',description=' + mix.description);
+    sendResponse(mix); 
   });
 })();
