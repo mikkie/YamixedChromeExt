@@ -25,8 +25,13 @@ POPUP = (function($){
              var tab = tabs[0];
              chrome.tabs.sendRequest(tab.id,{title : tab.title,url : tab.url},function(response) {
                 var categories = getCategories();
-                window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));
-                window.location.href="newMix.html";
+                if(categories){
+                   window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));
+                   window.location.href="newMix.html";
+                }
+                else{
+                   COMMON.logError('can not get categories');
+                }
              });
           });
 	   });	

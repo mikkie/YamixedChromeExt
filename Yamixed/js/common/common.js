@@ -17,9 +17,16 @@ COMMON = (function($){
       $.ajax(mergeOption).done(mergeOption.callback); 
    };
 
+
+   var logError = function(error){
+   	   var msg = error + ',please contact with ' + CONFIG.SUPPORT;
+       console.error(msg);
+       alert(msg); 
+   }; 
    
    return {
-      ajax : ajax
+      ajax : ajax,
+      logError : logError
    };
 
 })(jQuery);

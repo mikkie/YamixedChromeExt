@@ -82,12 +82,29 @@ NEW_MIX = (function($){
                    }),
                    callback : function(data){
                       if(data.success){
-                        //TODO 消息通知
+                         openNotofication(data.success);
+                      }
+                      else{
+                      	 COMMON.logError('服务器开小差了');
                       }
                    }
                 });
 			});
 		}
+    };
+
+
+    var openNotofication = function(mix){
+       var url = CONFIG.host + '/comment/view?mixId=' + mix.id; 	
+       chrome.notifications.create(url, {
+       	  type : 'basic',
+          iconUrl : mix.previewImgUrl,
+          title : 'Yamixed -' + mix.title,
+          message : mix.description,
+          isClickable : true
+       }, function(notificationId){
+       	  window.close();
+       });
     };
 
 
