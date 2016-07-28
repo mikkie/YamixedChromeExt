@@ -14,7 +14,8 @@ CONTENT = (function(){
      var images = [];
      $('img').each(function(i,n){
        if(i < 20){
-         images.push($(n).attr('src'));
+         var src = COMMON.absolute($(n).attr('src'))
+         images.push(src);
        }
      });
      return {
