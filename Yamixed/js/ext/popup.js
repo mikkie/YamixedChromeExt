@@ -23,7 +23,7 @@ POPUP = (function($){
 	   $('#' + ELS_IDS.NEW_MIX).click(function(){
 	   	  chrome.tabs.query({active : true}, function(tabs) {
              var tab = tabs[0];
-             chrome.tabs.sendRequest(tab.id,{title : tab.title,url : tab.url},function(response) {
+             chrome.tabs.sendMessage(tab.id,{title : tab.title,url : tab.url},function(response) {
                 var categories = getCategories();
                 if(categories){
                    window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));

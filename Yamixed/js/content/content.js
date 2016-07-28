@@ -1,8 +1,8 @@
 CONTENT = (function(){
 
-  var parseMix = function(request){
-  	 var title = request.title;
-  	 var url = request.url;
+  var parseMix = function(message){
+  	 var title = message.title;
+  	 var url = message.url;
   	 var descs = $('meta').filter(function(){
   	   var name = $(this).attr('name');
   	   return name && name.toLowerCase().indexOf('description') > -1;
@@ -25,8 +25,8 @@ CONTENT = (function(){
      };
   }; 
 
-  chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-  	var mix = parseMix(request);
+  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  	var mix = parseMix(message);
     sendResponse(mix); 
   });
 })();

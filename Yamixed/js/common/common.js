@@ -21,7 +21,13 @@ COMMON = (function($){
    var logError = function(error){
    	   var msg = error + ',please contact with ' + CONFIG.SUPPORT;
        console.error(msg);
-       alert(msg); 
+       chrome.notifications.create('error-' + new Date().getTime(), {
+          type : 'basic',
+          iconUrl : '../../images/logo_64x64.png',
+          title : 'Error',
+          message : msg
+       }, function(notificationId){
+       });
    }; 
    
    return {

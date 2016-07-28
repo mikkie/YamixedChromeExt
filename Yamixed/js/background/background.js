@@ -11,7 +11,9 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
 });
 
 chrome.notifications.onClicked.addListener(function(notificationId){
-    chrome.tabs.create({
+	if(notificationId.indexOf('http') == 0){
+      chrome.tabs.create({
         url: notificationId
-    });
+      });
+	}
 });
