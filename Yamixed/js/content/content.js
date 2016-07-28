@@ -29,4 +29,5 @@ CONTENT = (function(){
   	var mix = parseMix(message);
     sendResponse(mix); 
   });
+  
 })();

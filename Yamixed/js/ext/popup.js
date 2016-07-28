@@ -5,17 +5,14 @@ POPUP = (function($){
   };
 
 
-  var getCategories = function(){
-    var categories = null;
+  var getCategories = function(cb){
     COMMON.ajax({
       url : CONFIG.host + CONFIG.url.getCategories,
       type : 'get',
-      async : false,
       callback : function(data){
-        categories = data;  
+        cb(data);  
       }
     });
-    return categories;
   };	
   
   var bind = {
@@ -24,14 +21,15 @@ POPUP = (function($){
 	   	  chrome.tabs.query({active : true}, function(tabs) {
              var tab = tabs[0];
              chrome.tabs.sendMessage(tab.id,{title : tab.title,url : tab.url},function(response) {
-                var categories = getCategories();
-                if(categories){
-                   window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));
-                   window.location.href="newMix.html";
-                }
-                else{
-                   COMMON.logError('can not get categories');
-                }
+                getCategories(function(categories){
+                  if(categories){
+                     window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));
+                     window.location.href="newMix.html";
+                  }
+                  else{
+                     COMMON.logError('can not get categories');
+                  }
+                });
              });
           });
 	   });	
