@@ -1,0 +1,9 @@
+body {
+    min-width:500px;
+}
+
+.previewImg{
+	width:80px;
+	max-height:60px;
+	margin: 5px;
+}
