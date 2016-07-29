@@ -1,6 +1,7 @@
 POPUP = (function($){
 
   var ELS_IDS = {
+    HOME : 'home',
 	  NEW_MIX : 'newMix'	  
   };
 
@@ -16,6 +17,13 @@ POPUP = (function($){
   };	
   
   var bind = {
+   go_home : function(){
+      $('#' + ELS_IDS.HOME).click(function(){
+         chrome.tabs.create({
+           url: CONFIG.host
+         });
+      });
+   },  
 	 newMix : function(){
 	   $('#' + ELS_IDS.NEW_MIX).click(function(){
 	   	  chrome.tabs.query({active : true}, function(tabs) {

@@ -8,6 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/popup.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,7 +18,11 @@
     <![endif]-->
   </head>
   <body>
-    <button id="newMix" type="button" class="btn btn-warning">发布到Yamixed</button>
+    <div class="list-group">
+      <a id="newMix" href="javascript:void(0);" class="list-group-item list-group-item-info"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;发布链接</a>
+      <a href="javascript:void(0);" class="list-group-item list-group-item-warning"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>&nbsp;发布书签</a>
+      <a id="home" href="javascript:void(0);" class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Yamixed</a>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../jquery/jquery-1.11.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
