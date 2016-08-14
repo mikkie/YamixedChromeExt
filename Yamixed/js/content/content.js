@@ -1,5 +1,10 @@
 CONTENT = (function(){
 
+  var ELS_IDS = {
+    YAMIXED_MODAL : 'yamixed-modal-window',
+    MAIN_BODY : 'yamixed-ext-body'
+  };
+
   var parseMix = function(message){
   	 var title = message.title;
   	 var url = message.url;
@@ -30,8 +35,48 @@ CONTENT = (function(){
   }; 
 
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  	var mix = parseMix(message);
-    sendResponse(mix); 
+    if('parseLink' == message.action){
+  	  var mix = parseMix(message);
+      sendResponse(mix); 
+    }
+    else if('openUrm' == message.action){
+       $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
+          $('#' + ELS_IDS.MAIN_BODY).remove();
+          $('body').append(data);
+          centerIframe(true);
+          sendResponse();
+       });
+    }
   });
-  
+
+
+  var centerIframe = function(resetTop){
+     var w = $(window).width();
+     var $main_body = $('#' + ELS_IDS.MAIN_BODY);
+     if(resetTop){
+       var h = $(document).scrollTop();
+       $main_body.css('top',h + 80 + 'px');
+     }
+     
+     $main_body.css('left',w/2-$main_body.width()/2 + 'px');
+     $main_body.show();
+  };
+
+
+  var lastScrollTop = 0; 
+  $(window).resize(function(){
+     setTimeout(function(){
+        centerIframe(true);
+     },50);
+  }).scroll(function(){
+     var up = true;
+     var st = $(this).scrollTop();
+     if (st > lastScrollTop){
+       up = false; 
+     }
+     lastScrollTop = st;
+     setTimeout(function(){
+        centerIframe(up);
+     },50);
+  });
 })();
