@@ -2,5 +2,11 @@
   <iframe id="yamixed-iframe" src="" scrolling="no" frameborder="0" style="overflow: hidden; height: 600px; width: 900px;" height="600px" width="800px"></iframe>
   <script type="text/javascript">
      $('#yamixed-iframe').attr('src',chrome.extension.getURL("content/content.html"));
+     $(document).keyup(function(e){
+        if(e.keyCode == 27){
+          $('#yamixed-ext-body').remove();     
+        }
+        return false;
+     });
   </script>	
 </div>	

@@ -21,7 +21,7 @@ POPUP = (function($){
   var sendMessageToActivePage = function(message,callback){
      chrome.tabs.query({active : true}, function(tabs) {
         var tab = tabs[0];
-        chrome.tabs.sendMessage(tab.id,message,function(response){
+        chrome.tabs.sendMessage(tab.id,$.extend({},{tab : tab},message),function(response,tab){
             callback(response);
         });
      });
@@ -37,7 +37,7 @@ POPUP = (function($){
    },  
 	 newMix : function(){
 	   $('#' + ELS_IDS.NEW_MIX).click(function(){
-	   	  sendMessageToActivePage({action : 'parseLink',title : tab.title,url : tab.url},function(response) {
+	   	  sendMessageToActivePage({action : 'parseLink'},function(response) {
             if(!response){
                COMMON.logError('当前页面努力加载中...，请刷新重试(F5)');
                   return;
@@ -62,6 +62,8 @@ POPUP = (function($){
      });
    }	  
   };
+
+
   	
   var init = function(){
 	  for(var m in bind){

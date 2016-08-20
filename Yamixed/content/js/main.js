@@ -4,9 +4,18 @@ MAIN = (function() {
   	 MAIN_AREA : 'mainArea' 
   };	
 
+  var ELS_CLASS = {
+     CLOSE : 'close' 
+  };
+
 
   
   var bind = {
+      close : function(){
+         $('.' + ELS_CLASS.CLOSE).click(function(){
+            chrome.runtime.sendMessage({action:'close'});
+         });
+      } 
   };
 
   var init = function(){

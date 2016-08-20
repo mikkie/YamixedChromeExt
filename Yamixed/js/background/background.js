@@ -17,3 +17,20 @@ chrome.notifications.onClicked.addListener(function(notificationId){
       });
 	}
 });
+
+
+chrome.runtime.onMessage.addListener(function (msg, sender) {
+  sendMessageToActivePage(msg,function(response) {
+    
+  });
+});
+
+
+var sendMessageToActivePage = function(message,callback){
+     chrome.tabs.query({active : true}, function(tabs) {
+        var tab = tabs[0];
+        chrome.tabs.sendMessage(tab.id,$.extend({},{tab : tab},message),function(response,tab){
+            callback(response);
+        });
+     });
+};

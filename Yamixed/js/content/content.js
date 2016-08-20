@@ -6,8 +6,8 @@ CONTENT = (function(){
   };
 
   var parseMix = function(message){
-  	 var title = message.title;
-  	 var url = message.url;
+  	 var title = message.tab.title;
+  	 var url = message.tab.url;
   	 var descs = $('meta').filter(function(){
   	   var name = $(this).attr('name');
   	   return name && name.toLowerCase().indexOf('description') > -1;
@@ -46,6 +46,9 @@ CONTENT = (function(){
           centerIframe(true);
           sendResponse();
        });
+    }
+    else if('close' == message.action){
+       $('#' + ELS_IDS.MAIN_BODY).remove();
     }
   });
 

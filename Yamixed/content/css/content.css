@@ -1,0 +1,129 @@
+.header{
+   min-height: 50px;
+   padding-top: 8px;
+   padding-bottom: 8px;
+   border-bottom: 1px solid #e5e5e5;
+}
+#logo{
+  float: left;	
+}
+.avatar{
+  height: 34px;
+  width: 34px;
+  float: left;
+}
+#searchbox{
+  width: 35%;
+  float: left;
+  margin-left: 1%;
+}
+
+.user{
+  float: left;	
+  width: 15%; 	
+  margin-left: 1%;
+}
+
+.avatar{
+  height: 34px;
+  width: 34px;
+  display: inline-block;
+}
+
+.userName{
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.user li{
+  list-style: none;
+}
+
+.user li a{
+  color: #000;
+  text-decoration: none;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user li a h4{
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 90px;
+}
+
+.user li ul{
+  margin-top: 9px;
+  left: -20px;
+}
+
+.content{
+  margin-top: 10px;
+}
+
+.sidebar{
+  border-right: 1px solid #e5e5e5;
+  height: 540px;
+  overflow-y: auto; 
+}
+
+.nav-sidebar li a{
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+}
+
+.thumbnail{
+  width: 24.5%;
+  display: inline-block;
+}
+.thumbnail img{
+  width: 150px;
+  height: 90px;
+}
+
+.thumbnail .caption{
+  padding: 1px;
+}
+
+.thumbnail .caption h5{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.thumbnail .caption b{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+
+.desc{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.mainarea{
+  height: 540px;
+  overflow-y: auto; 
+}
+
+
+#bookmark{
+  float: left;
+  margin-left: 34%;
+}
+
+.close{
+  position: absolute;
+}
+
