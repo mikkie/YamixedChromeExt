@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="margin: 0;padding: 0;">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/css/bootstrap.min.css"></style>
+	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/css/content.css"></style>
+</head>
+<body style="margin: 0;padding: 0;">
+	<div id="mainArea" class="container-fluid">
+	   <div class="header row">
+	   	  <div class="col-md-12">
+             <a href="javascript:void(0);"><img id="logo" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_32x32.png" /></a>
+             <div class="user" style="margin-left: 80%;">
+             		<li role="presentation" class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://s-media-cache-ak0.pinimg.com/236x/ff/4d/c7/ff4dc726d7bb0b25a4c4aa308a6e0094.jpg" alt="..." class="avatar img-circle">
+                        <h4 class="userName"><span class="caret"></span>&nbsp;Aqua is genius sssssssssssss</h4>
+                      </a>
+                      <ul class="dropdown-menu">
+                      	<li><a href="">设置</a></li>
+                      	<li role="separator" class="divider"></li>
+                      	<li><a href="">退出</a></li>
+                      </ul>
+                </li>
+             </div>
+             <button type="button" class="close" data-dismiss="modal">
+               <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+             </button>	
+	   	  </div>
+	   </div>	
+     <div class="row content">
+       <div class="col-sm-3 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active">
+              <a id="space" href="#" style="font-weight: bold">空间<span class="sr-only">(current)</span></a>
+              <ul id="spaceUl" class="nav nav-sidebar">
+                 <li>
+                    <a href="#">Aqua的书签</a>
+                    <a href="#">ehealth的书签</a>
+                    <a href="#">yamixed的书签</a>
+                 </li> 
+              </ul>  
+            </li>
+            <li>
+              <a id="group" href="#" style="font-weight: bold">用户组</a>
+              <ul id="groupUl" class="nav nav-sidebar">
+                 <li>
+                    <a href="#">yamixed</a>
+                    <a href="#">ehealth</a>
+                 </li> 
+              </ul>
+            </li>
+          </ul>
+       </div>
+       <div class="col-sm-9 mainarea">
+          <div id="spaceArea">
+          <h5>空间:</h5>
+          <div class="well well-lg" style="padding:8px;">
+            <a href="#">
+              <div class="thumbnail space">
+                <b>Aqua的书签sssssssssssssssssssssss</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail space">
+                <b>Aqua的书签sssssssssssssssssssssss</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail space">
+                <b>Aqua的书签sssssssssssssssssssssss</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail space">
+                <b>Aqua的书签sssssssssssssssssssssss</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail space">
+                <b>Aqua的书签sssssssssssssssssssssss</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail space" style="background-color:#afaeb1;text-align:center;">
+                <b><span class="glyphicon glyphicon-plus-sign" aria-hidden="true">创建空间</span></b>
+              </div>
+            </a>  
+          </div>
+          </div>  
+          <div id="groupArea">
+          <h5>用户组:</h5>
+          <div class="well well-lg" style="padding:8px;">
+            <a href="#">
+              <div class="thumbnail group">
+                <b>yamixed</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail group">
+                <b>yamixed</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail group">
+                <b>yamixed</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail group">
+                <b>yamixed</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail group">
+                <b>yamixed</b>
+              </div>
+            </a>
+            <a href="#">
+              <div class="thumbnail group" style="background-color:#afaeb1;text-align:center;">
+                <b><span class="glyphicon glyphicon-plus-sign" aria-hidden="true">创建用户组</span></b>
+              </div>
+            </a>  
+          </div>
+          </div>
+       </div> 
+	   </div>
+	</div>  
+	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/setting.js"></script>
+</body>

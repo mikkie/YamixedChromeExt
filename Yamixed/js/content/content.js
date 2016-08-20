@@ -2,7 +2,8 @@ CONTENT = (function(){
 
   var ELS_IDS = {
     YAMIXED_MODAL : 'yamixed-modal-window',
-    MAIN_BODY : 'yamixed-ext-body'
+    MAIN_BODY : 'yamixed-ext-body',
+    IFRAME : 'yamixed-iframe'
   };
 
   var parseMix = function(message){
@@ -50,6 +51,11 @@ CONTENT = (function(){
     else if('close' == message.action){
        $('#' + ELS_IDS.MAIN_BODY).remove();
     }
+    else if('showPage' == message.action){
+       var $iframe = $('#' + ELS_IDS.IFRAME);
+       $iframe.attr('src',message.url).attr('width',message.width).css('width',message.width);
+       centerIframe(true);
+    }
   });
 
 
@@ -58,7 +64,7 @@ CONTENT = (function(){
      var $main_body = $('#' + ELS_IDS.MAIN_BODY);
      if(resetTop){
        var h = $(document).scrollTop();
-       $main_body.css('top',h + 80 + 'px');
+       $main_body.css('top',h + 40 + 'px');
      }
      
      $main_body.css('left',w/2-$main_body.width()/2 + 'px');

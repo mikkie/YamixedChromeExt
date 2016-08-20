@@ -127,3 +127,23 @@
   position: absolute;
 }
 
+
+.previewImg{
+  width:95px;
+  height:70px;
+  margin: 5px;
+}
+
+.space,.group{
+  height: 90px;
+  background-color: #776496;
+}
+
+.space b,.group b{
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  font-size: 15px;
+}
