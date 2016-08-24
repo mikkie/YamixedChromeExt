@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["jquery/jquery-1.11.1.min.js","js/common/common.js","js/content/content.js"]
+      "js": ["jquery/jquery-1.11.1.min.js","js/common/common.js","js/common/hotkeys.js","js/content/content.js"]
     }
   ],
   "web_accessible_resources": ["bootstrap/*","content/*","images/*"]

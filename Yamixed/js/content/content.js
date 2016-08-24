@@ -35,18 +35,26 @@ CONTENT = (function(){
      };
   }; 
 
+
+  var openUrm = function(callback){
+     $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
+          $('#' + ELS_IDS.MAIN_BODY).remove();
+          $('body').append(data);
+          centerIframe(true);
+          if(callback == 'function'){
+             callback();
+          }
+     });
+  }; 
+
+
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if('parseLink' == message.action){
   	  var mix = parseMix(message);
       sendResponse(mix); 
     }
     else if('openUrm' == message.action){
-       $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
-          $('#' + ELS_IDS.MAIN_BODY).remove();
-          $('body').append(data);
-          centerIframe(true);
-          sendResponse();
-       });
+       openUrm(sendResponse);
     }
     else if('close' == message.action){
        $('#' + ELS_IDS.MAIN_BODY).remove();
@@ -88,4 +96,14 @@ CONTENT = (function(){
         centerIframe(up);
      },50);
   });
+
+
+  (function binding(){
+     $(document).hotKey({ key: 'y', modifier: 'alt' }, function () {
+        openUrm();
+     });  
+  })(); 
+
+
+
 })();

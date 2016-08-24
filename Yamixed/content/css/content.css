@@ -120,7 +120,7 @@
 
 #bookmark{
   float: left;
-  margin-left: 34%;
+  margin-left: 30%;
 }
 
 .close{
@@ -146,4 +146,9 @@
   text-overflow: ellipsis;
   display: block;
   font-size: 15px;
+}
+
+.bell{
+  float: left;
+  margin-left: 1%;
 }

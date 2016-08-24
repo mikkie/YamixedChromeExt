@@ -34,12 +34,21 @@
         <div class="col-xs-12">
       <form id="saveMixForm" class="form-horizontal" role="form" method="post" action="${rc.getContextPath()}/mix/save">
       <div class="form-group">
-        <label for="title" class="col-sm-offset-1 col-sm-1 control-label">标签</label>
+        <label for="title" class="col-sm-offset-1 col-sm-1 control-label">空间/标签</label>
         <div class="col-sm-8">
-          <p>
+          <div class="dropdown" style="display:inline-block;">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+             我的书签
+             <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Yamixed的书签</a></li>
+            </ul>
+          </div>
+          <p style="display:inline-block;margin-left:20px;">
             <button type="button" class="btn btn-warning btn-sm">java</button>
             <button type="button" class="btn btn-warning btn-sm">javascript</button>
-            <input type="text" class="form-control" placeholder="新标签" style="width: 12%; display: inline-block; height:30px;"/>
+            <input type="text" class="form-control" placeholder="新标签" style="width: 22%; display: inline-block; height:30px;"/>
           </p>
         </div>
       </div>  
@@ -52,7 +61,7 @@
       <div class="form-group">
         <label for="desc" class="col-sm-offset-1 col-sm-1 control-label">描述</label>
         <div class="col-sm-8">
-          <textarea class="form-control" name="desc" rows="3" id="desc"></textarea>
+          <textarea class="form-control" name="desc" rows="3" id="desc" placeholder="请在此写下关于页面的笔记..."></textarea>
         </div>
       </div> 
       <div class="form-group">

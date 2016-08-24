@@ -8,12 +8,18 @@ Setting = (function() {
     GROUP_UL : 'groupUl',
     SPACE_AREA : 'spaceArea',
     GROUP_AREA : 'groupArea'
-  };	
+  };  
 
   var ELS_CLASS = {
-     CLOSE : 'close' 
+    NEW_SPACE : 'newSpace',
+    NEW_GROUP : 'newGroup',
+    CLOSE : 'close' 
   };
 
+
+  var showPage = function(url,width){
+    chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL(url), width : width}); 
+  };
 
   
   var bind = {
@@ -24,7 +30,7 @@ Setting = (function() {
       },
       goback : function(){
         $('#' + ELS_IDS.GO_BACK).click(function(){
-            chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px'});
+            showPage("content/content.html",'900px');
         });
       },
       space : function(){
@@ -59,6 +65,16 @@ Setting = (function() {
               $('#' + ELS_IDS.GROUP_AREA).show(500);
               $ul.show(500);
            }
+        });
+      },
+      new_space : function(){
+        $('.' + ELS_CLASS.NEW_SPACE).click(function(){
+           showPage('content/newSpace.html','600px'); 
+        });
+      },
+      new_group : function(){
+        $('.' + ELS_CLASS.NEW_GROUP).click(function(){
+           showPage('content/newGroup.html','600px'); 
         });
       }
   };

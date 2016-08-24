@@ -1,21 +1,18 @@
-MAIN = (function() {
+Bell = (function() {
 
   var ELS_IDS = {
-  	 MAIN_AREA : 'mainArea',
-     BOOK_MARK : 'bookmark',
-     GO_SETTING : 'goSetting' 
+    GO_BACK : 'logo',
+    GO_SETTING : 'goSetting' 
   };	
 
   var ELS_CLASS = {
-     CLOSE : 'close',
-     BELL : 'bell' 
+     CLOSE : 'close' 
   };
 
 
   var showPage = function(page,width){
      chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL(page), width : width});
   };
-
   
   var bind = {
       close : function(){
@@ -23,19 +20,14 @@ MAIN = (function() {
             chrome.runtime.sendMessage({action:'close'});
          });
       },
-      book_mark : function(){
-         $('#' + ELS_IDS.BOOK_MARK).click(function(){
-            showPage("content/newBookmark.html",'600px');
-         });
+      goback : function(){
+        $('#' + ELS_IDS.GO_BACK).click(function(){
+            showPage("content/content.html",'900px');
+        });
       },
       go_setting : function(){
          $('#' + ELS_IDS.GO_SETTING).click(function(){
             showPage("content/setting.html",'900px');
-         });
-      },
-      bell : function(){
-         $('.' + ELS_CLASS.BELL).click(function(){
-            showPage("content/bell.html",'600px');   
          });
       }
   };
@@ -53,4 +45,4 @@ MAIN = (function() {
   };
 
 })();
-$(document).ready(MAIN.init);
+$(document).ready(Bell.init);

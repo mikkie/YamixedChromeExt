@@ -1,8 +1,7 @@
-Bookmark = (function() {
+Space = (function() {
 
   var ELS_IDS = {
-    GO_BACK : 'logo',
-    GO_SETTING : 'goSetting' 
+    GO_BACK : 'logo'
   };	
 
   var ELS_CLASS = {
@@ -10,10 +9,6 @@ Bookmark = (function() {
   };
 
 
-  var showPage = function(page,width){
-     chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL(page), width : width});
-  };
- 
   
   var bind = {
       close : function(){
@@ -23,13 +18,8 @@ Bookmark = (function() {
       },
       goback : function(){
         $('#' + ELS_IDS.GO_BACK).click(function(){
-            showPage("content/content.html",'900px');
+            chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px'});
         });
-      },
-      go_setting : function(){
-         $('#' + ELS_IDS.GO_SETTING).click(function(){
-            showPage("content/setting.html",'900px');
-         });
       }
   };
 
@@ -46,4 +36,4 @@ Bookmark = (function() {
   };
 
 })();
-$(document).ready(Bookmark.init);
+$(document).ready(Space.init);
