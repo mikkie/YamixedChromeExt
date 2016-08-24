@@ -82,7 +82,7 @@
   width: 24.5%;
   display: inline-block;
 }
-.thumbnail img{
+.thumbnail a img{
   width: 150px;
   height: 90px;
 }
@@ -136,7 +136,6 @@
 
 .space,.group{
   height: 90px;
-  background-color: #776496;
 }
 
 .space b,.group b{
