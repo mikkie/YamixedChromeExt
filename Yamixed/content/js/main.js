@@ -3,7 +3,8 @@ MAIN = (function() {
   var ELS_IDS = {
   	 MAIN_AREA : 'mainArea',
      BOOK_MARK : 'bookmark',
-     GO_SETTING : 'goSetting' 
+     GO_SETTING : 'goSetting',
+     HOT_KEYS : 'hotkeys' 
   };	
 
   var ELS_CLASS = {
@@ -36,6 +37,11 @@ MAIN = (function() {
       bell : function(){
          $('.' + ELS_CLASS.BELL).click(function(){
             showPage("content/bell.html",'600px');   
+         });
+      },
+      hotkeys : function(){
+         $('#' + ELS_IDS.HOT_KEYS).click(function(){
+            showPage("content/hotkeys.html",'600px');
          });
       }
   };
