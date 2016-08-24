@@ -40,12 +40,25 @@ CONTENT = (function(){
      $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
           $('#' + ELS_IDS.MAIN_BODY).remove();
           $('body').append(data);
-          centerIframe(true);
+          openDialog(null,true,{width : '900px'});
           if(callback == 'function'){
              callback();
           }
      });
   }; 
+
+
+
+  var openLogin = function(callback){
+     $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
+          $('#' + ELS_IDS.MAIN_BODY).remove();
+          $('body').append(data);
+          openDialog(chrome.extension.getURL('/content/login.html'),true,{width : '400px',height : '260px'});
+          if(callback == 'function'){
+             callback();
+          }
+     });
+  };
 
 
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
@@ -60,21 +73,33 @@ CONTENT = (function(){
        $('#' + ELS_IDS.MAIN_BODY).remove();
     }
     else if('showPage' == message.action){
-       var $iframe = $('#' + ELS_IDS.IFRAME);
-       $iframe.attr('src',message.url).attr('width',message.width).css('width',message.width);
-       centerIframe(true);
+       openDialog(message.url,true,{width : message.width});
     }
   });
 
 
-  var centerIframe = function(resetTop){
+  var openDialog = function(src,resetTop,css){
+     //set src
+     var $iframe = $('#' + ELS_IDS.IFRAME);
+     if(src){
+       $iframe.attr('src',src);
+     }
+     //set size
+     if(css){
+       if(css.width){
+          $iframe.attr('width',css.width).css('width',css.width);
+       }
+       if(css.height){
+          $iframe.attr('height',css.height).css('height',css.height); 
+       }
+     }
+     //set position
      var w = $(window).width();
      var $main_body = $('#' + ELS_IDS.MAIN_BODY);
      if(resetTop){
        var h = $(document).scrollTop();
        $main_body.css('top',h + 40 + 'px');
      }
-     
      $main_body.css('left',w/2-$main_body.width()/2 + 'px');
      $main_body.show();
   };
@@ -83,7 +108,7 @@ CONTENT = (function(){
   var lastScrollTop = 0; 
   $(window).resize(function(){
      setTimeout(function(){
-        centerIframe(true);
+        openDialog(null,true,null);
      },50);
   }).scroll(function(){
      var up = true;
@@ -93,7 +118,7 @@ CONTENT = (function(){
      }
      lastScrollTop = st;
      setTimeout(function(){
-        centerIframe(up);
+        openDialog(null,up,null);
      },50);
   });
 
@@ -101,6 +126,9 @@ CONTENT = (function(){
   (function binding(){
      $(document).hotKey({ key: 'y', modifier: 'alt' }, function () {
         openUrm();
+     });
+     $(document).hotKey({ key: 'o', modifier: 'alt' }, function () {
+        openLogin();
      });  
   })(); 
 
