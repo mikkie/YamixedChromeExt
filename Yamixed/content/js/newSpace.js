@@ -18,7 +18,7 @@ Space = (function() {
       },
       goback : function(){
         $('#' + ELS_IDS.GO_BACK).click(function(){
-            chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px'});
+            chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
         });
       }
   };

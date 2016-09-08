@@ -12,7 +12,7 @@
 	   <div class="header row">
 	   	  <div class="col-md-12">
              <img id="logo" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_32x32.png" class="clickable"/>
-             <button id="bookmark" type="button" class="btn btn-success">收藏页面</button>
+             <button id="bookmark" type="button" class="btn btn-success"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏当前页面</button>
              <div id="searchbox" class="input-group">
                <span class="input-group-addon">@</span>
                <input type="text" class="form-control" placeholder="查询链接...">
@@ -25,10 +25,11 @@
                         <h4 class="userName"><span class="caret"></span>&nbsp;Aqua</h4>
                       </a>
                       <ul class="dropdown-menu">
+                        <li><a id="account" href="javascript:void(0);"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;账号管理</a></li>
                       	<li><a id="goSetting" href="javascript:void(0);"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;设置</a></li>
                         <li><a id="hotkeys" href="javascript:void(0);"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>&nbsp;快捷键</a></li>
                       	<li role="separator" class="divider"></li>
-                      	<li><a href=""><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;退出</a></li>
+                      	<li><a id="logout" href="javascript:void(0);"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;退出</a></li>
                       </ul>
                 </li>
              </div>

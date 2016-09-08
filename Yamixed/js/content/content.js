@@ -48,12 +48,38 @@ CONTENT = (function(){
   }; 
 
 
+  var checkAutoLogin = function(callback){
+     chrome.storage.sync.get('ym_auto_login',function(data){
+       if(data){
+          $.ajax({
+            url : 'http://localhost:3000/login/autoLogin',
+            dataType : 'json',
+            type : 'post',
+            data : data.ym_auto_login
+          }).done(function(data){
+              if(data.success){
+                 openUrm(callback);
+              }
+              else{
+                 openLogin(callback); 
+              }
+          }).fail(function(){
+              debugger;
+          });
+       }
+       else{
+          openLogin(callback);
+       }
+     });
+  };
+
+
 
   var openLogin = function(callback){
      $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
           $('#' + ELS_IDS.MAIN_BODY).remove();
           $('body').append(data);
-          openDialog(chrome.extension.getURL('/content/login.html'),true,{width : '400px',height : '260px'});
+          openDialog(chrome.extension.getURL('/content/login.html'),true,{width : '400px',height : '300px'});
           if(callback == 'function'){
              callback();
           }
@@ -67,13 +93,13 @@ CONTENT = (function(){
       sendResponse(mix); 
     }
     else if('openUrm' == message.action){
-       openUrm(sendResponse);
+       checkAutoLogin(sendResponse);
     }
     else if('close' == message.action){
        $('#' + ELS_IDS.MAIN_BODY).remove();
     }
     else if('showPage' == message.action){
-       openDialog(message.url,true,{width : message.width});
+       openDialog(message.url,true,{width : message.width,height : message.height});
     }
   });
 
@@ -125,7 +151,7 @@ CONTENT = (function(){
 
   (function binding(){
      $(document).hotKey({ key: 'y', modifier: 'alt' }, function () {
-        openUrm();
+        checkAutoLogin();
      });
      $(document).hotKey({ key: 'o', modifier: 'alt' }, function () {
         openLogin();

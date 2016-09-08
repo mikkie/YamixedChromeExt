@@ -10,8 +10,8 @@ Bookmark = (function() {
   };
 
 
-  var showPage = function(page,width){
-     chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL(page), width : width});
+  var showPage = function(page,width,height){
+     chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL(page), width : width,height : height});
   };
  
   
@@ -23,12 +23,12 @@ Bookmark = (function() {
       },
       goback : function(){
         $('#' + ELS_IDS.GO_BACK).click(function(){
-            showPage("content/content.html",'900px');
+            showPage("content/content.html",'900px','600px');
         });
       },
       go_setting : function(){
          $('#' + ELS_IDS.GO_SETTING).click(function(){
-            showPage("content/setting.html",'900px');
+            showPage("content/setting.html",'900px','600px');
          });
       }
   };
