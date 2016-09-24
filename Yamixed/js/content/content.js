@@ -61,10 +61,10 @@ CONTENT = (function(){
                  openUrm(callback);
               }
               else{
-                 openLogin(callback); 
+                 openLogin(callback);
               }
           }).fail(function(){
-              debugger;
+              openLogin(callback);
           });
        }
        else{
@@ -140,7 +140,7 @@ CONTENT = (function(){
      var up = true;
      var st = $(this).scrollTop();
      if (st > lastScrollTop){
-       up = false; 
+       up = false;
      }
      lastScrollTop = st;
      setTimeout(function(){
@@ -155,8 +155,8 @@ CONTENT = (function(){
      });
      $(document).hotKey({ key: 'o', modifier: 'alt' }, function () {
         openLogin();
-     });  
-  })(); 
+     });
+  })();
 
 
 

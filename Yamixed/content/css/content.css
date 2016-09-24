@@ -129,7 +129,13 @@ body{
 
 #bookmark{
   float: left;
-  margin-left: 26%;
+  margin-left: 7%;
+}
+
+#selSpace{
+  float: left;
+  width: 18%;
+  margin-left: 1%;
 }
 
 .close{
