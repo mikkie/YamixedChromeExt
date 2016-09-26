@@ -49,13 +49,16 @@ CONTENT = (function(){
 
 
   var checkAutoLogin = function(callback){
-     chrome.storage.sync.get('ym_auto_login',function(data){
+     chrome.storage.sync.get('user',function(data){
        if(data){
           $.ajax({
             url : 'http://localhost:3000/login/autoLogin',
             dataType : 'json',
             type : 'post',
-            data : data.ym_auto_login
+            data : {
+              email : data.email,
+              token : data.autoLoginToken
+            }
           }).done(function(data){
               if(data.success){
                  openUrm(callback);

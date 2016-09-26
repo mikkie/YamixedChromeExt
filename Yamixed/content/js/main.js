@@ -6,7 +6,8 @@ MAIN = (function() {
      GO_SETTING : 'goSetting',
      HOT_KEYS : 'hotkeys',
      ACCOUNT : 'account',
-     LOGOUT : 'logout' 
+     LOGOUT : 'logout',
+     SEL_SPACE : 'selSpace' 
   };	
 
   var ELS_CLASS = {
@@ -58,12 +59,33 @@ MAIN = (function() {
       }
   };
 
+
+  var renderHeader = function(){
+     //1.render space selector
+     chrome.storage.sync.get('userSpace',function(data){
+        var options = '';
+        if(data.userSpace && data.userSpace.success.length > 0){
+           var spaces = data.userSpace.success;
+           for(var i in spaces){
+              options += '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>';
+           }
+        }
+        $('#' + ELS_IDS.SEL_SPACE).append(options);
+     });
+
+  };
+
+  var renderPage = function(){
+     renderHeader();
+  };
+
   var init = function(){
      for(var m in bind){
         if(typeof bind[m] == 'function'){
            bind[m]();
         }
      }
+     renderPage();
   };
   
   return {

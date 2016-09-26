@@ -35,7 +35,10 @@ Register = (function() {
      }
      $('#' + ELS_IDS.FORM).ajaxForm(function(data){
         if(data.success){
-          chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
+          chrome.storage.sync.set({"user" : data.success});
+          Service.getUserSpaces(data.success.space).done(function(){
+             chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
+          });
         } 
      });
   };

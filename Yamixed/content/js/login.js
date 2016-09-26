@@ -49,15 +49,14 @@ Login = (function() {
            bind[m]();
         }
      }
-     chrome.storage.sync.remove('ym_auto_login');
+     chrome.storage.sync.remove('user');
      $('#' + ELS_IDS.LOGIN_FORM).ajaxForm({
       success : function(data){
         if(data.success){
-          chrome.storage.sync.set({"ym_auto_login":{
-            email : data.success.email,
-            token : data.success.autoLoginToken
-          }});
-          chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});  
+          chrome.storage.sync.set({"user" : data.success});
+          Service.getUserSpaces(data.success.space).done(function(){
+             chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});  
+          });
         }
         else if(data.error_user){
           $('#' + ELS_IDS.EMAIL_NAME)[0].setCustomValidity(data.error_user);
