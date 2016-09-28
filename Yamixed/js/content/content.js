@@ -112,12 +112,37 @@ CONTENT = (function(){
   var parsePage = function(sendResponse){
      var title = $('title').text();
      var description = $('meta[name="description"]').attr('content');
-     var images = $('img');
+     var $images = $('img');
+     var images = [];
+     $images.each(function(i,n){
+        if(i < 5){
+           var src = $(n).attr('src');
+           src = absolute(src);
+           images.push(src);
+        }
+     });
      sendResponse({
         title : title,
         description : description,
         images : images
      });
+  };
+
+  var absolute = function(url){
+      var base = window.location.href;
+      if(/:\/\//.test(url))return url; // url is absolute
+      // let's try a simple hack..
+      var basea=document.createElement('a'), urla=document.createElement('a');
+      basea.href=base, urla.href=url;
+      urla.protocol=basea.protocol;// "inherit" the base's protocol and hostname
+      if(!/^\/\//.test(url))urla.hostname=basea.hostname; //..hostname only if url is not protocol-relative  though
+      if( /^\//.test(url) )return urla.href; // url starts with /, we're done
+      var urlparts=url.split(/\//); // create arrays for the url and base directory paths
+      var baseparts=basea.pathname.split(/\//); 
+      if( ! /\/$/.test(base) )baseparts.pop(); // if base has a file name after last /, pop it off
+      while( urlparts[0]=='..' ){baseparts.pop();urlparts.shift();} // remove .. parts from url and corresponding directory levels from base
+      urla.pathname=baseparts.join('/')+'/'+urlparts.join('/');
+      return urla.href;
   };
 
 

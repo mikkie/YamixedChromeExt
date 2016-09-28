@@ -16,7 +16,7 @@
              		<li role="presentation" class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/g.jpg" alt="..." class="avatar img-circle">
-                        <h4 class="userName"><span class="caret"></span>&nbsp;Aqua</h4>
+                        <h4 class="userName"></h4>
                       </a>
                       <ul class="dropdown-menu" style="left:-10px;">
                       	<li><a id="goSetting" href="javascript:void(0);">设置</a></li>
@@ -41,14 +41,12 @@
              我的书签
              <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <ul class="dropdown-menu" id="spaces" aria-labelledby="dropdownMenu1">
               <li><a href="#">Yamixed的书签</a></li>
             </ul>
           </div>
-          <p style="display:inline-block;margin-left:20px;">
-            <button type="button" class="btn btn-warning btn-sm">java</button>
-            <button type="button" class="btn btn-warning btn-sm">javascript</button>
-            <input type="text" class="form-control" placeholder="新标签" style="width: 22%; display: inline-block; height:30px;"/>
+          <p id="tags" style="display:inline-block;margin-left:20px;">
+            <input type="text" id="newTag" class="form-control" placeholder="新标签" style="width: 80px; display: inline-block; height:35px;"/>
           </p>
         </div>
       </div>  
@@ -97,6 +95,7 @@
 	</div>  
 	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/jquery/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/newBookmark.js"></script>
+  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/common.js"></script>
+  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/newBookmark.js"></script>
 </body>
 </html>

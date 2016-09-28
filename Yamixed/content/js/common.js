@@ -28,7 +28,16 @@ Y_COMMON = {
      $('input[remoteValidte]').on('keyup blur',function(){
      	 Y_COMMON.form.validate($(this));
      });
-  }	
+  },
+  render : {
+    renderUser : function(selector){
+      chrome.storage.sync.get('user',function(data){
+       if(data.user){
+          $(selector).html('<span class="caret"></span>&nbsp;' + data.user.userName); 
+       }  
+      });
+    }
+  }
 };
 
 $(document).ready(Y_COMMON.init);

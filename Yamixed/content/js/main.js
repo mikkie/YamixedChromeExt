@@ -63,8 +63,8 @@ MAIN = (function() {
 
   var parseCurrentPage = function(){
      chrome.runtime.sendMessage({action:'parsePage'},function(response){
-        console.log(response);
-        // showPage("content/newBookmark.html",'600px','600px');
+        chrome.storage.sync.set({'newPageData' : response});
+        showPage("content/newBookmark.html",'600px','600px');
      });
   };
 
@@ -76,17 +76,18 @@ MAIN = (function() {
         if(data.userSpace && data.userSpace.success.length > 0){
            var spaces = data.userSpace.success;
            for(var i in spaces){
-              options += '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>';
+              var space = spaces[i];
+              if(space.defaultSpace){
+                 options = '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>' + options;
+              }
+              else{
+                 options += '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>';
+              }
            }
         }
         $('#' + ELS_IDS.SEL_SPACE).append(options);
      });
-     //2.render user
-     chrome.storage.sync.get('user',function(data){
-       if(data.user){
-          $('.' + ELS_CLASS.USER_NAME).html('<span class="caret"></span>&nbsp;' + data.user.userName); 
-       }  
-     });
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
   };
 
   var renderPage = function(){
