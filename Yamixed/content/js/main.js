@@ -12,7 +12,8 @@ MAIN = (function() {
 
   var ELS_CLASS = {
      CLOSE : 'close',
-     BELL : 'bell' 
+     BELL : 'bell',
+     USER_NAME : 'userName' 
   };
 
 
@@ -29,7 +30,7 @@ MAIN = (function() {
       },
       book_mark : function(){
          $('#' + ELS_IDS.BOOK_MARK).click(function(){
-            showPage("content/newBookmark.html",'600px','600px');
+            parseCurrentPage();
          });
       },
       go_setting : function(){
@@ -60,6 +61,14 @@ MAIN = (function() {
   };
 
 
+  var parseCurrentPage = function(){
+     chrome.runtime.sendMessage({action:'parsePage'},function(response){
+        console.log(response);
+        // showPage("content/newBookmark.html",'600px','600px');
+     });
+  };
+
+
   var renderHeader = function(){
      //1.render space selector
      chrome.storage.sync.get('userSpace',function(data){
@@ -72,7 +81,12 @@ MAIN = (function() {
         }
         $('#' + ELS_IDS.SEL_SPACE).append(options);
      });
-
+     //2.render user
+     chrome.storage.sync.get('user',function(data){
+       if(data.user){
+          $('.' + ELS_CLASS.USER_NAME).html('<span class="caret"></span>&nbsp;' + data.user.userName); 
+       }  
+     });
   };
 
   var renderPage = function(){

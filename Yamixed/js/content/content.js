@@ -50,14 +50,14 @@ CONTENT = (function(){
 
   var checkAutoLogin = function(callback){
      chrome.storage.sync.get('user',function(data){
-       if(data){
+       if(data && data.user){
           $.ajax({
             url : 'http://localhost:3000/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
-              email : data.email,
-              token : data.autoLoginToken
+              email : data.user.email,
+              token : data.user.autoLoginToken
             }
           }).done(function(data){
               if(data.success){
@@ -103,8 +103,22 @@ CONTENT = (function(){
     }
     else if('showPage' == message.action){
        openDialog(message.url,true,{width : message.width,height : message.height});
+    } 
+    else if('parsePage' == message.action){
+       parsePage(sendResponse);
     }
   });
+
+  var parsePage = function(sendResponse){
+     var title = $('title').text();
+     var description = $('meta[name="description"]').attr('content');
+     var images = $('img');
+     sendResponse({
+        title : title,
+        description : description,
+        images : images
+     });
+  };
 
 
   var openDialog = function(src,resetTop,css){
@@ -160,7 +174,5 @@ CONTENT = (function(){
         openLogin();
      });
   })();
-
-
 
 })();

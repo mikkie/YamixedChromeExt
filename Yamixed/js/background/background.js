@@ -19,10 +19,16 @@ chrome.notifications.onClicked.addListener(function(notificationId){
 });
 
 
-chrome.runtime.onMessage.addListener(function (msg, sender) {
+chrome.runtime.onMessage.addListener(function (msg, sender,sendResponse) {
   sendMessageToActivePage(msg,function(response) {
-    
+    sendResponse(response);
   });
+  //fix by aqua. :))
+  //The sendResponse callback is only valid if used synchronously, 
+  //or if the event handler returns true to indicate that it will respond asynchronously. 
+  //The sendMessage function's callback will be invoked automatically if no handlers 
+  //return true or if the sendResponse callback is garbage-collected.
+  return true;
 });
 
 
