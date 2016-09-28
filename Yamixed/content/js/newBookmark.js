@@ -15,7 +15,8 @@ Bookmark = (function() {
     LINK_IMG : 'linkimg',
     SAVE_MIX_FORM : 'saveMixForm',
     CHK_IMG_LINK : 'chkimglink',
-    IMG_LINK_DIV : 'imglinkDiv'
+    IMG_LINK_DIV : 'imglinkDiv',
+    SAVE_MIX : 'saveMix'
   };	
 
   var ELS_CLASS = {
@@ -119,7 +120,22 @@ Bookmark = (function() {
             $('#' + ELS_IDS.IMG_LINK_DIV).show();
           }
         });
-      },   
+      }, 
+      saveMix : function(){
+        $('#' + ELS_IDS.SAVE_MIX).click(function(){
+           var tags = [];
+           $('#' + ELS_IDS.TAGS + ' button').each(function(){
+              tags.push($(this).text());
+           });
+           Service.postNewLink({
+             title : $.trim($('#' + ELS_IDS.TITLE).val()),
+             description : $.trim($('#' + ELS_IDS.DESC).val()),
+             previewImg : $('#' + ELS_IDS.IMG_URL).val(),
+             spaceId : $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId'),
+             tags : tags
+           });
+        });
+      }  
   };
 
   var renderHeader = function(){

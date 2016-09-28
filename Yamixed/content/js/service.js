@@ -57,6 +57,15 @@ Service = (function($) {
      return post(option);
   };
 
+
+  service.postNewLink = function(newLink){
+     var option = {
+        url : 'http://localhost:3000/link/postNewLink',
+        data : newLink
+     };
+     return post(option);
+  };
+
 	return service;
 
 })(jQuery);
