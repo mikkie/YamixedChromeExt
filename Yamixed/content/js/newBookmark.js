@@ -133,6 +133,8 @@ Bookmark = (function() {
              previewImg : $('#' + ELS_IDS.IMG_URL).val(),
              spaceId : $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId'),
              tags : tags
+           }).done(function(){
+             showPage("content/content.html",'900px','600px');
            });
         });
       }  
