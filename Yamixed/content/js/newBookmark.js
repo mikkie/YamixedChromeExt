@@ -144,7 +144,7 @@ Bookmark = (function() {
     //1
     chrome.storage.sync.get('userSpace',function(data){
         var $spaces = $('#' + ELS_IDS.SPACES);
-        $spaces.hide().empty();
+        $spaces.empty();
         var options = '';
         if(data.userSpace && data.userSpace.success.length > 0){
            var spaces = data.userSpace.success;
@@ -158,7 +158,7 @@ Bookmark = (function() {
               }
               else{
                  options += '<li><a href="#" id="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</a></li>';
-                 $spaces.append(options).show();
+                 $spaces.append(options);
               }
            }
         }
