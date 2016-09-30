@@ -10,7 +10,8 @@ MAIN = (function() {
      SEL_SPACE : 'selSpace',
      LINK_TEMP : 'linkTemp',
      SEARCH_LINKS : 'searchLinks',
-     SEL_TAG : 'selTag' 
+     SEL_TAG : 'selTag',
+     SEARCH_TAG : 'searchTag' 
   };	
 
   var ELS_CLASS = {
@@ -86,7 +87,8 @@ MAIN = (function() {
       tag_click : function(){
         $('.' + ELS_CLASS.TAG_LIST).on('click','.' + ELS_CLASS.TAG,function(){
             var tag = $.trim($(this).text());
-            $('#' + ELS_IDS.SEL_TAG).text('@' + tag);  
+            $('#' + ELS_IDS.SEL_TAG).text('@' + tag);
+            searchLinks(null,tag);  
         });
       },
       seltag_click : function(){
@@ -101,6 +103,26 @@ MAIN = (function() {
          }).mouseout(function(){
             $(this).css('background-color','#eee');
          });
+      },
+      searchTag : function(){
+        $('#' + ELS_IDS.SEARCH_TAG).keyup(function(){
+          var $tags = $('.' + ELS_CLASS.TAG);
+          if($tags.length == 0){
+             return;   
+          }
+          var tag = $.trim($(this).val());
+          $tags.each(function(){
+            var $this = $(this);
+            if(tag){
+               if(!new RegExp(tag,'ig').test($this.text())){
+                  $this.hide();
+               }
+            }
+            else{
+              $this.show();
+            }
+          });
+        }); 
       }
   };
 
