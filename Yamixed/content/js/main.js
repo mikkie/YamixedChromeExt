@@ -94,6 +94,7 @@ MAIN = (function() {
       seltag_click : function(){
          $('#' + ELS_IDS.SEL_TAG).click(function(){
             $(this).text('@');
+            renderLinks();
          }).mouseover(function(){
             var $this = $(this);
             var tag = $this.text();
