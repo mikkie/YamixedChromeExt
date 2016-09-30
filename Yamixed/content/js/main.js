@@ -9,7 +9,8 @@ MAIN = (function() {
      LOGOUT : 'logout',
      SEL_SPACE : 'selSpace',
      LINK_TEMP : 'linkTemp',
-     SEARCH_LINKS : 'searchLinks' 
+     SEARCH_LINKS : 'searchLinks',
+     SEL_TAG : 'selTag' 
   };	
 
   var ELS_CLASS = {
@@ -17,7 +18,8 @@ MAIN = (function() {
      BELL : 'bell',
      USER_NAME : 'userName',
      MAIN_AREA : 'mainarea',
-     TAG_LIST : 'tagList' 
+     TAG_LIST : 'tagList',
+     TAG : 'tag' 
   };
 
 
@@ -70,8 +72,34 @@ MAIN = (function() {
               return;
             }
             if(e.which == 13){
-               searchLinks(keyword,null);
-            }  
+               var tag = $('#' + ELS_IDS.SEL_TAG).text();
+               if(tag == '@'){
+                  tag = null;
+               }
+               else{
+                  tag = tag.replace('@','');
+               }
+               searchLinks(keyword,tag);
+            } 
+         });
+      },
+      tag_click : function(){
+        $('.' + ELS_CLASS.TAG_LIST).on('click','.' + ELS_CLASS.TAG,function(){
+            var tag = $.trim($(this).text());
+            $('#' + ELS_IDS.SEL_TAG).text('@' + tag);  
+        });
+      },
+      seltag_click : function(){
+         $('#' + ELS_IDS.SEL_TAG).click(function(){
+            $(this).text('@');
+         }).mouseover(function(){
+            var $this = $(this);
+            var tag = $this.text();
+            if(tag != '@'){
+               $(this).css('background-color','#ea5f5f');
+            }
+         }).mouseout(function(){
+            $(this).css('background-color','#eee');
          });
       }
   };
@@ -186,10 +214,10 @@ MAIN = (function() {
        }
     }
     if(tags.length > 0){
-       var html = '<li class="active"><a href="javascript:void(0);">'+ tags[0] +'<span class="sr-only">(current)</span></a></li>' 
+       var html = '<li class="active"><a href="javascript:void(0);" class="tag">'+ tags[0] +'<span class="sr-only"></span></a></li>' 
        if(tags.length > 1){
          for(var i = 1; i < tags.length; i++){
-           html += '<li><a href="javascript:void(0);">'+ tags[i] +'</a></li>'  
+           html += '<li><a href="javascript:void(0);" class="tag">'+ tags[i] +'</a></li>'  
          }  
        }
        $list.append(html);
