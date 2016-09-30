@@ -15,7 +15,8 @@ MAIN = (function() {
      CLOSE : 'close',
      BELL : 'bell',
      USER_NAME : 'userName',
-     MAIN_AREA : 'mainarea' 
+     MAIN_AREA : 'mainarea',
+     TAG_LIST : 'tagList' 
   };
 
 
@@ -96,10 +97,8 @@ MAIN = (function() {
   };
 
 
-  var renderLinks = function(){
-     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
-     Service.getLinksBySpace(spaceId).done(function(data){
-        var $main = $('.' + ELS_CLASS.MAIN_AREA);
+  var showLinks = function(data){
+     var $main = $('.' + ELS_CLASS.MAIN_AREA);
         $main.empty();
         if(data.success && data.success.length > 0){
           var html = '';
@@ -127,7 +126,61 @@ MAIN = (function() {
           }  
           $main.append(html);  
         }
+  }; 
+
+  var renderLinks = function(){
+     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+     Service.getLinksBySpace(spaceId).done(function(data){
+        showLinks(data);
+        renderTags(data);
      });
+  };
+
+
+  var addTag = function(allTags,tags){
+     if(allTags.length == 0){
+        for(var i in tags){
+          allTags.push(tags[i]); 
+        }
+        return;
+     }
+     for(var i in allTags){
+        var allTag = allTags[i];  
+        var found = false;
+        for(var j in tags){
+           var tag = tags[j];
+           if(allTag == tag){
+              found = true;
+              break; 
+           }  
+        }
+        if(!found){
+           allTags.push(tag);
+        }  
+     }  
+  };
+
+  var renderTags = function(data){
+    var $list = $('.' + ELS_CLASS.TAG_LIST);
+    $list.empty();
+    var tags = [];
+    if(data.success && data.success.length > 0){
+       for(var i in data.success){
+          var link = data.success[i]; 
+          if(link.tags && link.tags.length > 0){
+             addTag(tags,link.tags);   
+          } 
+       }
+    }
+    if(tags.length > 0){
+       var html = '<li class="active"><a href="javascript:void(0);">'+ tags[0] +'<span class="sr-only">(current)</span></a></li>' 
+       if(tags.length > 1){
+         for(var i = 1; i < tags.length; i++){
+           html += '<li><a href="javascript:void(0);">'+ tags[i] +'</a></li>'  
+         }  
+       }
+       $list.append(html);
+    }
   };
 
   var renderPage = function(){
