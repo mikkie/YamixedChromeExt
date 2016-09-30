@@ -20,7 +20,8 @@ MAIN = (function() {
      USER_NAME : 'userName',
      MAIN_AREA : 'mainarea',
      TAG_LIST : 'tagList',
-     TAG : 'tag' 
+     TAG : 'tag',
+     LINK : 'link' 
   };
 
 
@@ -124,6 +125,12 @@ MAIN = (function() {
             }
           });
         }); 
+      },
+      link_click : function(){
+        $('.' + ELS_CLASS.MAIN_AREA).on('click','.' + ELS_CLASS.LINK,function(){
+            var linkId = $(this).parent().attr('linkId');
+            Service.updateLinkVisitTime(linkId);
+        });
       }
   };
 
@@ -168,8 +175,8 @@ MAIN = (function() {
           var html = '';
           for(var i in data.success){
               var link = data.success[i];
-              html += ['<div class="thumbnail">', 
-            '<a href="'+link.url+'" target="_blank"><img src="'+link.previewImg+'" alt="..."></a>', 
+              html += ['<div class="thumbnail" linkId="'+ link._id +'">', 
+            '<a class="link" href="'+link.url+'" target="_blank"><img src="'+link.previewImg+'" alt="..."></a>', 
             '<div class="caption">', 
               '<h5><b>'+link.title+'</b></h5>', 
               '<p class="desc">', 

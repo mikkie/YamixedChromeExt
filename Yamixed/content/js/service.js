@@ -91,6 +91,17 @@ Service = (function($) {
   };
 
 
+  service.updateLinkVisitTime = function(linkId){
+     var option = {
+        url : 'http://localhost:3000/link/updateLinkVisitTime',
+        data : {
+          linkId : linkId
+        }
+     };
+     return post(option);
+  };
+
+
 	return service;
 
 })(jQuery);
