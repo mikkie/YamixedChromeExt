@@ -90,6 +90,7 @@ body{
 .thumbnail{
   width: 24.5%;
   display: inline-block;
+  margin-right: 3px;
 }
 .thumbnail a img{
   width: 150px;
@@ -119,6 +120,7 @@ body{
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  height: 78px;
 }
 
 .mainarea{

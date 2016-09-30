@@ -102,9 +102,10 @@ MAIN = (function() {
         var $main = $('.' + ELS_CLASS.MAIN_AREA);
         $main.empty();
         if(data.success && data.success.length > 0){
+          var html = '';
           for(var i in data.success){
               var link = data.success[i];
-              var html = ['<div class="thumbnail">', 
+              html += ['<div class="thumbnail">', 
             '<a href="'+link.url+'" target="_blank"><img src="'+link.previewImg+'" alt="..."></a>', 
             '<div class="caption">', 
               '<h5><b>'+link.title+'</b></h5>', 
