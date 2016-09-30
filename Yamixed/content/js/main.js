@@ -8,7 +8,8 @@ MAIN = (function() {
      ACCOUNT : 'account',
      LOGOUT : 'logout',
      SEL_SPACE : 'selSpace',
-     LINK_TEMP : 'linkTemp' 
+     LINK_TEMP : 'linkTemp',
+     SEARCH_LINKS : 'searchLinks' 
   };	
 
   var ELS_CLASS = {
@@ -59,6 +60,18 @@ MAIN = (function() {
       logout : function(){
          $('#' + ELS_IDS.LOGOUT).click(function(){
             showPage("content/login.html",'400px','300px');
+         });
+      },
+      searchLinksClick : function(){
+         $('#' + ELS_IDS.SEARCH_LINKS).keyup(function(e){
+            var keyword = $.trim($(this).val());
+            if(!keyword){
+              renderLinks();
+              return;
+            }
+            if(e.which == 13){
+               searchLinks(keyword,null);
+            }  
          });
       }
   };
@@ -144,11 +157,11 @@ MAIN = (function() {
         }
         return;
      }
-     for(var i in allTags){
-        var allTag = allTags[i];  
+     for(var i in tags){
+        var tag = tags[i];
         var found = false;
-        for(var j in tags){
-           var tag = tags[j];
+        for(var j in allTags){
+           var allTag = allTags[j];  
            if(allTag == tag){
               found = true;
               break; 
@@ -186,6 +199,14 @@ MAIN = (function() {
   var renderPage = function(){
      renderHeader().then(function(){
        renderLinks();
+     });
+  };
+
+
+  var searchLinks = function(keyword,tag){
+     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+     Service.searchLinks(spaceId,keyword,tag).done(function(data){
+        showLinks(data);
      });
   };
 

@@ -77,6 +77,20 @@ Service = (function($) {
      return post(option);
   };
 
+
+  service.searchLinks = function(spaceId,keyword,tag){
+     var option = {
+        url : 'http://localhost:3000/link/searchLinks',
+        data : {
+          spaceId : spaceId,
+          keyword : keyword,
+          tag : tag
+        }
+     };
+     return post(option);
+  };
+
+
 	return service;
 
 })(jQuery);
