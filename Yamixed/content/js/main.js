@@ -7,13 +7,15 @@ MAIN = (function() {
      HOT_KEYS : 'hotkeys',
      ACCOUNT : 'account',
      LOGOUT : 'logout',
-     SEL_SPACE : 'selSpace' 
+     SEL_SPACE : 'selSpace',
+     LINK_TEMP : 'linkTemp' 
   };	
 
   var ELS_CLASS = {
      CLOSE : 'close',
      BELL : 'bell',
-     USER_NAME : 'userName' 
+     USER_NAME : 'userName',
+     MAIN_AREA : 'mainarea' 
   };
 
 
@@ -70,6 +72,7 @@ MAIN = (function() {
 
 
   var renderHeader = function(){
+     return new Promise(function(resolve, reject){
      //1.render space selector
      chrome.storage.sync.get('userSpace',function(data){
         var options = '';
@@ -86,12 +89,50 @@ MAIN = (function() {
            }
         }
         $('#' + ELS_IDS.SEL_SPACE).append(options);
+        resolve();
      });
      Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     });
+  };
+
+
+  var renderLinks = function(){
+     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+     Service.getLinksBySpace(spaceId).done(function(data){
+        var $main = $('.' + ELS_CLASS.MAIN_AREA);
+        $main.empty();
+        if(data.success && data.success.length > 0){
+          for(var i in data.success){
+              var link = data.success[i];
+              var html = ['<div class="thumbnail">', 
+            '<a href="'+link.url+'" target="_blank"><img src="'+link.previewImg+'" alt="..."></a>', 
+            '<div class="caption">', 
+              '<h5><b>'+link.title+'</b></h5>', 
+              '<p class="desc">', 
+                link.description + '</p>', 
+              '<p>', 
+                '<a href="#" class="btn btn-primary btn-xs" role="button">', 
+                  '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', 
+                '</a>', 
+                '<a href="#" class="btn btn-success btn-xs" role="button">', 
+                  '<span class="glyphicon glyphicon-share" aria-hidden="true">', 
+                '</a>', 
+                '<a href="#" class="btn btn-danger btn-xs" role="button">', 
+                  '<span class="glyphicon glyphicon-trash" aria-hidden="true">', 
+                '</a>',
+              '</p>', 
+            '</div>', 
+          '</div>'].join('');
+          }  
+          $main.append(html);  
+        }
+     });
   };
 
   var renderPage = function(){
-     renderHeader();
+     renderHeader().then(function(){
+       renderLinks();
+     });
   };
 
   var init = function(){

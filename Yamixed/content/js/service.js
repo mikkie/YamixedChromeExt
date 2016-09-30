@@ -58,6 +58,17 @@ Service = (function($) {
   };
 
 
+  service.getLinksBySpace = function(spaceId){
+     var option = {
+        url : 'http://localhost:3000/link/getLinksBySpace',
+        data : {
+          spaceId : spaceId
+        }
+     };
+     return post(option);
+  };
+
+
   service.postNewLink = function(newLink){
      var option = {
         url : 'http://localhost:3000/link/postNewLink',

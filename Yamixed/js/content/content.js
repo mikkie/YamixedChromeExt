@@ -122,6 +122,7 @@ CONTENT = (function(){
         }
      });
      sendResponse({
+        url : window.location.href,
         title : title,
         description : description,
         images : images
