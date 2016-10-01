@@ -1,6 +1,10 @@
 body{
   background-color: #e2e2e2;
 }
+.modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: 0;
+}
 .header{
    min-height: 50px;
    padding-top: 8px;

@@ -15,7 +15,7 @@ MAIN = (function() {
   };	
 
   var ELS_CLASS = {
-     CLOSE : 'close',
+     CLOSE : 'closeWindow',
      BELL : 'bell',
      USER_NAME : 'userName',
      MAIN_AREA : 'mainarea',
@@ -214,7 +214,7 @@ MAIN = (function() {
                 '<a href="#" class="editTag btn btn-primary btn-xs" role="button">', 
                   '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', 
                 '</a>', 
-                '<a href="#" class="btn btn-success btn-xs" role="button">', 
+                '<a href="#" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#shareModal">', 
                   '<span class="glyphicon glyphicon-share" aria-hidden="true">', 
                 '</a>', 
                 '<a href="#" class="delTag btn btn-danger btn-xs" role="button">', 
