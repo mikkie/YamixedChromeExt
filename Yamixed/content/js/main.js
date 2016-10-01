@@ -21,7 +21,8 @@ MAIN = (function() {
      MAIN_AREA : 'mainarea',
      TAG_LIST : 'tagList',
      TAG : 'tag',
-     LINK : 'link' 
+     LINK : 'link',
+     DEL_TAG : 'delTag' 
   };
 
 
@@ -131,6 +132,20 @@ MAIN = (function() {
             var linkId = $(this).parent().attr('linkId');
             Service.updateLinkVisitTime(linkId);
         });
+      },
+      selSpace_change : function(){
+        $('#' + ELS_IDS.SEL_SPACE).change(function(){
+          renderLinks();
+        });
+      },
+      del_tag : function(){
+        $('.' + ELS_CLASS.MAIN_AREA).on('click','.' + ELS_CLASS.DEL_TAG,function(){
+           var $thumbnail = $(this).parents('.thumbnail');
+           var linkId = $thumbnail.attr('linkId');
+           Service.deleteLink(linkId).done(function(){
+             $thumbnail.remove();
+           });
+        });
       }
   };
 
@@ -188,7 +203,7 @@ MAIN = (function() {
                 '<a href="#" class="btn btn-success btn-xs" role="button">', 
                   '<span class="glyphicon glyphicon-share" aria-hidden="true">', 
                 '</a>', 
-                '<a href="#" class="btn btn-danger btn-xs" role="button">', 
+                '<a href="#" class="delTag btn btn-danger btn-xs" role="button">', 
                   '<span class="glyphicon glyphicon-trash" aria-hidden="true">', 
                 '</a>',
               '</p>', 

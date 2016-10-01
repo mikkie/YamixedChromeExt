@@ -102,6 +102,16 @@ Service = (function($) {
   };
 
 
+  service.deleteLink = function(linkId){
+    var option = {
+        url : 'http://localhost:3000/link/deleteLink',
+        data : {
+          linkId : linkId
+        }
+     };
+     return post(option);
+  };
+
 	return service;
 
 })(jQuery);
