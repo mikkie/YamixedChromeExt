@@ -169,6 +169,10 @@ body{
   margin-left: 1%;
 }
 
+.linkOP a{
+  margin-right: 3px;
+}
+
 .keyboard-key{
   background: #fff;
   border-radius: 5px;

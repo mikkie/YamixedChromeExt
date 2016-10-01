@@ -22,7 +22,8 @@ MAIN = (function() {
      TAG_LIST : 'tagList',
      TAG : 'tag',
      LINK : 'link',
-     DEL_TAG : 'delTag' 
+     DEL_TAG : 'delTag',
+     EDIT_TAG : 'editTag' 
   };
 
 
@@ -146,6 +147,19 @@ MAIN = (function() {
              $thumbnail.remove();
            });
         });
+      },
+      edit_tag : function(){
+        $('.' + ELS_CLASS.MAIN_AREA).on('click','.' + ELS_CLASS.EDIT_TAG,function(){
+          var $thumbnail = $(this).parents('.thumbnail');
+          var linkId = $thumbnail.attr('linkId');
+          Service.getLinkById(linkId).done(function(response){
+            var data = response.success;
+            data.images = [];
+            data.images.push(data.previewImg);
+            chrome.storage.sync.set({'newPageData' : data});
+            showPage("content/newBookmark.html",'600px','600px');
+          });
+        });
       }
   };
 
@@ -196,8 +210,8 @@ MAIN = (function() {
               '<h5><b>'+link.title+'</b></h5>', 
               '<p class="desc">', 
                 link.description + '</p>', 
-              '<p>', 
-                '<a href="#" class="btn btn-primary btn-xs" role="button">', 
+              '<p class="linkOP">', 
+                '<a href="#" class="editTag btn btn-primary btn-xs" role="button">', 
                   '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', 
                 '</a>', 
                 '<a href="#" class="btn btn-success btn-xs" role="button">', 

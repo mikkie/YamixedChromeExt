@@ -17,7 +17,8 @@ Bookmark = (function() {
     CHK_IMG_LINK : 'chkimglink',
     IMG_LINK_DIV : 'imglinkDiv',
     SAVE_MIX : 'saveMix',
-    URL : 'url'
+    URL : 'url',
+    ID : '_id'
   };	
 
   var ELS_CLASS = {
@@ -129,6 +130,7 @@ Bookmark = (function() {
               tags.push($(this).text());
            });
            Service.postNewLink({
+             _id : $('#' + ELS_IDS.ID).val(),
              url : $('#' + ELS_IDS.URL).val(),
              title : $.trim($('#' + ELS_IDS.TITLE).val()),
              description : $.trim($('#' + ELS_IDS.DESC).val()),
@@ -193,7 +195,15 @@ Bookmark = (function() {
           $('#' + ELS_IDS.URL).val(newPageData.url);
           $('#' + ELS_IDS.TITLE).val(newPageData.title);
           $('#' + ELS_IDS.DESC).val(newPageData.description);
-          renderImages(newPageData.images);   
+          renderImages(newPageData.images);
+          if(newPageData.tags && newPageData.tags.length > 0){
+            for(var i in newPageData.tags){
+              $('#' + ELS_IDS.TAGS).prepend('<button type="button" class="tag btn btn-warning btn-sm" style="margin-left:10px;">'+ newPageData.tags[i] +'</button>');
+            }
+          }
+          if(newPageData._id){
+            $('#' + ELS_IDS.ID).val(newPageData._id);
+          }   
        }  
      });
   };
