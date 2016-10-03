@@ -141,7 +141,15 @@ Bookmark = (function() {
              showPage("content/content.html",'900px','600px');
            });
         });
-      }  
+      },
+      sel_space_click : function(){
+        $('#' + ELS_IDS.SPACES).on('click','a',function(){
+          var $this = $(this);
+          var text = $this.text();
+          var id = $this.attr('id');
+          $('#' + ELS_IDS.CURRENT_SPACE).html(text + '<span class="caret"></span>').attr('spaceId',id);
+        });
+      }
   };
 
   var renderHeader = function(){
@@ -160,13 +168,10 @@ Bookmark = (function() {
                  $currentSpace.attr('spaceId',spaces[i]._id);
                  $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 
               }
-              else{
-                 options += '<li><a href="#" id="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</a></li>';
-                 $spaces.append(options);
-              }
+              options += '<li><a href="#" id="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</a></li>';
            }
+           $spaces.append(options);
         }
-        $('#' + ELS_IDS.SEL_SPACE).append(options);
      });
      //2
      Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
