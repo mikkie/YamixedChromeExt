@@ -152,7 +152,7 @@ Bookmark = (function() {
       }
   };
 
-  var renderHeader = function(){
+  var renderHeader = function(imageData){
     //1
     chrome.storage.sync.get('userSpace',function(data){
         var $spaces = $('#' + ELS_IDS.SPACES);
@@ -163,10 +163,19 @@ Bookmark = (function() {
            var options = '';
            for(var i in spaces){
               var space = spaces[i];
-              if(space.defaultSpace){
-                 var $currentSpace = $('#' + ELS_IDS.CURRENT_SPACE);
-                 $currentSpace.attr('spaceId',spaces[i]._id);
-                 $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 
+              if(imageData.spaceId){
+                if(imageData.spaceId == space._id){
+                  var $currentSpace = $('#' + ELS_IDS.CURRENT_SPACE);
+                  $currentSpace.attr('spaceId',spaces[i]._id);
+                  $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 
+                } 
+              }
+              else{
+                if(space.defaultSpace){
+                  var $currentSpace = $('#' + ELS_IDS.CURRENT_SPACE);
+                  $currentSpace.attr('spaceId',spaces[i]._id);
+                  $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 
+                }
               }
               options += '<li><a href="#" id="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</a></li>';
            }
@@ -177,8 +186,9 @@ Bookmark = (function() {
      Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
   };
 
-  var renderImages = function(images){
-     renderHeader();
+  var renderImages = function(data){
+     var images = data.images;
+     renderHeader(data);
      var $holder = $('#' + ELS_IDS.IMAGE_HOLDER);
      $holder.empty();
      var html = '';
@@ -200,7 +210,7 @@ Bookmark = (function() {
           $('#' + ELS_IDS.URL).val(newPageData.url);
           $('#' + ELS_IDS.TITLE).val(newPageData.title);
           $('#' + ELS_IDS.DESC).val(newPageData.description);
-          renderImages(newPageData.images);
+          renderImages(newPageData);
           if(newPageData.tags && newPageData.tags.length > 0){
             for(var i in newPageData.tags){
               $('#' + ELS_IDS.TAGS).prepend('<button type="button" class="tag btn btn-warning btn-sm" style="margin-left:10px;">'+ newPageData.tags[i] +'</button>');
