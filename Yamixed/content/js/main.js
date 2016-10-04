@@ -23,7 +23,9 @@ MAIN = (function() {
      TAG : 'tag',
      LINK : 'link',
      DEL_TAG : 'delTag',
-     EDIT_TAG : 'editTag' 
+     EDIT_TAG : 'editTag',
+     SIDE_BAR : 'sidebar',
+     MAIN_AREA : 'mainarea' 
   };
 
 
@@ -228,6 +230,9 @@ MAIN = (function() {
           }  
           $main.append(html);  
         }
+        else{
+          $main.append('<div style="text-align:center;"><button style="margin-top:25%;" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏当前页面</button></div>');
+        }
   }; 
 
   var renderLinks = function(){
@@ -275,6 +280,8 @@ MAIN = (function() {
        }
     }
     if(tags.length > 0){
+       $('.' + ELS_CLASS.SIDE_BAR).show();
+       $('.' + ELS_CLASS.MAIN_AREA).addClass('col-sm-9').removeClass('col-sm-12');
        var html = '<li class="active"><a href="javascript:void(0);" class="tag">'+ tags[0] +'<span class="sr-only"></span></a></li>' 
        if(tags.length > 1){
          for(var i = 1; i < tags.length; i++){
@@ -282,6 +289,10 @@ MAIN = (function() {
          }  
        }
        $list.append(html);
+    }
+    else{
+       $('.' + ELS_CLASS.SIDE_BAR).hide();
+       $('.' + ELS_CLASS.MAIN_AREA).addClass('col-sm-12').removeClass('col-sm-9');
     }
   };
 
