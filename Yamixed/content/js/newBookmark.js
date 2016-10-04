@@ -34,6 +34,28 @@ Bookmark = (function() {
   };
  
   
+  var createNewTag = function(input){
+    var $this = $(input);
+    var val = $.trim($this.val());
+    if(val){
+      var found = false;
+      $('#' + ELS_IDS.TAGS + ' button').each(function(){
+        if($(this).text() == val){
+          found = true;
+          return false;
+        }
+      });
+      if(found){
+        return false;
+      }
+      $('#' + ELS_IDS.TAGS).prepend('<button type="button" class="tag btn btn-warning btn-sm" style="margin-left:10px;">'+ val +'</button>');
+      $this.val('');
+      if($('#' + ELS_IDS.TAGS).find('button').length >= 3){
+        $this.hide();
+      }
+    }
+  };
+
   var bind = {
       close : function(){
          $('.' + ELS_CLASS.CLOSE).click(function(){
@@ -53,26 +75,10 @@ Bookmark = (function() {
       new_tag : function(){
          $('#' + ELS_IDS.NEW_TAG).keyup(function(e){
              if(e.which == 13){
-                var $this = $(this);
-                var val = $.trim($this.val());
-                if(val){
-                   var found = false;
-                   $('#' + ELS_IDS.TAGS + ' button').each(function(){
-                      if($(this).text() == val){
-                        found = true;
-                        return false;
-                      }
-                   });
-                   if(found){
-                     return false;
-                   }
-                   $('#' + ELS_IDS.TAGS).prepend('<button type="button" class="tag btn btn-warning btn-sm" style="margin-left:10px;">'+ val +'</button>');
-                   $this.val('');
-                   if($('#' + ELS_IDS.TAGS).find('button').length >= 3){
-                      $this.hide();
-                   }
-                }
+                createNewTag(this);
              }
+         }).focusout(function(){
+             createNewTag(this);
          });
       },
       tags_click : function(){
@@ -129,16 +135,17 @@ Bookmark = (function() {
            $('#' + ELS_IDS.TAGS + ' button').each(function(){
               tags.push($(this).text());
            });
+           var spaceId = $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId');
            Service.postNewLink({
              _id : $('#' + ELS_IDS.ID).val(),
              url : $('#' + ELS_IDS.URL).val(),
              title : $.trim($('#' + ELS_IDS.TITLE).val()),
              description : $.trim($('#' + ELS_IDS.DESC).val()),
              previewImg : $('#' + ELS_IDS.IMG_URL).val(),
-             spaceId : $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId'),
+             spaceId : spaceId,
              tags : tags
            }).done(function(){
-             showPage("content/content.html",'900px','600px');
+             showPage("content/content.html?spaceId=" + spaceId,'900px','600px');
            });
         });
       },

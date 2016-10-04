@@ -2,7 +2,6 @@ MAIN = (function() {
 
   var ELS_IDS = {
   	 MAIN_AREA : 'mainArea',
-     BOOK_MARK : 'bookmark',
      GO_SETTING : 'goSetting',
      HOT_KEYS : 'hotkeys',
      ACCOUNT : 'account',
@@ -12,9 +11,10 @@ MAIN = (function() {
      SEARCH_LINKS : 'searchLinks',
      SEL_TAG : 'selTag',
      SEARCH_TAG : 'searchTag' 
-  };	
+  };  
 
   var ELS_CLASS = {
+     BOOK_MARK : 'bookmark',
      CLOSE : 'closeWindow',
      BELL : 'bell',
      USER_NAME : 'userName',
@@ -41,7 +41,7 @@ MAIN = (function() {
          });
       },
       book_mark : function(){
-         $('#' + ELS_IDS.BOOK_MARK).click(function(){
+         $(document).on('click','.' + ELS_CLASS.BOOK_MARK,function(){
             parseCurrentPage();
          });
       },
@@ -183,13 +183,26 @@ MAIN = (function() {
         var options = '';
         if(data.userSpace && data.userSpace.success.length > 0){
            var spaces = data.userSpace.success;
+           var id = Y_COMMON.getQueryString('spaceId');
            for(var i in spaces){
               var space = spaces[i];
-              if(space.defaultSpace){
+              //if pass spaceId then select the id
+              if(id){
+               if(id == spaces[i]._id){
                  options = '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>' + options;
-              }
-              else{
+               }
+               else{
                  options += '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>';
+               }
+              }
+              //else select the default space id
+              else{
+               if(space.defaultSpace){
+                 options = '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>' + options;
+               }
+               else{
+                 options += '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>';
+               }
               }
            }
         }
@@ -231,7 +244,7 @@ MAIN = (function() {
           $main.append(html);  
         }
         else{
-          $main.append('<div style="text-align:center;"><button style="margin-top:25%;" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏当前页面</button></div>');
+          $main.append('<div style="text-align:center;"><button style="margin-top:25%;" type="button" class="bookmark btn btn-success btn-lg"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏当前页面</button></div>');
         }
   }; 
 
