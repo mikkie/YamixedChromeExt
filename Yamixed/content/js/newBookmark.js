@@ -163,19 +163,10 @@ Bookmark = (function() {
            var options = '';
            for(var i in spaces){
               var space = spaces[i];
-              if(imageData.spaceId){
-                if(imageData.spaceId == space._id){
-                  var $currentSpace = $('#' + ELS_IDS.CURRENT_SPACE);
-                  $currentSpace.attr('spaceId',spaces[i]._id);
-                  $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 
-                } 
-              }
-              else{
-                if(space.defaultSpace){
-                  var $currentSpace = $('#' + ELS_IDS.CURRENT_SPACE);
-                  $currentSpace.attr('spaceId',spaces[i]._id);
-                  $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 
-                }
+              if(imageData.spaceId == space._id){
+                var $currentSpace = $('#' + ELS_IDS.CURRENT_SPACE);
+                $currentSpace.attr('spaceId',spaces[i]._id);
+                $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 
               }
               options += '<li><a href="#" id="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</a></li>';
            }

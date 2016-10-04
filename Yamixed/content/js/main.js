@@ -166,6 +166,8 @@ MAIN = (function() {
 
   var parseCurrentPage = function(){
      chrome.runtime.sendMessage({action:'parsePage'},function(response){
+        var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+        response.spaceId = spaceId;
         chrome.storage.sync.set({'newPageData' : response});
         showPage("content/newBookmark.html",'600px','600px');
      });
