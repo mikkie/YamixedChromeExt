@@ -5,6 +5,7 @@ Account = (function() {
     USER_NAME : 'username',
     SEL_SPACE : 'selSpace',
     EMAIL : 'email',
+    LOGOUT : 'logout',
     SAVE : 'save',
     FORM : 'saveAccountForm',
     USER_ID : 'userId'
@@ -16,7 +17,10 @@ Account = (function() {
   };
 
 
-  
+  var showPage = function(page,width,height){
+     chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL(page), width : width, height : height});
+  };
+
   var bind = {
       close : function(){
          $('.' + ELS_CLASS.CLOSE).click(function(){
@@ -27,6 +31,11 @@ Account = (function() {
         $('#' + ELS_IDS.GO_BACK).click(function(){
             chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
         });
+      },
+      logout : function(){
+         $('#' + ELS_IDS.LOGOUT).click(function(){
+            showPage("content/login.html",'400px','300px');
+         });
       }
   };
 
