@@ -122,7 +122,7 @@ Service = (function($) {
         }
      };
      return post(option);
-  }
+  };
 
 	return service;
 
