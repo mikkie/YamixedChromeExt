@@ -4,6 +4,7 @@ Space = (function() {
     GO_BACK : 'logo',
     NEW_USER_INPUT : 'newUserInput',
     USER_TIPS : 'userTips',
+    LOGOUT : 'logout',
     CURRENT_USER : 'currentUsers',
     CREATE_GROUP : 'createGroup',
     GROUP_NAME : 'groupName'
@@ -11,6 +12,7 @@ Space = (function() {
 
   var ELS_CLASS = {
      CLOSE : 'close',
+     USER_NAME : 'userName',
      DEL_USER : 'delUser'
   };
 
@@ -45,6 +47,9 @@ Space = (function() {
     });
   };
 
+  var showPage = function(page,width,height){
+     chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL(page), width : width, height : height});
+  };
   
   var bind = {
       close : function(){
@@ -56,6 +61,11 @@ Space = (function() {
         $('#' + ELS_IDS.GO_BACK).click(function(){
             chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
         });
+      },
+      logout : function(){
+         $('#' + ELS_IDS.LOGOUT).click(function(){
+            showPage("content/login.html",'400px','300px');
+         });
       },
       newUser : function(){
         $('#' + ELS_IDS.NEW_USER_INPUT).keyup(function(){
@@ -123,6 +133,7 @@ Space = (function() {
            bind[m]();
         }
      }
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
   };
   
   return {
