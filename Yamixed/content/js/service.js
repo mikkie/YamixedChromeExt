@@ -130,6 +130,21 @@ Service = (function($) {
     return get({url : 'http://localhost:3000/account/getUsersByNameOrEmail?keyword=' + keyword});
   };
 
+
+  service.createNewGroup = function(name,users,owner){
+     var option = {
+        url : 'http://localhost:3000/group/new',
+        data : {
+          name : name,
+          users : users,
+          owner : owner
+        }
+     };
+     return post(option);
+  };
+
+
+
 	return service;
 
 })(jQuery);
