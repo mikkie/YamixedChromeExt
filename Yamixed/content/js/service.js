@@ -124,6 +124,12 @@ Service = (function($) {
      return post(option);
   };
 
+
+
+  service.getUserByNameOrEmail = function(keyword) {
+    return get({url : 'http://localhost:3000/account/getUsersByNameOrEmail?keyword=' + keyword});
+  };
+
 	return service;
 
 })(jQuery);

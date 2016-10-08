@@ -41,34 +41,12 @@
         <label for="desc" class="col-sm-offset-1 col-sm-1 control-label">用户</label>
         <div class="col-sm-8">
           <table class="table table-striped">
-            <tbody>
-              <tr>
-               <th style="text-align:left;">Aqua</th>
-               <th style="text-align:right;">
-                 <button type="button" class="btn btn-danger btn-sm">
-                   <span class="glyphicon glyphicon-trash" aria-hidden="true"> 
-                 </button>
-               </th>
-              </tr>
-              <tr>
-               <th style="text-align:left;">Tagar</th>
-               <th style="text-align:right;">
-                 <button type="button" class="btn btn-danger btn-sm">
-                   <span class="glyphicon glyphicon-trash" aria-hidden="true"> 
-                 </button>
-               </th>
-              </tr>
-              <tr>
-               <th style="text-align:left;">Xiaxue</th>
-               <th style="text-align:right;">
-                 <button type="button" class="btn btn-danger btn-sm">
-                   <span class="glyphicon glyphicon-trash" aria-hidden="true"> 
-                 </button>
-               </th>
-              </tr>
+            <tbody id="currentUsers">
               <tr>
                <th style="text-align:left;">
-                 <input type="text" class="form-control" placeholder="输入用户名...">
+                 <input type="text" class="form-control" id="newUserInput" placeholder="输入用户名...">
+                 <ul id="userTips">
+                 </ul> 
                </th>
                <th style="text-align:right;">
                </th>
@@ -88,6 +66,7 @@
 	</div>  
 	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/jquery/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/newSpace.js"></script>
+  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/service.js"></script>
+	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/newGroup.js"></script>
 </body>
 </html>
