@@ -33,7 +33,7 @@ Y_COMMON = {
     renderUser : function(selector){
       chrome.storage.sync.get('user',function(data){
        if(data.user){
-          $(selector).html('<span class="caret"></span>&nbsp;' + data.user.userName); 
+          $(selector).html('<span userId="'+ data.user._id + '" class="caret"></span>&nbsp;' + data.user.userName); 
        }  
       });
     }

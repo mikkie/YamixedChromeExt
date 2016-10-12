@@ -7,12 +7,14 @@ Setting = (function() {
     SPACE_UL : 'spaceUl',
     GROUP_UL : 'groupUl',
     SPACE_AREA : 'spaceArea',
-    GROUP_AREA : 'groupArea'
+    GROUP_AREA : 'groupArea',
+    SPACE_LI : 'spaceLi'
   };  
 
   var ELS_CLASS = {
     NEW_SPACE : 'newSpace',
     NEW_GROUP : 'newGroup',
+    USER_NAME : 'userName',
     CLOSE : 'close' 
   };
 
@@ -79,12 +81,43 @@ Setting = (function() {
       }
   };
 
+
+  var renderPage = function(){
+    renderSpace();
+    renderGroup();
+  };
+
+  var renderSpace = function(){
+    chrome.storage.sync.get('user',function(data){
+       if(data.user){
+         Service.getUserCreatedSpaces(data.user._id).done(function(data){
+          var $li = $('#' + ELS_IDS.SPACE_LI);
+          $li.empty();
+          if(data.success && data.success.length > 0){
+            var html = '';
+            for(var i in data.success){
+              var space = data.success[i];
+              html += '<a id="'+ space._id +'" href="#">' + space.spaceName + '</a>';
+            }
+            $li.append(html);  
+          }
+         }); 
+       }
+    });
+  };
+
+  var renderGroup = function(){
+
+  };
+
   var init = function(){
      for(var m in bind){
         if(typeof bind[m] == 'function'){
            bind[m]();
         }
      }
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     renderPage();
   };
   
   return {

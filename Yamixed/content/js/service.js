@@ -167,6 +167,10 @@ Service = (function($) {
      return get({url : 'http://localhost:3000/space/findSpaceByName?name=' + name});
   };
 
+  service.getUserCreatedSpaces = function(userId){
+     return get({url : 'http://localhost:3000/space/getUserCreatedSpaces?userId=' + userId});
+  };
+
 	return service;
 
 })(jQuery);
