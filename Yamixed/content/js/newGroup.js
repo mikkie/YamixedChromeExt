@@ -107,8 +107,13 @@ Space = (function() {
              $gName.focus();
              return;
            }
-           chrome.storage.sync.get('user',function(data){
-             if(data.user){
+           Service.findGroupByName(name).done(function(data){
+             if(data.error || data.success){
+                $gName.focus();
+                return;
+             }
+             chrome.storage.sync.get('user',function(data){
+              if(data.user){
                var users = [];
                $('#' + ELS_IDS.CURRENT_USER + ' tr').each(function(){
                   var $tr = $(this);
@@ -121,8 +126,10 @@ Space = (function() {
                Service.createNewGroup(name,users,data.user._id).done(function(){
                   chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
                });
-             }  
-           });
+              }  
+             });
+
+           });  
         });
       }
   };

@@ -200,13 +200,13 @@ body{
   cursor: pointer;
 }
 
-#userTips{
+#userTips,#groupTips{
   list-style-type: none;
   padding-left: 0;
   padding: 1px;
 }
 
-#userTips li{
+#userTips li,#groupTips li{
   background-color: white;
   padding: 5px;
   cursor: pointer;

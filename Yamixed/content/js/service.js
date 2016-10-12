@@ -143,7 +143,29 @@ Service = (function($) {
      return post(option);
   };
 
+  service.createNewSpace = function(name,groups,owner){
+     var option = {
+        url : 'http://localhost:3000/space/new',
+        data : {
+          name : name,
+          groups : groups,
+          owner : owner
+        }
+     };
+     return post(option);
+  };
 
+  service.findGroupByName = function(name){
+     return get({url : 'http://localhost:3000/group/findGroupByName?name=' + name});
+  };
+
+  service.findGroupByNameLike = function(name){
+     return get({url : 'http://localhost:3000/group/findGroupByNameLike?name=' + name});
+  };
+
+  service.findSpaceByName = function(name){
+     return get({url : 'http://localhost:3000/space/findSpaceByName?name=' + name});
+  };
 
 	return service;
 
