@@ -42,6 +42,12 @@ Y_COMMON = {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
+  },
+  util : {
+    randomColor : function(color){    
+      return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])    
+      && (color.length == 6) ?  color : arguments.callee(color);    
+    }
   }
 };
 

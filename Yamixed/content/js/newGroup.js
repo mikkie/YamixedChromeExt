@@ -123,7 +123,7 @@ Space = (function() {
                     users.push(userId + '-' + nameAndEmail); 
                   }
                });
-               Service.createNewGroup(name,users,data.user._id).done(function(){
+               Service.createNewGroup(name,Y_COMMON.util.randomColor(''),users,data.user._id).done(function(){
                   chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
                });
               }  

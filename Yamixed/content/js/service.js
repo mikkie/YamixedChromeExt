@@ -131,11 +131,12 @@ Service = (function($) {
   };
 
 
-  service.createNewGroup = function(name,users,owner){
+  service.createNewGroup = function(name,color,users,owner){
      var option = {
         url : 'http://localhost:3000/group/new',
         data : {
           name : name,
+          color : color,
           users : users,
           owner : owner
         }
@@ -143,11 +144,13 @@ Service = (function($) {
      return post(option);
   };
 
-  service.createNewSpace = function(name,groups,owner){
+  service.createNewSpace = function(id,name,color,groups,owner){
      var option = {
         url : 'http://localhost:3000/space/new',
         data : {
+          id : id,
           name : name,
+          color : color,
           groups : groups,
           owner : owner
         }
@@ -167,8 +170,16 @@ Service = (function($) {
      return get({url : 'http://localhost:3000/space/findSpaceByName?name=' + name});
   };
 
+  service.findSpaceById = function(spaceId){
+     return get({url : 'http://localhost:3000/space/findSpaceById?spaceId=' + spaceId});
+  };
+
   service.getUserCreatedSpaces = function(userId){
      return get({url : 'http://localhost:3000/space/getUserCreatedSpaces?userId=' + userId});
+  };
+
+  service.getUserCreatedGroups = function(userId){
+     return get({url : 'http://localhost:3000/group/getUserCreatedGroups?userId=' + userId});
   };
 
 	return service;

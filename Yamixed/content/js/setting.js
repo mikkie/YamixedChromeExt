@@ -8,14 +8,18 @@ Setting = (function() {
     GROUP_UL : 'groupUl',
     SPACE_AREA : 'spaceArea',
     GROUP_AREA : 'groupArea',
-    SPACE_LI : 'spaceLi'
-  };  
+    SPACE_LI : 'spaceLi',
+    GROUP_LI : 'groupLi',
+    SPACE_DIV : 'spaceDiv',
+    GROUP_DIV : 'groupDiv'
+  };
 
   var ELS_CLASS = {
     NEW_SPACE : 'newSpace',
     NEW_GROUP : 'newGroup',
     USER_NAME : 'userName',
-    CLOSE : 'close' 
+    CLOSE : 'close',
+    EDIT_SPACE : 'editSpace' 
   };
 
 
@@ -78,6 +82,12 @@ Setting = (function() {
         $('.' + ELS_CLASS.NEW_GROUP).click(function(){
            showPage('content/newGroup.html','600px','600px'); 
         });
+      },
+      edit_space : function(){
+         $(document).on('click','.' + ELS_CLASS.EDIT_SPACE,function(){
+            var id = $(this).attr('id');
+            showPage('content/newSpace.html?spaceId=' + id,'600px','600px');
+         });
       }
   };
 
@@ -92,14 +102,23 @@ Setting = (function() {
        if(data.user){
          Service.getUserCreatedSpaces(data.user._id).done(function(data){
           var $li = $('#' + ELS_IDS.SPACE_LI);
+          var $div = $('#' + ELS_IDS.SPACE_DIV);
           $li.empty();
+          $div.find('.old').remove();
           if(data.success && data.success.length > 0){
             var html = '';
+            var divHtml = '';
             for(var i in data.success){
               var space = data.success[i];
-              html += '<a id="'+ space._id +'" href="#">' + space.spaceName + '</a>';
+              var color = space.color;
+              if(!color){
+                color = Y_COMMON.util.randomColor('');   
+              }
+              html += '<a id="'+ space._id +'" href="javascript:void(0);" class="editSpace">' + space.spaceName + '</a>';
+              divHtml += '<a id="'+ space._id  +'" href="javascript:void(0);" class="editSpace"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + space.spaceName + '</b></div></a>';
             }
-            $li.append(html);  
+            $li.append(html);
+            $div.prepend(divHtml);  
           }
          }); 
        }
@@ -107,7 +126,31 @@ Setting = (function() {
   };
 
   var renderGroup = function(){
-
+    chrome.storage.sync.get('user',function(data){
+       if(data.user){
+         Service.getUserCreatedGroups(data.user._id).done(function(data){
+          var $li = $('#' + ELS_IDS.GROUP_LI);
+          var $div = $('#' + ELS_IDS.GROUP_DIV);
+          $li.empty();
+          $div.find('.old').remove();
+          if(data.success && data.success.length > 0){
+            var html = '';
+            var divHtml = '';
+            for(var i in data.success){
+              var group = data.success[i];
+              var color = group.color;
+              if(!color){
+                color = Y_COMMON.util.randomColor('');   
+              }
+              html += '<a id="'+ group._id +'" href="javascript:void(0);">' + group.name + '</a>';
+              divHtml += '<a id="'+ group._id  +'" href="javascript:void(0);"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + group.name + '</b></div></a>';
+            }
+            $li.append(html);
+            $div.prepend(divHtml);  
+          }
+         }); 
+       }
+    });
   };
 
   var init = function(){
