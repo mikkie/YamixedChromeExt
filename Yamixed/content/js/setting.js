@@ -19,7 +19,8 @@ Setting = (function() {
     NEW_GROUP : 'newGroup',
     USER_NAME : 'userName',
     CLOSE : 'close',
-    EDIT_SPACE : 'editSpace' 
+    EDIT_SPACE : 'editSpace',
+    EDIT_GROUP : 'editGroup', 
   };
 
 
@@ -88,6 +89,12 @@ Setting = (function() {
             var id = $(this).attr('id');
             showPage('content/newSpace.html?spaceId=' + id,'600px','600px');
          });
+      },
+      edit_group : function(){
+         $(document).on('click','.' + ELS_CLASS.EDIT_GROUP,function(){
+            var id = $(this).attr('id');
+            showPage('content/newGroup.html?groupId=' + id,'600px','600px');
+         });
       }
   };
 
@@ -142,8 +149,8 @@ Setting = (function() {
               if(!color){
                 color = Y_COMMON.util.randomColor('');   
               }
-              html += '<a id="'+ group._id +'" href="javascript:void(0);">' + group.name + '</a>';
-              divHtml += '<a id="'+ group._id  +'" href="javascript:void(0);"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + group.name + '</b></div></a>';
+              html += '<a id="'+ group._id +'" href="javascript:void(0);" class="editGroup">' + group.name + '</a>';
+              divHtml += '<a id="'+ group._id  +'" href="javascript:void(0);" class="editGroup"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + group.name + '</b></div></a>';
             }
             $li.append(html);
             $div.prepend(divHtml);  

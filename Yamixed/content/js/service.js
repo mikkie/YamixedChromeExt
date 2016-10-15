@@ -131,10 +131,11 @@ Service = (function($) {
   };
 
 
-  service.createNewGroup = function(name,color,users,owner){
+  service.createNewGroup = function(id,name,color,users,owner){
      var option = {
         url : 'http://localhost:3000/group/new',
         data : {
+          id : id,
           name : name,
           color : color,
           users : users,
@@ -160,6 +161,10 @@ Service = (function($) {
 
   service.findGroupByName = function(name){
      return get({url : 'http://localhost:3000/group/findGroupByName?name=' + name});
+  };
+
+  service.findGroupById = function(groupId){
+     return get({url : 'http://localhost:3000/group/findGroupById?groupId=' + groupId});
   };
 
   service.findGroupByNameLike = function(name){

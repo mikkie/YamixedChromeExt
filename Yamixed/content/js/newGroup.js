@@ -108,9 +108,12 @@ Space = (function() {
              return;
            }
            Service.findGroupByName(name).done(function(data){
-             if(data.error || data.success){
-                $gName.focus();
-                return;
+             var id = Y_COMMON.getQueryString('groupId');
+             if(!id){
+               if(data.error || data.success){
+                 $gName.focus();
+                 return;
+               }
              }
              chrome.storage.sync.get('user',function(data){
               if(data.user){
@@ -123,7 +126,7 @@ Space = (function() {
                     users.push(userId + '-' + nameAndEmail); 
                   }
                });
-               Service.createNewGroup(name,Y_COMMON.util.randomColor(''),users,data.user._id).done(function(){
+               Service.createNewGroup(id,name,Y_COMMON.util.randomColor(''),users,data.user._id).done(function(){
                   chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
                });
               }  
@@ -134,11 +137,43 @@ Space = (function() {
       }
   };
 
+
+  var renderEditGroup = function(id){
+    $('#' + ELS_IDS.CREATE_GROUP).text('更新');
+    Service.findGroupById(id).done(function(data){
+      if(data.success){
+        var group = data.success;
+        $('#' + ELS_IDS.GROUP_NAME).attr('readonly','readonly').val(group.name);
+        if(group.users && group.users.length > 0){
+           var html = '';
+           for(var i in group.users){
+              var user = group.users[i];
+              var temp = ['<tr value="'+ user.userId +'">',
+                      '<th style="text-align:left;">'+ user.userName +'</th>',
+                      '<th style="text-align:right;">',   
+                      '<button type="button" class="btn btn-danger btn-sm delUser">',
+                      '<span class="glyphicon glyphicon-trash" aria-hidden="true">',
+                      '</button>',
+                      '</th>',
+                      '</tr>'
+              ].join('');
+              html += temp;
+           }
+           $('#' + ELS_IDS.CURRENT_USER).prepend(html);   
+        }    
+      }
+    });
+  };
+
   var init = function(){
      for(var m in bind){
         if(typeof bind[m] == 'function'){
            bind[m]();
         }
+     }
+     var id = Y_COMMON.getQueryString('groupId');
+     if(id){
+        renderEditGroup(id); 
      }
      Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
   };
