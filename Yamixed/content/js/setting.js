@@ -11,6 +11,7 @@ Setting = (function() {
     SPACE_LI : 'spaceLi',
     GROUP_LI : 'groupLi',
     SPACE_DIV : 'spaceDiv',
+    LOGOUT : 'logout',
     GROUP_DIV : 'groupDiv'
   };
 
@@ -94,6 +95,11 @@ Setting = (function() {
          $(document).on('click','.' + ELS_CLASS.EDIT_GROUP,function(){
             var id = $(this).attr('id');
             showPage('content/newGroup.html?groupId=' + id,'600px','600px');
+         });
+      },
+      logout : function(){
+         $('#' + ELS_IDS.LOGOUT).click(function(){
+            showPage("content/login.html",'400px','300px');
          });
       }
   };
