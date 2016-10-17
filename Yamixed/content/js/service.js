@@ -159,6 +159,19 @@ Service = (function($) {
      return post(option);
   };
 
+  service.joinSpace = function(userId,spaceId){
+     var option = {
+        url : 'http://localhost:3000/space/join',
+        data : {
+          userId : userId,
+          spaceId : spaceId
+        }
+     };
+     return post(option);
+  };
+
+
+
   service.findGroupByName = function(name){
      return get({url : 'http://localhost:3000/group/findGroupByName?name=' + name});
   };
@@ -185,6 +198,14 @@ Service = (function($) {
 
   service.getUserCreatedGroups = function(userId){
      return get({url : 'http://localhost:3000/group/getUserCreatedGroups?userId=' + userId});
+  };
+
+  service.getMessagesToUser = function(userId){
+     return get({url : 'http://localhost:3000/message/getMessagesToUser?userId=' + userId});
+  };
+
+  service.disableMessage = function(messageId){
+     return get({url : 'http://localhost:3000/message/disableMessage?messageId=' + messageId});
   };
 
 	return service;

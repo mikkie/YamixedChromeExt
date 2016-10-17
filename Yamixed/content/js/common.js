@@ -48,6 +48,13 @@ Y_COMMON = {
       return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])    
       && (color.length == 6) ?  color : arguments.callee(color);    
     }
+  },
+  service : {
+    getLogindUser : function(callback){
+      chrome.storage.sync.get('user',function(data){
+         callback(data); 
+      });
+    }
   }
 };
 

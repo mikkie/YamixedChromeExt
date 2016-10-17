@@ -209,7 +209,22 @@ MAIN = (function() {
         $('#' + ELS_IDS.SEL_SPACE).append(options);
         resolve();
      });
+     renderBell(); 
      Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     });
+  };
+
+  var renderBell = function(){
+     Y_COMMON.service.getLogindUser(function(data){
+        if(data.user){
+          Service.getMessagesToUser(data.user._id).done(function(msg){
+             if(msg.success && msg.success.length > 0){
+                var $bellImg = $('.' + ELS_CLASS.BELL + ' img');
+                var src = $bellImg.attr('src').replace('grey','pink');
+                $bellImg.attr('src',src);
+             }   
+          });
+        }  
      });
   };
 
