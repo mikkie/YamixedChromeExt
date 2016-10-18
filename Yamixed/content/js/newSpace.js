@@ -136,7 +136,9 @@ Space = (function() {
                   }
                });
                Service.createNewSpace(spaceId,name,Y_COMMON.util.randomColor(''),groups,data.user._id).done(function(){
-                  chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
+                  Y_COMMON.service.syncLocalData(function(){
+                     chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
+                  });
                });
               }  
              });

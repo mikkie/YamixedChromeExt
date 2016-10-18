@@ -55,6 +55,16 @@ Y_COMMON = {
       chrome.storage.sync.get('user',function(data){
          callback(data); 
       });
+    },
+    syncLocalData : function(callback){
+      chrome.storage.sync.get('user',function(data){
+        Service.getUserById(data.user._id).done(function(data){
+           chrome.storage.sync.set({"user" : data.success});
+           Service.getUserSpaces(data.success.space).done(function(data){
+              callback(data);
+           });  
+        });
+      });
     }
   }
 };

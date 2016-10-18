@@ -208,6 +208,10 @@ Service = (function($) {
      return get({url : Y_COMMON.config.server.host + '/message/disableMessage?messageId=' + messageId});
   };
 
+  service.getUserById = function(userId){
+     return get({url : Y_COMMON.config.server.host + '/account/getUserById?userId=' + userId});
+  };
+
 	return service;
 
 })(jQuery);
