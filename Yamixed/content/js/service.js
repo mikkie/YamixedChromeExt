@@ -48,7 +48,7 @@ Service = (function($) {
         spaceIds += ("," + space.joined.join(',')); 
      }
      var option = {
-        url : 'http://localhost:3000/space/getUserSpace',
+        url : Y_COMMON.config.server.host + '/space/getUserSpace',
         localKey : 'userSpace',
         data : {
           spaceIds : spaceIds
@@ -60,7 +60,7 @@ Service = (function($) {
 
   service.getLinksBySpace = function(spaceId){
      var option = {
-        url : 'http://localhost:3000/link/getLinksBySpace',
+        url : Y_COMMON.config.server.host + '/link/getLinksBySpace',
         data : {
           spaceId : spaceId
         }
@@ -71,7 +71,7 @@ Service = (function($) {
 
   service.postNewLink = function(newLink){
      var option = {
-        url : 'http://localhost:3000/link/postNewLink',
+        url : Y_COMMON.config.server.host + '/link/postNewLink',
         data : newLink
      };
      return post(option);
@@ -80,7 +80,7 @@ Service = (function($) {
 
   service.searchLinks = function(spaceId,keyword,tag){
      var option = {
-        url : 'http://localhost:3000/link/searchLinks',
+        url : Y_COMMON.config.server.host + '/link/searchLinks',
         data : {
           spaceId : spaceId,
           keyword : keyword,
@@ -93,7 +93,7 @@ Service = (function($) {
 
   service.updateLinkVisitTime = function(linkId){
      var option = {
-        url : 'http://localhost:3000/link/updateLinkVisitTime',
+        url : Y_COMMON.config.server.host + '/link/updateLinkVisitTime',
         data : {
           linkId : linkId
         }
@@ -104,7 +104,7 @@ Service = (function($) {
 
   service.deleteLink = function(linkId){
     var option = {
-        url : 'http://localhost:3000/link/deleteLink',
+        url : Y_COMMON.config.server.host + '/link/deleteLink',
         data : {
           linkId : linkId
         }
@@ -115,7 +115,7 @@ Service = (function($) {
 
   service.getLinkById = function(linkId){
     var option = {
-        url : 'http://localhost:3000/link/getLinkById',
+        url : Y_COMMON.config.server.host + '/link/getLinkById',
         localKey : 'newPageData',
         data : {
           linkId : linkId
@@ -127,13 +127,13 @@ Service = (function($) {
 
 
   service.getUserByNameOrEmail = function(keyword) {
-    return get({url : 'http://localhost:3000/account/getUsersByNameOrEmail?keyword=' + keyword});
+    return get({url : Y_COMMON.config.server.host + '/account/getUsersByNameOrEmail?keyword=' + keyword});
   };
 
 
   service.createNewGroup = function(id,name,color,users,owner){
      var option = {
-        url : 'http://localhost:3000/group/new',
+        url : Y_COMMON.config.server.host + '/group/new',
         data : {
           id : id,
           name : name,
@@ -147,7 +147,7 @@ Service = (function($) {
 
   service.createNewSpace = function(id,name,color,groups,owner){
      var option = {
-        url : 'http://localhost:3000/space/new',
+        url : Y_COMMON.config.server.host + '/space/new',
         data : {
           id : id,
           name : name,
@@ -161,7 +161,7 @@ Service = (function($) {
 
   service.joinSpace = function(userId,spaceId){
      var option = {
-        url : 'http://localhost:3000/space/join',
+        url : Y_COMMON.config.server.host + '/space/join',
         data : {
           userId : userId,
           spaceId : spaceId
@@ -173,39 +173,39 @@ Service = (function($) {
 
 
   service.findGroupByName = function(name){
-     return get({url : 'http://localhost:3000/group/findGroupByName?name=' + name});
+     return get({url : Y_COMMON.config.server.host + '/group/findGroupByName?name=' + name});
   };
 
   service.findGroupById = function(groupId){
-     return get({url : 'http://localhost:3000/group/findGroupById?groupId=' + groupId});
+     return get({url : Y_COMMON.config.server.host + '/group/findGroupById?groupId=' + groupId});
   };
 
   service.findGroupByNameLike = function(name){
-     return get({url : 'http://localhost:3000/group/findGroupByNameLike?name=' + name});
+     return get({url : Y_COMMON.config.server.host + '/group/findGroupByNameLike?name=' + name});
   };
 
   service.findSpaceByName = function(name){
-     return get({url : 'http://localhost:3000/space/findSpaceByName?name=' + name});
+     return get({url : Y_COMMON.config.server.host + '/space/findSpaceByName?name=' + name});
   };
 
   service.findSpaceById = function(spaceId){
-     return get({url : 'http://localhost:3000/space/findSpaceById?spaceId=' + spaceId});
+     return get({url : Y_COMMON.config.server.host + '/space/findSpaceById?spaceId=' + spaceId});
   };
 
   service.getUserCreatedSpaces = function(userId){
-     return get({url : 'http://localhost:3000/space/getUserCreatedSpaces?userId=' + userId});
+     return get({url : Y_COMMON.config.server.host + '/space/getUserCreatedSpaces?userId=' + userId});
   };
 
   service.getUserCreatedGroups = function(userId){
-     return get({url : 'http://localhost:3000/group/getUserCreatedGroups?userId=' + userId});
+     return get({url : Y_COMMON.config.server.host + '/group/getUserCreatedGroups?userId=' + userId});
   };
 
   service.getMessagesToUser = function(userId){
-     return get({url : 'http://localhost:3000/message/getMessagesToUser?userId=' + userId});
+     return get({url : Y_COMMON.config.server.host + '/message/getMessagesToUser?userId=' + userId});
   };
 
   service.disableMessage = function(messageId){
-     return get({url : 'http://localhost:3000/message/disableMessage?messageId=' + messageId});
+     return get({url : Y_COMMON.config.server.host + '/message/disableMessage?messageId=' + messageId});
   };
 
 	return service;

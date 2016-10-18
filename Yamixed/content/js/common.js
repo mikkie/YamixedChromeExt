@@ -1,7 +1,7 @@
 Y_COMMON = {
   config : {
     server : {
-  	   host : 'http://localhost:3000'
+  	   host : 'https://localhost:3000'
     }
   },
   form : {

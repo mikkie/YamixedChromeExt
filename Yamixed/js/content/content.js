@@ -52,7 +52,7 @@ CONTENT = (function(){
      chrome.storage.sync.get('user',function(data){
        if(data && data.user){
           $.ajax({
-            url : 'http://localhost:3000/login/autoLogin',
+            url : 'https://localhost:3000/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
