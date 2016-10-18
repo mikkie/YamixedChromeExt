@@ -58,7 +58,7 @@ Account = (function() {
            var spaces = data.userSpace.success;
            for(var i in spaces){
               var space = spaces[i];
-              if(space.defaultSpace){
+              if(space.defaultSpace && space.userId == $('#' + ELS_IDS.USER_ID).val()){
                  options = '<option name="spaceId" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>' + options;
               }
               else{
