@@ -85,7 +85,9 @@ Account = (function() {
      $('#' + ELS_IDS.FORM).ajaxForm(function(data){
         if(data.success){
           Service.getUserSpaces(data.success.space).done(function(){
-             chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
+             Y_COMMON.service.syncLocalData(function(){
+                chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
+             });
           });
         } 
      });
