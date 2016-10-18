@@ -264,24 +264,41 @@ MAIN = (function() {
         }
   }; 
 
+
+  var showOrHideBookmarkBtn = function(isShow){
+      if(isShow){
+        $('.' + ELS_CLASS.BOOK_MARK).show();
+        $('#' + ELS_IDS.SEL_SPACE).css('margin-left','1%');
+      }
+      else{
+        $('.' + ELS_CLASS.BOOK_MARK).hide();
+        $('#' + ELS_IDS.SEL_SPACE).css('margin-left','22%');
+      }
+  };
+
   var renderLinks = function(){
      var $space = $('#' + ELS_IDS.SEL_SPACE);
      var ids = $space.val().split('-');
      var spaceId = ids[0];
-     Service.getLinksBySpace(spaceId).done(function(data){
-        showLinks(data);
-        renderTags(data);
-     });
      var userId = ids[1];
      chrome.storage.sync.get('user',function(data){
        if(userId == data.user._id){
-          $('.' + ELS_CLASS.BOOK_MARK).show();
-          $space.css('margin-left','1%');  
+          showOrHideBookmarkBtn(true);
        }
        else{
-          $('.' + ELS_CLASS.BOOK_MARK).hide();
-          $space.css('margin-left','22%');
+          Service.checkRWPermission(spaceId,data.user._id).done(function(data){
+             if(data.success == 'rw'){
+                showOrHideBookmarkBtn(true);
+             }
+             else{
+                showOrHideBookmarkBtn(false);
+             } 
+          });
        }
+     });
+     Service.getLinksBySpace(spaceId).done(function(data){
+        showLinks(data);
+        renderTags(data);
      });
   };
 

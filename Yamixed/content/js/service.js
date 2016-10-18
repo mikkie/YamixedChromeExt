@@ -212,6 +212,10 @@ Service = (function($) {
      return get({url : Y_COMMON.config.server.host + '/account/getUserById?userId=' + userId});
   };
 
+  service.checkRWPermission = function(spaceId,userId){
+     return get({url : Y_COMMON.config.server.host + '/space/checkRWPermission?spaceId=' + spaceId + '&userId=' + userId});  
+  };
+
 	return service;
 
 })(jQuery);
