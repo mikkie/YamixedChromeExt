@@ -10,7 +10,8 @@ Bell = (function() {
   var ELS_CLASS = {
      USER_NAME : 'userName',
      JOIN_SPACE : 'joinSpace',
-     CLOSE : 'close' 
+     CLOSE : 'close',
+     AVATAR : 'avatar' 
   };
 
 
@@ -63,7 +64,7 @@ Bell = (function() {
   };
 
   var renderPage = function(){
-      Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+      Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
       Y_COMMON.service.getLogindUser(function(data){
          var $list = $('#' + ELS_IDS.MSG_LIST);
          $list.empty();

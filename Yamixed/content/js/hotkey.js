@@ -8,7 +8,8 @@ Bell = (function() {
 
   var ELS_CLASS = {
      USER_NAME : 'userName',
-     CLOSE : 'close' 
+     CLOSE : 'close',
+     AVATAR : 'avatar' 
   };
 
 
@@ -45,7 +46,7 @@ Bell = (function() {
            bind[m]();
         }
      }
-     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
   };
   
   return {

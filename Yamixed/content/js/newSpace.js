@@ -13,7 +13,8 @@ Space = (function() {
   var ELS_CLASS = {
      CLOSE : 'close',
      USER_NAME : 'userName',
-     DEL_GROUP : 'delGroup' 
+     DEL_GROUP : 'delGroup',
+     AVATAR : 'avatar' 
   };
 
 
@@ -190,7 +191,7 @@ Space = (function() {
      if(id){
         renderEditSpace(id); 
      }
-     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
   };
   
   return {

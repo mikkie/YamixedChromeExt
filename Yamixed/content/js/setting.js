@@ -21,7 +21,8 @@ Setting = (function() {
     USER_NAME : 'userName',
     CLOSE : 'close',
     EDIT_SPACE : 'editSpace',
-    EDIT_GROUP : 'editGroup', 
+    EDIT_GROUP : 'editGroup',
+    AVATAR : 'avatar' 
   };
 
 
@@ -172,7 +173,7 @@ Setting = (function() {
            bind[m]();
         }
      }
-     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
      renderPage();
   };
   

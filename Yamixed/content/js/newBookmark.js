@@ -25,7 +25,8 @@ Bookmark = (function() {
      CLOSE : 'close',
      USER_NAME : 'userName',
      TAG : 'tag',
-     PREVIEW_IMG : 'previewImg'  
+     PREVIEW_IMG : 'previewImg',
+     AVATAR : 'avatar'  
   };
 
 
@@ -181,7 +182,7 @@ Bookmark = (function() {
         }
      });
      //2
-     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
   };
 
   var renderImages = function(data){

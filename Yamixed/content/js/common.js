@@ -33,7 +33,7 @@ Y_COMMON = {
     renderUser : function(avatarSel,selector){
       chrome.storage.sync.get('user',function(data){
        if(data.user){
-          $(avatarSel).css('background','#' + data.user.avatar.color).text(data.user.avatar.alphabet);
+          $(avatarSel).attr('title',data.user.userName).css('background','#' + data.user.avatar.color).text(data.user.avatar.alphabet);
           $(selector).html('<span userId="'+ data.user._id + '" class="caret"></span>&nbsp;' + data.user.userName); 
        }  
       });
