@@ -8,7 +8,9 @@ Account = (function() {
     LOGOUT : 'logout',
     SAVE : 'save',
     FORM : 'saveAccountForm',
-    USER_ID : 'userId'
+    USER_ID : 'userId',
+    SAVE : 'save',
+    PASSWORD : 'password'
   };	
 
   var ELS_CLASS = {
@@ -37,6 +39,28 @@ Account = (function() {
          $('#' + ELS_IDS.LOGOUT).click(function(){
             showPage("content/login.html",'400px','300px');
          });
+      },
+      save : function(){
+        $('#' + ELS_IDS.FORM).submit(function(data){
+          var $pwd = $('#' + ELS_IDS.PASSWORD);
+          var pwd = $pwd.val();
+          if(pwd && !/^.{6,}$/.test(pwd)){
+             $pwd.focus();
+             return false;
+          }
+          $(this).ajaxSubmit({
+            success : function(data){
+              if(data.success){
+                Service.getUserSpaces(data.success.space).done(function(){
+                  Y_COMMON.service.syncLocalData(function(){
+                    chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
+                  });
+                });
+              }
+            }
+          });
+          return false; 
+        });
       }
   };
 
@@ -82,15 +106,6 @@ Account = (function() {
         }
      }
      renderPage();
-     $('#' + ELS_IDS.FORM).ajaxForm(function(data){
-        if(data.success){
-          Service.getUserSpaces(data.success.space).done(function(){
-             Y_COMMON.service.syncLocalData(function(){
-                chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
-             });
-          });
-        } 
-     });
   };
   
   return {
