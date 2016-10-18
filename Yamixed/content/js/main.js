@@ -25,7 +25,8 @@ MAIN = (function() {
      DEL_TAG : 'delTag',
      EDIT_TAG : 'editTag',
      SIDE_BAR : 'sidebar',
-     MAIN_AREA : 'mainarea' 
+     MAIN_AREA : 'mainarea',
+     AVATAR : 'avatar' 
   };
 
 
@@ -210,7 +211,7 @@ MAIN = (function() {
         resolve();
      });
      renderBell(); 
-     Y_COMMON.render.renderUser('.' + ELS_CLASS.USER_NAME);
+     Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
      });
   };
 

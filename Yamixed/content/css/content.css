@@ -24,6 +24,14 @@ body{
   height: 34px;
   width: 34px;
   float: left;
+  background: #989797;
+  -moz-border-radius: 17px;
+  -webkit-border-radius: 17px;
+  border-radius: 17px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  font-size: 23px;
 }
 #searchbox{
   width: 35%;
