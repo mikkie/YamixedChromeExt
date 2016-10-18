@@ -190,19 +190,19 @@ MAIN = (function() {
               //if pass spaceId then select the id
               if(id){
                if(id == spaces[i]._id){
-                 options = '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>' + options;
+                 options = '<option name="selSpace" value="'+ spaces[i]._id +'-'+ spaces[i].userId + '">'+ spaces[i].spaceName +'</option>' + options;
                }
                else{
-                 options += '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>';
+                 options += '<option name="selSpace" value="'+ spaces[i]._id +'-'+ spaces[i].userId + '">'+ spaces[i].spaceName +'</option>';
                }
               }
               //else select the default space id
               else{
                if(space.defaultSpace){
-                 options = '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>' + options;
+                 options = '<option name="selSpace" value="'+ spaces[i]._id +'-'+ spaces[i].userId + '">'+ spaces[i].spaceName +'</option>' + options;
                }
                else{
-                 options += '<option name="selSpace" value="'+ spaces[i]._id +'">'+ spaces[i].spaceName +'</option>';
+                 options += '<option name="selSpace" value="'+ spaces[i]._id +'-'+ spaces[i].userId + '">'+ spaces[i].spaceName +'</option>';
                }
               }
            }
@@ -265,10 +265,23 @@ MAIN = (function() {
   }; 
 
   var renderLinks = function(){
-     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+     var $space = $('#' + ELS_IDS.SEL_SPACE);
+     var ids = $space.val().split('-');
+     var spaceId = ids[0];
      Service.getLinksBySpace(spaceId).done(function(data){
         showLinks(data);
         renderTags(data);
+     });
+     var userId = ids[1];
+     chrome.storage.sync.get('user',function(data){
+       if(userId == data.user._id){
+          $('.' + ELS_CLASS.BOOK_MARK).show();
+          $space.css('margin-left','1%');  
+       }
+       else{
+          $('.' + ELS_CLASS.BOOK_MARK).hide();
+          $space.css('margin-left','22%');
+       }
      });
   };
 
