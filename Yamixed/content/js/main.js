@@ -169,7 +169,7 @@ MAIN = (function() {
 
   var parseCurrentPage = function(){
      chrome.runtime.sendMessage({action:'parsePage'},function(response){
-        var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+        var spaceId = $('#' + ELS_IDS.SEL_SPACE).val().split('-')[0];
         response.spaceId = spaceId;
         chrome.storage.sync.set({'newPageData' : response});
         showPage("content/newBookmark.html",'600px','600px');
@@ -346,7 +346,7 @@ MAIN = (function() {
 
 
   var searchLinks = function(keyword,tag){
-     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val().split('-')[0];
      Service.searchLinks(spaceId,keyword,tag).done(function(data){
         showLinks(data);
      });
