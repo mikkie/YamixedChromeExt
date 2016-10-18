@@ -58,7 +58,9 @@ Bell = (function() {
         $('#' + ELS_IDS.MSG_LIST).on('click','.' + ELS_CLASS.JOIN_SPACE,function(){
            var userId = $(this).attr('userId');
            var spaceId = $(this).attr('spaceId');
-           Service.joinSpace(userId,spaceId);
+           Service.joinSpace(userId,spaceId).done(function(){
+              Y_COMMON.service.syncLocalData();
+           });
         });
       }
   };

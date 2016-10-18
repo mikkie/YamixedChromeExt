@@ -61,7 +61,9 @@ Y_COMMON = {
         Service.getUserById(data.user._id).done(function(data){
            chrome.storage.sync.set({"user" : data.success});
            Service.getUserSpaces(data.success.space).done(function(data){
-              callback(data);
+              if(typeof callback == 'function'){
+                 callback(data);
+              }
            });  
         });
       });

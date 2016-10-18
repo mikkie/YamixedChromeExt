@@ -177,7 +177,7 @@ MAIN = (function() {
   };
 
 
-  var renderHeader = function(){
+  var renderHeader = function(user){
      return new Promise(function(resolve, reject){
      //1.render space selector
      chrome.storage.sync.get('userSpace',function(data){
@@ -198,7 +198,7 @@ MAIN = (function() {
               }
               //else select the default space id
               else{
-               if(space.defaultSpace){
+               if(space.defaultSpace && space.userId == user._id){
                  options = '<option name="selSpace" value="'+ spaces[i]._id +'-'+ spaces[i].userId + '">'+ spaces[i].spaceName +'</option>' + options;
                }
                else{
@@ -338,8 +338,8 @@ MAIN = (function() {
     }
   };
 
-  var renderPage = function(){
-     renderHeader().then(function(){
+  var renderPage = function(user){
+     renderHeader(user).then(function(){
        renderLinks();
      });
   };
@@ -358,7 +358,10 @@ MAIN = (function() {
            bind[m]();
         }
      }
-     renderPage();
+     chrome.storage.sync.get('user',function(data){
+        renderPage(data.user);
+     });
+     
   };
   
   return {
