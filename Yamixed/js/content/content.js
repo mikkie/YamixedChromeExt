@@ -109,9 +109,30 @@ CONTENT = (function(){
     }
   });
 
+
+  var findDescription = function(){
+      var description = '';
+      for(var i = 1; i <= 4; i++){
+         $('h' + i).each(function(){
+            var text = $(this).text();
+            if(text && /\w+\s+\w+/.test(text)){
+              description = text;
+              return false;   
+            } 
+         });
+         if(description){
+            break;
+         } 
+      }
+      return description;
+  };
+
   var parsePage = function(sendResponse){
      var title = $('title').text();
      var description = $('meta[name="description"]').attr('content');
+     if(!description){
+        description = findDescription();
+     }
      var $images = $('img');
      var images = [];
      $images.each(function(i,n){
