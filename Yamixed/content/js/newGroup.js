@@ -37,13 +37,15 @@ Space = (function() {
        var $tips = $('#' + ELS_IDS.USER_TIPS);
        $tips.empty();
        if(data.success && data.success.length > 0){
-         for(var i in data.success){
-           var user = data.success[i];
-           if(!isUserExists(user._id)){
-             html += '<li value="'+ user._id +'">' + user.userName + '   <span style="color:grey">' + user.email + '</span></li>';
+         Y_COMMON.service.getLogindUser(function(data){
+           for(var i in data.success){
+             var user = data.success[i];
+             if(!isUserExists(user._id) && user._id != data.user._id){
+               html += '<li value="'+ user._id +'">' + user.userName + '   <span style="color:grey">' + user.email + '</span></li>';
+             }
            }
-         }
-         $tips.append(html); 
+           $tips.append(html); 
+         });
        }
     });
   };
@@ -104,7 +106,7 @@ Space = (function() {
         $('#' + ELS_IDS.CREATE_GROUP).click(function(){
            var $gName = $('#' + ELS_IDS.GROUP_NAME);
            var name = $gName.val();
-           if(!name){
+           if(!name || name.indexOf('-') >=0){
              $gName.focus();
              return;
            }

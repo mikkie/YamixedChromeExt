@@ -111,7 +111,7 @@ Space = (function() {
         $('#' + ELS_IDS.CREATE_SPACE).click(function(){
            var $sName = $('#' + ELS_IDS.SPACE_NAME);
            var name = $sName.val();
-           if(!name){
+           if(!name || name.indexOf('-') >=0){
              $sName.focus();
              return;
            }
