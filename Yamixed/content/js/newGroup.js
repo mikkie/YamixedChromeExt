@@ -37,10 +37,10 @@ Space = (function() {
        var $tips = $('#' + ELS_IDS.USER_TIPS);
        $tips.empty();
        if(data.success && data.success.length > 0){
-         Y_COMMON.service.getLogindUser(function(data){
+         Y_COMMON.service.getLogindUser(function(loginUser){
            for(var i in data.success){
              var user = data.success[i];
-             if(!isUserExists(user._id) && user._id != data.user._id){
+             if(!isUserExists(user._id) && user._id != loginUser.user._id){
                html += '<li value="'+ user._id +'">' + user.userName + '   <span style="color:grey">' + user.email + '</span></li>';
              }
            }
