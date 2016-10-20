@@ -7,6 +7,7 @@ Space = (function() {
     LOGOUT : 'logout',
     CURRENT_USER : 'currentUsers',
     CREATE_GROUP : 'createGroup',
+    DELETE_GROUP : 'deleteGroup',
     GROUP_NAME : 'groupName'
   };
 
@@ -102,6 +103,16 @@ Space = (function() {
           $(this).parents('tr').remove();
         });
       },
+      deleteGroup : function(){
+        $('#' + ELS_IDS.DELETE_GROUP).click(function(){
+          if(confirm('确定删除该用户组?')){
+             var groupId = Y_COMMON.getQueryString('groupId')
+             Service.disableGroup(groupId).done(function(){
+               chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
+             });
+           }
+        });
+      },
       createGroup : function(){
         $('#' + ELS_IDS.CREATE_GROUP).click(function(){
            var $gName = $('#' + ELS_IDS.GROUP_NAME);
@@ -176,7 +187,8 @@ Space = (function() {
      }
      var id = Y_COMMON.getQueryString('groupId');
      if(id){
-        renderEditGroup(id); 
+        renderEditGroup(id);
+        $('#' + ELS_IDS.DELETE_GROUP).show();
      }
      Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
   };

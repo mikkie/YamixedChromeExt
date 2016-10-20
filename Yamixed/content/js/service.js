@@ -180,8 +180,8 @@ Service = (function($) {
      return get({url : Y_COMMON.config.server.host + '/group/findGroupById?groupId=' + groupId});
   };
 
-  service.findGroupByNameLike = function(name){
-     return get({url : Y_COMMON.config.server.host + '/group/findGroupByNameLike?name=' + name});
+  service.findGroupByNameLike = function(name,owner){
+     return get({url : Y_COMMON.config.server.host + '/group/findGroupByNameLike?name=' + name + '&owner=' + owner});
   };
 
   service.findSpaceByName = function(name){
@@ -213,7 +213,15 @@ Service = (function($) {
   };
 
   service.checkRWPermission = function(spaceId,userId){
-     return get({url : Y_COMMON.config.server.host + '/space/checkRWPermission?spaceId=' + spaceId + '&userId=' + userId});  
+     return get({url : Y_COMMON.config.server.host + '/space/checkRWPermission?spaceId=' + spaceId + '&userId=' + userId});
+  };
+
+  service.disableSpace = function(spaceId){
+     return get({url : Y_COMMON.config.server.host + '/space/disableSpace?spaceId=' + spaceId});
+  };
+  
+  service.disableGroup = function(groupId){
+     return get({url : Y_COMMON.config.server.host + '/group/disableGroup?groupId=' + groupId});
   };
 
 	return service;

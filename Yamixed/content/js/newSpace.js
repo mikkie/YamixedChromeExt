@@ -7,7 +7,8 @@ Space = (function() {
     LOGOUT : 'logout',
     CURRENT_GROUP : 'currentGroup',
     SPACE_NAME : 'spaceName',
-    CREATE_SPACE : 'createSpace'
+    CREATE_SPACE : 'createSpace',
+    DELETE_SPACE : 'deleteSpace'
   };	
 
   var ELS_CLASS = {
@@ -30,8 +31,8 @@ Space = (function() {
      return found;
   };
 
-  var buildGroupSelectTips = function(name){
-     Service.findGroupByNameLike(name).done(function(data){
+  var buildGroupSelectTips = function(name,owner){
+     Service.findGroupByNameLike(name,owner).done(function(data){
        var html = '';
        var $tips = $('#' + ELS_IDS.GROUP_TIPS);
        $tips.empty();
@@ -72,7 +73,9 @@ Space = (function() {
         $('#' + ELS_IDS.GROUP_INPUT).keyup(function(){
           var value = $(this).val();
           if(value.length > 3){
-             buildGroupSelectTips(value);
+             Y_COMMON.service.getLogindUser(function(data){
+                buildGroupSelectTips(value,data.user._id);
+             });
           }
           else{
             $('#' + ELS_IDS.GROUP_TIPS).empty();
@@ -105,6 +108,16 @@ Space = (function() {
       del_group : function(){
         $('#' + ELS_IDS.CURRENT_GROUP).on('click','.' + ELS_CLASS.DEL_GROUP,function(){
           $(this).parents('tr').remove();
+        });
+      },
+      deleteSpace : function(){
+        $('#' + ELS_IDS.DELETE_SPACE).click(function(){
+           if(confirm('确定删除该空间?')){
+             var spaceId = Y_COMMON.getQueryString('spaceId')
+             Service.disableSpace(spaceId).done(function(){
+               chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
+             });
+           }
         });
       },
       createSpace : function(){
@@ -191,7 +204,8 @@ Space = (function() {
      }
      var id = Y_COMMON.getQueryString('spaceId');
      if(id){
-        renderEditSpace(id); 
+        renderEditSpace(id);
+        $('#' + ELS_IDS.DELETE_SPACE).show(); 
      }
      Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
   };
