@@ -133,7 +133,7 @@ CONTENT = (function(){
      if(!description){
         description = findDescription();
      }
-     var $images = $('img');
+     var $images = $('img[src]');
      var images = [];
      $images.each(function(i,n){
         if(i < 5){
