@@ -159,8 +159,9 @@ MAIN = (function() {
             var data = response.success;
             data.images = [];
             data.images.push(data.previewImg);
-            chrome.storage.sync.set({'newPageData' : data});
-            showPage("content/newBookmark.html",'600px','600px');
+            chrome.storage.sync.set({'newPageData' : data},function(){
+               showPage("content/newBookmark.html",'600px','600px');
+            });
           });
         });
       }
@@ -171,8 +172,9 @@ MAIN = (function() {
      chrome.runtime.sendMessage({action:'parsePage'},function(response){
         var spaceId = $('#' + ELS_IDS.SEL_SPACE).val().split('-')[0];
         response.spaceId = spaceId;
-        chrome.storage.sync.set({'newPageData' : response});
-        showPage("content/newBookmark.html",'600px','600px');
+        chrome.storage.sync.set({'newPageData' : response},function(){
+          showPage("content/newBookmark.html",'600px','600px');
+        });
      });
   };
 
