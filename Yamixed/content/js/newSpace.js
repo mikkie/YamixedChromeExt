@@ -167,6 +167,9 @@ Space = (function() {
     Service.findSpaceById(id).done(function(data){
       if(data.success){
         var space = data.success;
+        if(!space.defaultSpace){
+          $('#' + ELS_IDS.DELETE_SPACE).show(); 
+        }
         $('#' + ELS_IDS.SPACE_NAME).attr('readonly','readonly').val(space.spaceName);
         if(space.groups && space.groups.length > 0){
            var html = '';
@@ -205,7 +208,6 @@ Space = (function() {
      var id = Y_COMMON.getQueryString('spaceId');
      if(id){
         renderEditSpace(id);
-        $('#' + ELS_IDS.DELETE_SPACE).show(); 
      }
      Y_COMMON.render.renderUser('.' + ELS_CLASS.AVATAR,'.' + ELS_CLASS.USER_NAME);
   };
