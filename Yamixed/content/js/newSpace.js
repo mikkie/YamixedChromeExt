@@ -115,7 +115,9 @@ Space = (function() {
            if(confirm('确定删除该空间?')){
              var spaceId = Y_COMMON.getQueryString('spaceId')
              Service.disableSpace(spaceId).done(function(){
-               chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
+               Y_COMMON.service.syncLocalData(function(){
+                 chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'}); 
+               });
              });
            }
         });
