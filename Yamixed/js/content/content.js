@@ -270,6 +270,9 @@ CONTENT = (function(){
      $(document).hotKey({ key: 'o', modifier: 'alt' }, function () {
         openLogin();
      });
+     $(document).hotKey({ key: 'n', modifier: 'alt' }, function () {
+        openBookmark();
+     });
   })();
 
 })();
