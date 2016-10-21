@@ -240,7 +240,7 @@ MAIN = (function() {
           for(var i in data.success){
               var link = data.success[i];
               html += ['<div class="thumbnail" linkId="'+ link._id +'">', 
-            '<a class="link" href="'+link.url+'" target="_blank"><img src="'+link.previewImg+'" alt="..."></a>', 
+            '<a class="link" href="'+link.url+'" target="_blank"><img src="'+link.previewImg+'" alt="..." ></a>', 
             '<div class="caption">', 
               '<h5><b>'+link.title+'</b></h5>', 
               '<p class="desc">', 
@@ -259,7 +259,8 @@ MAIN = (function() {
             '</div>', 
           '</div>'].join('');
           }  
-          $main.append(html);  
+          $main.append(html);
+          $main.find('img[src=""]').attr('src','chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/no_image.jpg');  
         }
         else{
           $main.append('<div style="text-align:center;"><button style="margin-top:25%;" type="button" class="bookmark btn btn-success btn-lg"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏当前页面</button></div>');
