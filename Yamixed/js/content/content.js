@@ -77,6 +77,47 @@ CONTENT = (function(){
   };
 
 
+  var openBookmarkPage = function(callback){
+     var pageData = getPageData();
+     chrome.storage.sync.set({'newPageData' : pageData},function(){
+        $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
+          $('#' + ELS_IDS.MAIN_BODY).remove();
+          $('body').append(data);
+          openDialog(chrome.extension.getURL('/content/newBookmark.html'),true,{width : '600px',height : '600px'});
+          if(callback == 'function'){
+             callback();
+          }
+        });
+     });
+  };
+
+  var openBookmark = function(callback){
+    chrome.storage.sync.get('user',function(data){
+       if(data && data.user){
+          $.ajax({
+            url : 'https://localhost:3000/login/autoLogin',
+            dataType : 'json',
+            type : 'post',
+            data : {
+              email : data.user.email,
+              token : data.user.autoLoginToken
+            }
+          }).done(function(data){
+              if(data.success){
+                 openBookmarkPage(callback);
+              }
+              else{
+                 openLogin(callback);
+              }
+          }).fail(function(){
+              openLogin(callback);
+          });
+       }
+       else{
+          openLogin(callback);
+       }
+     });
+  };
 
   var openLogin = function(callback){
      $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
@@ -107,6 +148,9 @@ CONTENT = (function(){
     else if('parsePage' == message.action){
        parsePage(sendResponse);
     }
+    else if('openBookmark' == message.action){
+       openBookmark(sendResponse);
+    }
   });
 
 
@@ -127,7 +171,8 @@ CONTENT = (function(){
       return description;
   };
 
-  var parsePage = function(sendResponse){
+
+  var getPageData = function(){
      var title = $('title').text();
      var description = $('meta[name="description"]').attr('content');
      if(!description){
@@ -142,12 +187,17 @@ CONTENT = (function(){
            images.push(src);
         }
      });
-     sendResponse({
+     return {
         url : window.location.href,
         title : title,
         description : description,
         images : images
-     });
+     };
+  };
+
+  var parsePage = function(sendResponse){
+     var data = getPageData();
+     sendResponse(data);
   };
 
   var absolute = function(url){

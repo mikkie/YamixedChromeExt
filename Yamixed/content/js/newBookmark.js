@@ -171,7 +171,7 @@ Bookmark = (function() {
            var options = '';
            for(var i in spaces){
               var space = spaces[i];
-              if(imageData.spaceId == space._id){
+              if((imageData.spaceId && imageData.spaceId == space._id) || (!imageData.spaceId && i == 0)){
                 var $currentSpace = $('#' + ELS_IDS.CURRENT_SPACE);
                 $currentSpace.attr('spaceId',spaces[i]._id);
                 $currentSpace.html(spaces[i].spaceName + '<span class="caret"></span>'); 

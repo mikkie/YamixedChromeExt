@@ -3,7 +3,8 @@ POPUP = (function($){
   var ELS_IDS = {
     HOME : 'home',
 	  NEW_MIX : 'newMix',
-    URM : 'urm'	  
+    URM : 'urm',
+    BOOK_MARK : 'bookmark'	  
   };
 
 
@@ -60,6 +61,13 @@ POPUP = (function($){
             window.close();
          });
      });
+   },
+   bookmark : function(){
+     $('#' + ELS_IDS.BOOK_MARK).click(function(){
+         sendMessageToActivePage({action : 'openBookmark'},function(response) {
+            window.close();
+         });
+     }); 
    }	  
   };
 
