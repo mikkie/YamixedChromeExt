@@ -20,6 +20,12 @@ chrome.notifications.onClicked.addListener(function(notificationId){
 
 
 chrome.runtime.onMessage.addListener(function (msg, sender,sendResponse) {
+  if(msg.action == 'syncBookmark'){
+    chrome.bookmarks.getTree(function(nodes){
+      sendResponse(nodes);
+    });
+    return true;
+  }
   sendMessageToActivePage(msg,function(response) {
     sendResponse(response);
   });

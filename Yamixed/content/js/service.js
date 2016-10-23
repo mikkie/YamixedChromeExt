@@ -224,6 +224,17 @@ Service = (function($) {
      return get({url : Y_COMMON.config.server.host + '/group/disableGroup?groupId=' + groupId});
   };
 
+  service.syncBookmarkToYamixed = function(nodes,spaceId){
+    var option = {
+        url : Y_COMMON.config.server.host + '/space/init',
+        data : {
+          nodes : nodes,
+          spaceId : spaceId
+        }
+     };
+     return post(option);
+  };
+
 	return service;
 
 })(jQuery);
