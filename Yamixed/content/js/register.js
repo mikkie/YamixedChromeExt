@@ -39,7 +39,7 @@ Register = (function() {
           Service.getUserSpaces(data.success.space).done(function(){
              chrome.runtime.sendMessage({action:'syncBookmark'},function(nodes){
                 var defaultSpaceId = data.success.space.created[0];
-                Service.syncBookmarkToYamixed(nodes,defaultSpaceId).done(function(){
+                Service.syncBookmarkToYamixed(nodes,defaultSpaceId,data.success._id).done(function(){
                   chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});
                 });
              });
