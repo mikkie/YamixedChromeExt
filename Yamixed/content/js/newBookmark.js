@@ -138,15 +138,15 @@ Bookmark = (function() {
            });
            var spaceId = $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId');
            Service.postNewLink({
-             _id : $('#' + ELS_IDS.ID).val(),
-             url : $('#' + ELS_IDS.URL).val(),
-             title : $.trim($('#' + ELS_IDS.TITLE).val()),
-             description : $.trim($('#' + ELS_IDS.DESC).val()),
-             previewImg : $('#' + ELS_IDS.IMG_URL).val(),
-             spaceId : spaceId,
-             tags : tags
+              _id : $('#' + ELS_IDS.ID).val(),
+              url : $('#' + ELS_IDS.URL).val(),
+              title : $.trim($('#' + ELS_IDS.TITLE).val()),
+              description : $.trim($('#' + ELS_IDS.DESC).val()),
+              previewImg : $('#' + ELS_IDS.IMG_URL).val(),
+              spaceId : spaceId,
+              tags : tags
            }).done(function(){
-             showPage("content/content.html?spaceId=" + spaceId,'900px','600px');
+              showPage("content/content.html?spaceId=" + spaceId,'900px','600px');
            });
         });
       },
