@@ -6,6 +6,8 @@ CONTENT = (function(){
     IFRAME : 'yamixed-iframe'
   };
 
+  var host = 'https://localhost:3000';
+
   var parseMix = function(message){
   	 var title = message.tab.title;
   	 var url = message.tab.url;
@@ -263,6 +265,47 @@ CONTENT = (function(){
   });
 
 
+
+  var syncContent4GlobalSearch = function(){
+     chrome.storage.sync.get('user',function(data){
+       if(data.user){
+          $.ajax({
+            url : host + '/link/findLinkByUrlAndOwner',
+            dataType : 'json',
+            type : 'post',
+            data : {
+              url : window.location.href,
+              owner : data.user._id
+            }  
+          }).done(function(data){
+            if(data.success && data.success.length > 0){
+               updateContent(data.success);
+            }  
+          });
+       }   
+     });
+  };
+
+
+  var updateContent = function(links){
+     var content = $('body').text();
+     for(var i in links){
+        if(links[i].content){
+           continue;   
+        }
+        $.ajax({
+          url : host + '/link/updateContent',
+          dataType : 'json',
+          type : 'post',
+          data : {
+            linkId : links[i]._id,
+            content : content
+          }
+        }).done(function(data){}); 
+     }
+  };
+
+
   (function binding(){
      $(document).hotKey({ key: 'y', modifier: 'alt' }, function () {
         checkAutoLogin();
@@ -274,5 +317,9 @@ CONTENT = (function(){
         openBookmark();
      });
   })();
+
+  $(document).ready(function(){
+    syncContent4GlobalSearch();
+  });
 
 })();
