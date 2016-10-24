@@ -65,8 +65,15 @@ POPUP = (function($){
 	 },
    urm_start : function(){
      $('#' + ELS_IDS.URM).click(function(){
-         sendMessageToActivePage({action : 'openUrm'},function(response) {
-            window.close();
+         chrome.tabs.query({active : true}, function(tabs) {
+           var tab = tabs[0];
+           if(/^chrome:/.test(tab.url)){
+              COMMON.logError('请在页面中打开书签管理');
+              return false;
+           }
+           sendMessageToActivePage({action : 'openUrm'},function(response) {
+               window.close();
+           });
          });
      });
    },
