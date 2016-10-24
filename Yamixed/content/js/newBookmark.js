@@ -65,7 +65,7 @@ Bookmark = (function() {
       },
       goback : function(){
         $('#' + ELS_IDS.GO_BACK).click(function(){
-            showPage("content/content.html",'900px','600px');
+            showPage("content/content.html?spaceId=" + $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId'),'900px','600px');
         });
       },
       go_setting : function(){
