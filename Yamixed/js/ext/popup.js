@@ -38,20 +38,28 @@ POPUP = (function($){
    },  
 	 newMix : function(){
 	   $('#' + ELS_IDS.NEW_MIX).click(function(){
-	   	  sendMessageToActivePage({action : 'parseLink'},function(response) {
-            if(!response){
-               COMMON.logError('当前页面努力加载中...，请刷新重试(F5)');
-                  return;
-            }
-            getCategories(function(categories){
-               if(categories){
-                  window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));
-                  window.location.href="newMix.html";
-               }
-               else{
-                  COMMON.logError('服务正在神游中...');
-               }
+        chrome.tabs.query({active : true}, function(tabs) {
+          var tab = tabs[0];
+	   	    if(/^(http|https)/.test(tab.url)){
+            sendMessageToActivePage({action : 'parseLink'},function(response) {
+              if(!response){
+                 COMMON.logError('当前页面努力加载中...，请刷新重试(F5)');
+                    return;
+              }
+              getCategories(function(categories){
+                 if(categories){
+                    window.sessionStorage.setItem('newMix',JSON.stringify({'mix' : response,'categories' : categories}));
+                    window.location.href="newMix.html";
+                 }
+                 else{
+                    COMMON.logError('服务正在神游中...');
+                 }
+              });
             });
+          }
+          else{
+              COMMON.logError('请在页面中发布链接');
+          }
         });
 	   });	
 	 },
@@ -64,9 +72,17 @@ POPUP = (function($){
    },
    bookmark : function(){
      $('#' + ELS_IDS.BOOK_MARK).click(function(){
-         sendMessageToActivePage({action : 'openBookmark'},function(response) {
-            window.close();
-         });
+        chrome.tabs.query({active : true}, function(tabs) {
+          var tab = tabs[0];
+          if(/^(http|https)/.test(tab.url)){
+            sendMessageToActivePage({action : 'openBookmark'},function(response) {
+              window.close();
+            });
+          }
+          else{
+            COMMON.logError('请在页面中收藏链接');
+          }
+        });
      }); 
    }	  
   };

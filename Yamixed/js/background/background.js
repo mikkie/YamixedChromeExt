@@ -1,7 +1,7 @@
 var checkForValidUrl = function(tab) {
-  if (/^(http|https)/.test(tab.url)){
+  //if (/^(http|https)/.test(tab.url)){
     chrome.pageAction.show(tab.id);
-  }
+  //}
 };
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 	checkForValidUrl(tab);

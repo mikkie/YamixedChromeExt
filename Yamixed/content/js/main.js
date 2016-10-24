@@ -170,6 +170,10 @@ MAIN = (function() {
 
   var parseCurrentPage = function(){
      chrome.runtime.sendMessage({action:'parsePage'},function(response){
+        if(!response.url){
+           alert('亲，该页面无法收藏');
+           return false;
+        }
         var spaceId = $('#' + ELS_IDS.SEL_SPACE).val().split('-')[0];
         response.spaceId = spaceId;
         chrome.storage.sync.set({'newPageData' : response},function(){

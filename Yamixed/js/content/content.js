@@ -198,7 +198,10 @@ CONTENT = (function(){
   };
 
   var parsePage = function(sendResponse){
-     var data = getPageData();
+     var data = {};
+     if(/^(http|https)/.test(window.location.href)){
+        data = getPageData();
+     }
      sendResponse(data);
   };
 
