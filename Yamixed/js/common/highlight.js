@@ -7,6 +7,7 @@ jQuery.fn.highlight = function(pat,note) {
     var spannode = document.createElement('span');
     $(spannode).data('note',note);
     spannode.className = 'yamixed-highlight';
+    spannode.setAttribute("id","yamixed-note-" + note._id);
     spannode.setAttribute("style","cursor:pointer;background-color:#fff34d;-moz-border-radius:5px;-webkit-border-radius: 5px; border-radius: 5px;-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);");
     var middlebit = node.splitText(pos);
     var endbit = middlebit.splitText(pat.length);
@@ -26,6 +27,34 @@ jQuery.fn.highlight = function(pat,note) {
  return this.each(function() {
   innerHighlight(this, pat.toUpperCase());
  });
+};
+
+jQuery.fn.lowlight = function(note) {
+ function newNormalize(node) {
+    for (var i = 0, children = node.childNodes, nodeCount = children.length; i < nodeCount; i++) {
+        var child = children[i];
+        if (child.nodeType == 1) {
+            newNormalize(child);
+            continue;
+        }
+        if (child.nodeType != 3) { continue; }
+        var next = child.nextSibling;
+        if (next == null || next.nodeType != 3) { continue; }
+        var combined_text = child.nodeValue + next.nodeValue;
+        new_node = node.ownerDocument.createTextNode(combined_text);
+        node.insertBefore(new_node, child);
+        node.removeChild(child);
+        node.removeChild(next);
+        i--;
+        nodeCount--;
+    }
+ }
+
+ return this.find("#yamixed-note-" + note._id).each(function() {
+    var thisParent = this.parentNode;
+    thisParent.replaceChild(this.firstChild, this);
+    newNormalize(thisParent);
+ }).end();
 };
 
 jQuery.fn.removeHighlight = function() {

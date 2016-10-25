@@ -4,7 +4,8 @@ Note = (function() {
     GO_BACK : 'logo',
     LOGOUT : 'logout',
     EDITOR : 'editor',
-    SAVE : 'saveNote'
+    SAVE : 'saveNote',
+    DEL : 'delNote'
   };
 
   var ELS_CLASS = {
@@ -54,6 +55,22 @@ Note = (function() {
               });
            });
         });
+      },
+      del : function(){
+        $('#' + ELS_IDS.DEL).click(function(){
+           chrome.storage.sync.get("yamixedNote",function(data){
+              var id = data.yamixedNote._id;
+              var url = data.yamixedNote.url;
+              Y_COMMON.service.getLogindUser(function(data){
+                Service.delNote(id,url,data.user._id).done(function(data){
+                    chrome.runtime.sendMessage({action:'close'});
+                    if(data.success){
+                      chrome.runtime.sendMessage({action:'lowlight',note:data.success});
+                    }
+                });
+              });
+           });
+        });
       }
   };
 
@@ -62,10 +79,10 @@ Note = (function() {
     chrome.storage.sync.get("yamixedNote",function(data){
        var content = data.yamixedNote.sentence;
        if(data.yamixedNote.content){
-         content = data.yamixedNote.content; 
+         content = data.yamixedNote.content;
+         $('#' + ELS_IDS.DEL).show(); 
        }
        $('#' + ELS_IDS.EDITOR).text(content);
-    
     });
   };
 

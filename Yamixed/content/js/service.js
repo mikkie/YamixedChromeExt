@@ -252,6 +252,18 @@ Service = (function($) {
      return post(option);
   };
 
+  service.delNote = function(id,url,owner){
+    var option = {
+        url : Y_COMMON.config.server.host + '/note/delete',
+        data : {
+          id : id,
+          url : url,
+          owner : owner
+        }
+    };
+    return post(option);
+  };
+
 	return service;
 
 })(jQuery);

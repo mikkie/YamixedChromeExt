@@ -185,6 +185,14 @@ CONTENT = (function(){
   };
 
 
+  var lowlightNote = function(note,callback){
+      $('body').lowlight(note);
+      if(callback == 'function'){
+        callback();
+      }
+  };
+
+
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if('parseLink' == message.action){
   	  var mix = parseMix(message);
@@ -207,6 +215,9 @@ CONTENT = (function(){
     }
     else if('highlight' == message.action){
        highlightNote(message.note.sentence,message.note,sendResponse); 
+    }
+    else if('lowlight' == message.action){
+       lowlightNote(message.note,sendResponse);
     }
   });
 
@@ -436,7 +447,9 @@ CONTENT = (function(){
               for(var i in notes){
                 notes[i].url = data.success[0].url;
                 notes[i].owner = data.success[0].owner;
-                highlightNote(notes[i].sentence,notes[i]);
+                if(notes[i].valid){
+                   highlightNote(notes[i].sentence,notes[i]);
+                }
               }
              }
            } 
