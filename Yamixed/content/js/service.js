@@ -236,6 +236,22 @@ Service = (function($) {
      return post(option);
   };
 
+  service.saveNote = function(id,content,sentence,url,x,y,owner){
+    var option = {
+        url : Y_COMMON.config.server.host + '/note/new',
+        data : {
+          id : id,
+          content : content,
+          sentence : sentence,
+          url : url,
+          x : x,
+          y : y,
+          owner : owner
+        }
+     };
+     return post(option);
+  };
+
 	return service;
 
 })(jQuery);

@@ -6,6 +6,11 @@ CONTENT = (function(){
     IFRAME : 'yamixed-iframe'
   };
 
+  var ELS_CLASS = {
+   YA_NOTE : 'yamixed-note',
+   YA_HIGHTLIGHT : 'yamixed-highlight'
+  };
+
   var host = 'https://localhost:3000';
 
   var parseMix = function(message){
@@ -121,6 +126,45 @@ CONTENT = (function(){
      });
   };
 
+
+  var openNotePage = function(note){
+    $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
+        $('#' + ELS_IDS.MAIN_BODY).remove();
+        $('body').append(data);
+        chrome.storage.sync.set({"yamixedNote" : note},function(data){
+          openDialog(chrome.extension.getURL('/content/note.html'),true,{width : '900px',height : '600px'});
+        });
+    });
+  };
+
+  var openNote = function(note){
+     chrome.storage.sync.get('user',function(data){
+       if(data && data.user){
+          $.ajax({
+            url : 'https://localhost:3000/login/autoLogin',
+            dataType : 'json',
+            type : 'post',
+            data : {
+              email : data.user.email,
+              token : data.user.autoLoginToken
+            }
+          }).done(function(data){
+              if(data.success){
+                 openNotePage(note);
+              }
+              else{
+                 openLogin();
+              }
+          }).fail(function(){
+              openLogin();
+          });
+       }
+       else{
+          openLogin();
+       }
+     });
+  };
+
   var openLogin = function(callback){
      $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
           $('#' + ELS_IDS.MAIN_BODY).remove();
@@ -130,6 +174,14 @@ CONTENT = (function(){
              callback();
           }
      });
+  };
+
+
+  var highlightNote = function(sentence,note,callback){
+      $('body').highlight(sentence,note);
+      if(callback == 'function'){
+        callback();
+      }
   };
 
 
@@ -152,6 +204,9 @@ CONTENT = (function(){
     }
     else if('openBookmark' == message.action){
        openBookmark(sendResponse);
+    }
+    else if('highlight' == message.action){
+       highlightNote(message.note.sentence,message.note,sendResponse); 
     }
   });
 
@@ -321,8 +376,83 @@ CONTENT = (function(){
      });
   })();
 
+
+  var bind = {
+    newNote : function(){
+      var getSelected = function () {
+        if (window.getSelection) return window.getSelection();
+        if (document.getSelection) return document.getSelection();
+        if (document.selection) return document.selection.createRange().text;
+      };
+      $('body').mouseup(function(e){
+         var sentence = getSelected().toString();
+         if(sentence && $('.' + ELS_CLASS.YA_NOTE).length == 0){
+           if(sentence.length > 10000){
+              alert('亲,所选文字太长了...');
+              return false;
+           }
+           var $noteBtn = $('<div class="yamixed-note" style="cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24.jpg"/></div>');
+           var x = e.pageX + 24;
+           var y = e.pageY + 24;
+           $noteBtn.css('top',y + 'px');
+           $noteBtn.css('left',x + 'px');
+           $noteBtn.data('note',{sentence : sentence,x : x,y : y, url : window.location.href});
+           $('body').append($noteBtn);
+         }
+         else{
+           $('.' + ELS_CLASS.YA_NOTE).remove();
+         }
+      });
+    },
+    editNote : function(){
+      $('body').on('mouseup','.' + ELS_CLASS.YA_NOTE,function(){
+        var $this = $(this);
+        openNote($this.data('note'));
+      });
+    },
+    highlight_click : function(){
+      $('body').on('click','.' + ELS_CLASS.YA_HIGHTLIGHT,function(){
+        openNote($(this).data('note'));
+        return false;
+      });
+    }
+  };
+
+  var loadNotes = function(){
+    chrome.storage.sync.get('user',function(data){
+      if(data.user){
+        $.ajax({
+          url : host + '/note/search',
+          dataType : 'json',
+          type : 'post',
+          data : {
+            url : window.location.href,
+            owner : data.user._id
+          }
+        }).done(function(data){
+          if(data.success && data.success.length > 0){
+             var notes = data.success[0].notes;
+             if(notes && notes.length > 0){
+              for(var i in notes){
+                notes[i].url = data.success[0].url;
+                notes[i].owner = data.success[0].owner;
+                highlightNote(notes[i].sentence,notes[i]);
+              }
+             }
+           } 
+        }); 
+      }
+    });
+  }
+
   $(document).ready(function(){
+    for(var k in bind){
+       if(typeof bind[k] == 'function'){
+          bind[k]();
+       }
+    }
     syncContent4GlobalSearch();
+    loadNotes();
   });
 
 })();

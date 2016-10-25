@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="margin: 0;padding: 0;">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/css/bootstrap.min.css"></style>
+	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/css/content.css"></style>
+</head>
+<body style="margin: 0;padding: 0;">
+	<div id="mainArea" class="container-fluid">
+	   <div class="header row">
+	   	  <div class="col-md-12">
+             <img id="logo" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_32x32.png" class="clickable"/>
+             <div class="user" style="margin-left:81%;">
+             		<li role="presentation" class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <div class="avatar"></div>
+                        <h4 class="userName"></h4>
+                      </a>
+                      <ul class="dropdown-menu">
+                      	<li><a id="logout" href="javascript:void(0);"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;退出</a></li>
+                      </ul>
+                </li>
+             </div>
+             <button type="button" class="close closeWindow" data-dismiss="modal">
+               <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+             </button>	
+	   	  </div>
+	   </div>	
+     <div class="row content">
+       <div class="col-md-12">
+         <textarea name="editor" id="editor" rows="15" style="width:100%;" placeholder="请在此写下笔记..."></textarea>
+       </div>
+	   </div>
+     <div style="margin-top:20px;">
+       <div class="col-md-12">
+         <button type="button" id="saveNote" class="btn btn-primary">保存</button>
+       </div>
+     </div>   
+	</div>
+	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/common.js"></script>
+  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/service.js"></script>
+  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/note.js"></script>
+</body>
+</html>
