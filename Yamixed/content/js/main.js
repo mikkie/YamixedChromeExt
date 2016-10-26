@@ -373,6 +373,29 @@ MAIN = (function() {
      var spaceId = $('#' + ELS_IDS.SEL_SPACE).val().split('-')[0];
      Service.searchLinks(spaceId,keyword,tag).done(function(data){
         showLinks(data);
+        if(data.success && data.success.length == 0){
+          var url = $.trim(keyword);
+          if(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/.test(url)){
+            if(url.indexOf('http') != 0){
+               var proto = ['http','https'];
+               for(var i in proto){
+                 var ok = false;
+                 Y_COMMON.util.urlExists(proto[i] + '://' + url,false,function(res){
+                   if(res){
+                     window.open(proto[i] + '://' + url); 
+                     ok = true;
+                   }   
+                 });
+                 if(ok){
+                   break;
+                 }
+               } 
+            }
+            else{
+               window.open(url);
+            }
+          }
+        }
      });
   };
 

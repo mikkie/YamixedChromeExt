@@ -48,6 +48,19 @@ Y_COMMON = {
     randomColor : function(color){    
       return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])    
       && (color.length == 6) ?  color : arguments.callee(color);    
+    },
+    urlExists : function(url,async,callback){
+      $.ajax({
+        type: 'HEAD',
+        async : async,
+        url: url,
+        success: function(){
+          callback(true);
+        },
+        error: function() {
+          callback(false);
+        }
+      });
     }
   },
   service : {
