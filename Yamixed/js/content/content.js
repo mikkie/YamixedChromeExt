@@ -478,9 +478,9 @@ CONTENT = (function(){
         }); 
       }
     });
-  }
+  };
 
-  $(document).ready(function(){
+  (function(){
     for(var k in bind){
        if(typeof bind[k] == 'function'){
           bind[k]();
@@ -488,6 +488,6 @@ CONTENT = (function(){
     }
     syncContent4GlobalSearch();
     loadNotes();
-  });
+  })();
 
 })();
