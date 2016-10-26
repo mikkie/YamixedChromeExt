@@ -10,6 +10,9 @@ Service = (function($) {
        };
        option = $.extend(setting,option);
        $.ajax(option).done(function(data){
+          if(typeof option.postHook == 'function'){
+             option.postHook(data);
+          }
           if(option.localKey){
              var localDate = {};
              localDate[option.localKey] = data;  
@@ -119,6 +122,11 @@ Service = (function($) {
         localKey : 'newPageData',
         data : {
           linkId : linkId
+        },
+        postHook : function(data){
+           if(data.success){
+              data.success.content = '';
+           }  
         }
      };
      return post(option);
