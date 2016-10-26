@@ -177,10 +177,22 @@ CONTENT = (function(){
   };
 
 
+  var clearOldNote = function(note){
+    lowlightNote(note);
+    var $note = $('#yamixed-note-' + note._id);
+    if($note.length == 1){
+      $note.remove();
+    }
+  }
+
   var highlightNote = function(sentence,note,callback){
+      //1.remove old if exist  
+      clearOldNote(note);
+      //2.use line hight light
       $('body').highlight(sentence,note);
+      //3.if line high light not work
       if($('#yamixed-note-' + note._id).length == 0){
-          var $noteBtn = $('<div class="yamixed-highlight" style="opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24.jpg"/></div>');
+          var $noteBtn = $('<div class="yamixed-highlight" style="opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24G.jpg"/></div>');
           $noteBtn.attr('id','yamixed-note-' + note._id);
           $noteBtn.data('note',note);
           $noteBtn.css('top',note.y + 'px').css('left',note.x + 'px');
@@ -432,7 +444,7 @@ CONTENT = (function(){
       });
     },
     highlight_click : function(){
-      $('body').on('click','.' + ELS_CLASS.YA_HIGHTLIGHT,function(){
+      $('body').on('mouseup','.' + ELS_CLASS.YA_HIGHTLIGHT,function(){
         openNote($(this).data('note'));
         return false;
       });
