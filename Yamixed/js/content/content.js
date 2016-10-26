@@ -179,6 +179,13 @@ CONTENT = (function(){
 
   var highlightNote = function(sentence,note,callback){
       $('body').highlight(sentence,note);
+      if($('#yamixed-note-' + note._id).length == 0){
+          var $noteBtn = $('<div class="yamixed-highlight" style="opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24.jpg"/></div>');
+          $noteBtn.attr('id','yamixed-note-' + note._id);
+          $noteBtn.data('note',note);
+          $noteBtn.css('top',note.y + 'px').css('left',note.x + 'px');
+          $('body').append($noteBtn);
+      }
       if(callback == 'function'){
         callback();
       }
@@ -187,6 +194,9 @@ CONTENT = (function(){
 
   var lowlightNote = function(note,callback){
       $('body').lowlight(note);
+      if($('#yamixed-note-' + note._id).length == 1){
+          $('#yamixed-note-' + note._id).remove();
+      }
       if(callback == 'function'){
         callback();
       }
@@ -402,9 +412,9 @@ CONTENT = (function(){
               alert('亲,所选文字太长了...');
               return false;
            }
-           var $noteBtn = $('<div class="yamixed-note" style="cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24.jpg"/></div>');
-           var x = e.pageX + 24;
-           var y = e.pageY + 24;
+           var $noteBtn = $('<div class="yamixed-note" style="opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24.jpg"/></div>');
+           var x = e.pageX + 15;
+           var y = e.pageY + 15;
            $noteBtn.css('top',y + 'px');
            $noteBtn.css('left',x + 'px');
            $noteBtn.data('note',{sentence : sentence,x : x,y : y, url : window.location.href});
