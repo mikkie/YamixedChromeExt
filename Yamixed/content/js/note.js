@@ -77,7 +77,7 @@ Note = (function() {
   };
 
 
-  var renderSpace = function(){
+  var renderSpace = function(renderNote){
     Y_COMMON.service.getLogindUser(function(data){
       if(data.user){
         Service.getUserCreatedSpaces(data.user._id).done(function(data){
@@ -91,14 +91,15 @@ Note = (function() {
                  $('#' + ELS_IDS.SEL_SPACE).append('<option value="'+space._id+'">'+ space.spaceName +'</option>');
               }
             }
+            renderNote();
           } 
         });
       }
     });
   };
 
-  var renderPage = function(){
-    renderSpace();
+
+  var renderNote = function(){
     chrome.storage.sync.get("yamixedNote",function(data){
        var content = data.yamixedNote.sentence;
        if(data.yamixedNote.content){
@@ -107,9 +108,17 @@ Note = (function() {
        }
        $('#' + ELS_IDS.EDITOR).text(content);
        if(data.yamixedNote._id){
-         $('#' + ELS_IDS.SEL_SPACE).attr('disabled','disabled');
+         var $space = $('#' + ELS_IDS.SEL_SPACE);
+         if(data.yamixedNote.space){
+           $space.val(data.yamixedNote.space);
+         }  
+         $space.attr('disabled','disabled');
        }
     });
+  };
+
+  var renderPage = function(){
+    renderSpace(renderNote);
   };
 
 
