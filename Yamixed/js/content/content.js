@@ -398,13 +398,13 @@ CONTENT = (function(){
 
 
   (function binding(){
-     $(document).hotKey({ key: 'y', modifier: 'alt' }, function () {
+     $(window).hotKey({ key: 'y', modifier: 'alt' }, function () {
         checkAutoLogin();
      });
-     $(document).hotKey({ key: 'o', modifier: 'alt' }, function () {
+     $(window).hotKey({ key: 'o', modifier: 'alt' }, function () {
         openLogin();
      });
-     $(document).hotKey({ key: 'n', modifier: 'alt' }, function () {
+     $(window).hotKey({ key: 'n', modifier: 'alt' }, function () {
         openBookmark();
      });
   })();
