@@ -48,7 +48,7 @@ Bell = (function() {
                  $item.remove();
                  var $list = $('#' + ELS_IDS.MSG_LIST);
                  if($list.children().length == 0){
-                    $list.append('<a href="javascript:void(0);" class="list-group-item"><h4 class="list-group-item-heading">亲，没有新消息。</h4></a>');
+                    $list.append('<a href="#" class="list-group-item"><h4 class="list-group-item-heading">亲，没有新消息。</h4></a>');
                  } 
               }
            });
@@ -82,7 +82,7 @@ Bell = (function() {
                  $list.append(html);
               }
               else{
-                $list.append('<a href="javascript:void(0);" class="list-group-item"><h4 class="list-group-item-heading">亲，没有新消息。</h4></a>');
+                $list.append('<a href="#" class="list-group-item"><h4 class="list-group-item-heading">亲，没有新消息。</h4></a>');
               }
            });    
          } 

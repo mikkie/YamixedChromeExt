@@ -196,7 +196,7 @@ Bookmark = (function() {
      var html = '';
      if(images.length > 0){
        for(var i in images){
-          html += '<a href="javascript:void(0);"><img src="' + images[i]+'" alt="..." class="img-thumbnail previewImg"></a>';   
+          html += '<a href="#"><img src="' + images[i]+'" alt="..." class="img-thumbnail previewImg"></a>';   
        }
      }
      if(html){
