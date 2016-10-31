@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="margin: 0;padding: 0;">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/css/bootstrap.min.css"></style>
+	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/css/login.css"></style>
+</head>
+<body style="margin: 0;padding: 0;">
+	<button type="button" class="close" data-dismiss="modal">
+       <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+	<div class="container-fluid">
+		<div class="row">
+		  <div class="col-md-6">
+		  	<form id="newUserForm" class="form-signin" action="https://www.yamixed.com:3000/register/createUser" method="post">
+		      <a href="javascript:void(0);"><img id="logo" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_32x32.png" class="clickable"></a>
+              <h2 class="form-signin-heading">新用户注册</h2>
+              <label for="inputEmail" class="sr-only">邮箱</label>
+              <input type="email" id="inputEmail" name="email" class="form-control" placeholder="邮箱地址" required autofocus remoteValidte remote="/register/checkEmail/y/">
+              </br>
+              <label for="username" class="sr-only">用户名</label>
+              <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus pattern="[a-zA-Z0-9_-]{4,12}" title="用户名必须为4-12位，允许数字、字母、-、_组合" remoteValidte remote="/register/checkName/" name="name">
+              </br>
+              <label for="inputPassword" class="sr-only">密码</label>
+              <input type="password" id="inputPassword" class="form-control" placeholder="密码" required pattern=".{6,}" title="密码至少为6位" name="password">
+              </br>
+              <button id="doRegister" class="btn btn-lg btn-success btn-block" type="submit">注册</button>
+            </form>
+		  </div>
+		</div>  	
+	</div>
+<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/register.js"></script>
+<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/common.js"></script>
+<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/service.js"></script>
+<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/jquery.form.min.js"></script>
+</body>
+</html>		

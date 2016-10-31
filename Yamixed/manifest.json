@@ -6,15 +6,17 @@
     "default_icon": "icon.png",
     "default_popup" : "html/popup.html"
   },
-  "permissions": ["tabs","notifications","http://*/"],
+  "permissions": ["tabs","bookmarks","notifications","http://*/*","https://*/*","storage"],
   "manifest_version": 2,
   "background": {
-     "scripts": ["js/background/background.js"]
+     "scripts": ["jquery/jquery-1.11.1.min.js","js/background/background.js"]
   },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["jquery/jquery-1.11.1.min.js","js/common/common.js","js/content/content.js"]
+      "js": ["jquery/jquery-1.11.1.min.js","js/common/common.js","js/common/hotkeys.js","js/common/highlight.js","js/content/content.js"]
     }
-  ]
+  ],
+  "web_accessible_resources": ["bootstrap/*","content/*","images/*","test/*","ckeditor/*"]
 }

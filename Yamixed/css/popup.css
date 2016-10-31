@@ -1,0 +1,11 @@
+body {
+    min-width:120px;
+}
+
+.list-group {
+   margin-bottom: 0px;
+}
+
+#favSearch{
+  margin-top: 2px;	
+}

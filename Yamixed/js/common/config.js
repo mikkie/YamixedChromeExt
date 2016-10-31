@@ -2,7 +2,7 @@ CONFIG = (function(){
   
   return {
   	 SUPPORT : 'lmj3648xm@hotmail.com',
-     host : 'http://localhost/yamixed',
+     host : 'http://www.yamixed.com',
      basicAuth : {
      	username : 'tagar48MZ',
      	password : 'xiaXue8812Lmj'

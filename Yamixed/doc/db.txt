@@ -1,0 +1,52 @@
+requirement:
+
+content.html:
+
+1.根据名称或描述查询用户的链接(当前空间) √ link.title link.description link.space
+4.根据名称或描述及标签查询用户的链接(当前空间) √ link.title link.description link.space link.tag in
+
+
+2.根据名称查询用户的标签（当前空间） (本地查询) tag cache local
+3.根据标签查询链接（当前空间） √ link.tag in 
+
+
+5.查询用户的所有标签（当前空间） √ link.tag merge local
+6.查询用户的所有链接(当前空间) √ link.space 
+
+
+
+
+
+documents:
+
+1.user 2.space 3.link
+
+
+user:{
+	"_id"  : 0,
+	"space":{
+		"crated" : [1,3],
+		"joined" : [2,5]
+	}
+}
+
+
+space:{
+  "_id"  : 0,
+  "name" : "xxx",
+  "user" : 1,
+  "default" : true
+}
+
+
+link:{
+	"space" : 0,
+	"tags" : ["a","b","c"],
+	"title" : "this is my title",
+	"description" : "this is the first link",
+	"previewImg" : "http://demo.yamixed.com/img.png",
+	"content" : "xxxxxxxxxxxxxxx",
+	"lastVisitTime" : date
+}
+
+

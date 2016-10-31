@@ -1,0 +1,19 @@
+body{
+  background-color: #e2e2e2;
+}
+
+#logo{
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.form-signin h2{
+  display: inline-block;
+  width: 80%;	
+  margin-top: 0;
+}
+
+.close{
+  float: none;	
+  margin-left: 96%;
+}
