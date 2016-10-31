@@ -143,7 +143,7 @@ NEW_MIX = (function($){
        $image_holder.empty();
        if(images && images.length > 0){
           for(var i in images){
-             $image_holder.append('<a href="javascript:void(0);"><img src="'+ images[i] +'" alt="..." class="img-thumbnail previewImg"></a>');
+             $image_holder.append('<a href="#"><img src="'+ images[i] +'" alt="..." class="img-thumbnail previewImg"></a>');
           }
        }
 	};

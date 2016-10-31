@@ -128,8 +128,8 @@ Setting = (function() {
               if(!color){
                 color = Y_COMMON.util.randomColor('');   
               }
-              html += '<a id="'+ space._id +'" href="javascript:void(0);" class="editSpace">' + space.spaceName + '</a>';
-              divHtml += '<a id="'+ space._id  +'" href="javascript:void(0);" class="editSpace"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + space.spaceName + '</b></div></a>';
+              html += '<a id="'+ space._id +'" href="#" class="editSpace">' + space.spaceName + '</a>';
+              divHtml += '<a id="'+ space._id  +'" href="#" class="editSpace"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + space.spaceName + '</b></div></a>';
             }
             $li.append(html);
             $div.prepend(divHtml);  
@@ -156,8 +156,8 @@ Setting = (function() {
               if(!color){
                 color = Y_COMMON.util.randomColor('');   
               }
-              html += '<a id="'+ group._id +'" href="javascript:void(0);" class="editGroup">' + group.name + '</a>';
-              divHtml += '<a id="'+ group._id  +'" href="javascript:void(0);" class="editGroup"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + group.name + '</b></div></a>';
+              html += '<a id="'+ group._id +'" href="#" class="editGroup">' + group.name + '</a>';
+              divHtml += '<a id="'+ group._id  +'" href="#" class="editGroup"><div class="thumbnail space old" style="background-color:#'+ color +';"><b>' + group.name + '</b></div></a>';
             }
             $li.append(html);
             $div.prepend(divHtml);  

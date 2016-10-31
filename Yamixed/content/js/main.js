@@ -348,10 +348,10 @@ MAIN = (function() {
     if(tags.length > 0){
        $('.' + ELS_CLASS.SIDE_BAR).show();
        $('.' + ELS_CLASS.MAIN_AREA).addClass('col-sm-9').removeClass('col-sm-12');
-       var html = '<li class="active"><a href="javascript:void(0);" class="tag">'+ tags[0] +'<span class="sr-only"></span></a></li>' 
+       var html = '<li class="active"><a href="#" class="tag">'+ tags[0] +'<span class="sr-only"></span></a></li>' 
        if(tags.length > 1){
          for(var i = 1; i < tags.length; i++){
-           html += '<li><a href="javascript:void(0);" class="tag">'+ tags[i] +'</a></li>'  
+           html += '<li><a href="#" class="tag">'+ tags[i] +'</a></li>'  
          }  
        }
        $list.append(html);
