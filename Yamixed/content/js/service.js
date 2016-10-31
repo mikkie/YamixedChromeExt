@@ -244,11 +244,12 @@ Service = (function($) {
      return post(option);
   };
 
-  service.saveNote = function(id,content,sentence,url,x,y,owner){
+  service.saveNote = function(id,space,content,sentence,url,x,y,owner){
     var option = {
         url : Y_COMMON.config.server.host + '/note/new',
         data : {
           id : id,
+          space : space,
           content : content,
           sentence : sentence,
           url : url,
