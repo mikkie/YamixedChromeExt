@@ -418,7 +418,7 @@ CONTENT = (function(){
         if (document.selection) return document.selection.createRange().text;
       };
       $('body').mouseup(function(e){
-         var sentence = getSelected().toString();
+         var sentence = $.trim(getSelected().toString());
          if(sentence && $('.' + ELS_CLASS.YA_NOTE).length == 0){
            if(sentence.length > 10000){
               alert('亲,所选文字太长了...');
