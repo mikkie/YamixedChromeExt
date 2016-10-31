@@ -11,7 +11,7 @@ CONTENT = (function(){
    YA_HIGHTLIGHT : 'yamixed-highlight'
   };
 
-  var host = 'https://localhost:3000';
+  var host = 'https://www.yamixed.com:3000';
 
   var parseMix = function(message){
   	 var title = message.tab.title;
@@ -59,7 +59,7 @@ CONTENT = (function(){
      chrome.storage.sync.get('user',function(data){
        if(data && data.user){
           $.ajax({
-            url : 'https://localhost:3000/login/autoLogin',
+            url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
@@ -102,7 +102,7 @@ CONTENT = (function(){
     chrome.storage.sync.get('user',function(data){
        if(data && data.user){
           $.ajax({
-            url : 'https://localhost:3000/login/autoLogin',
+            url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
@@ -141,7 +141,7 @@ CONTENT = (function(){
      chrome.storage.sync.get('user',function(data){
        if(data && data.user){
           $.ajax({
-            url : 'https://localhost:3000/login/autoLogin',
+            url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
