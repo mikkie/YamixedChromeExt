@@ -5,6 +5,7 @@ Note = (function() {
     LOGOUT : 'logout',
     EDITOR : 'editor',
     SAVE : 'saveNote',
+    SEL_SPACE : 'selSpace',
     DEL : 'delNote'
   };
 
@@ -45,8 +46,9 @@ Note = (function() {
               var url = data.yamixedNote.url;
               var x = data.yamixedNote.x;
               var y = data.yamixedNote.y;
+              var space = $('#' + ELS_IDS.SEL_SPACE).val();
               Y_COMMON.service.getLogindUser(function(data){
-                 Service.saveNote(id,content,sentence,url,x,y,data.user._id).done(function(data){
+                 Service.saveNote(id,space,content,sentence,url,x,y,data.user._id).done(function(data){
                     chrome.runtime.sendMessage({action:'close'});
                     if(data.success){
                       chrome.runtime.sendMessage({action:'highlight',note:data.success});
@@ -75,7 +77,29 @@ Note = (function() {
   };
 
 
-  var renderPage = function(){
+  var renderSpace = function(renderNote){
+    Y_COMMON.service.getLogindUser(function(data){
+      if(data.user){
+        Service.getUserCreatedSpaces(data.user._id).done(function(data){
+          if(data.success && data.success.length > 0){
+            for(var i in data.success){
+              var space = data.success[i];
+              if(space.defaultSpace){
+                 $('#' + ELS_IDS.SEL_SPACE).prepend('<option value="'+space._id+'">'+ space.spaceName +'</option>');
+              }
+              else{
+                 $('#' + ELS_IDS.SEL_SPACE).append('<option value="'+space._id+'">'+ space.spaceName +'</option>');
+              }
+            }
+            renderNote();
+          } 
+        });
+      }
+    });
+  };
+
+
+  var renderNote = function(){
     chrome.storage.sync.get("yamixedNote",function(data){
        var content = data.yamixedNote.sentence;
        if(data.yamixedNote.content){
@@ -83,7 +107,18 @@ Note = (function() {
          $('#' + ELS_IDS.DEL).show(); 
        }
        $('#' + ELS_IDS.EDITOR).text(content);
+       if(data.yamixedNote._id){
+         var $space = $('#' + ELS_IDS.SEL_SPACE);
+         if(data.yamixedNote.space){
+           $space.val(data.yamixedNote.space);
+         }  
+         $space.attr('disabled','disabled');
+       }
     });
+  };
+
+  var renderPage = function(){
+    renderSpace(renderNote);
   };
 
 
