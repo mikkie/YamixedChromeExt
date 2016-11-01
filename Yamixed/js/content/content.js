@@ -192,7 +192,7 @@ CONTENT = (function(){
       $('body').highlight(sentence,note);
       //3.if line high light not work
       if($('#yamixed-note-' + note._id).length == 0){
-          var $noteBtn = $('<div class="yamixed-highlight" style="z-index:999999;opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24G.jpg"/></div>');
+          var $noteBtn = $('<div class="yamixed-highlight" style="z-index:999999;opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/images/logo_24x24G.jpg"/></div>');
           $noteBtn.attr('id','yamixed-note-' + note._id);
           $noteBtn.data('note',note);
           $noteBtn.css('top',note.y + 'px').css('left',note.x + 'px');
@@ -424,7 +424,7 @@ CONTENT = (function(){
               alert('Sorry,content too long...');
               return false;
            }
-           var $noteBtn = $('<div class="yamixed-note" style="z-index:999999;opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24.jpg"/></div>');
+           var $noteBtn = $('<div class="yamixed-note" style="z-index:999999;opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/images/logo_24x24.jpg"/></div>');
            var x = e.pageX + 15;
            var y = e.pageY + 15;
            $noteBtn.css('top',y + 'px');

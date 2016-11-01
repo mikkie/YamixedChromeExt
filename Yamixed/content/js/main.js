@@ -264,7 +264,7 @@ MAIN = (function() {
           '</div>'].join('');
           }  
           $main.append(html);
-          $main.find('img[src=""]').attr('src','chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/no_image.jpg');  
+          $main.find('img[src=""]').attr('src','chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/images/no_image.jpg');  
         }
         else{
           $main.append('<div style="text-align:center;"><button style="margin-top:25%;" type="button" class="bookmark btn btn-success btn-lg"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>bookmark this page</button></div>');
