@@ -19,7 +19,7 @@ COMMON = (function($){
 
 
    var logError = function(error){
-   	   var msg = error + ',请联系 ' + CONFIG.SUPPORT;
+   	   var msg = error + ',please contact ' + CONFIG.SUPPORT;
        console.error(msg);
        chrome.notifications.create('error-' + new Date().getTime(), {
           type : 'basic',

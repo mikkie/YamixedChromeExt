@@ -4,22 +4,22 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/css/bootstrap.min.css"></style>
-	<link rel="stylesheet" href="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/css/content.css"></style>
+	<link rel="stylesheet" href="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/bootstrap/css/bootstrap.min.css"></style>
+	<link rel="stylesheet" href="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/content/css/content.css"></style>
 </head>
 <body style="margin: 0;padding: 0;">
 	<div id="mainArea" class="container-fluid">
 	   <div class="header row">
 	   	  <div class="col-md-12">
-             <img id="logo" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_32x32.png" class="clickable"/>
-             <button type="button" id="bookmark" class="bookmark btn btn-success"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏当前页面</button>
+             <img id="logo" src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/images/logo_32x32.png" class="clickable"/>
+             <button type="button" id="bookmark" class="bookmark btn btn-success"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>bookmrak this page</button>
              <select id="selSpace" class="form-control" name="selSpace">
              </select>
              <div id="searchbox" class="input-group">
                <span class="input-group-addon" id="selTag">@</span>
-               <input id="searchLinks" autofocus="autofocus" type="text" class="form-control" placeholder="查询链接...">
+               <input id="searchLinks" autofocus="autofocus" type="text" class="form-control" placeholder="search links...">
              </div><!-- /input-group -->
-             <a class="bell" href="#"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/bell_grey_24px.png" class="shake"></a>
+             <a class="bell" href="#"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/images/bell_grey_24px.png" class="shake"></a>
              <div class="user">
              		<li role="presentation" class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -27,11 +27,11 @@
                         <h4 class="userName"></h4>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a id="account" href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;账号管理</a></li>
-                      	<li><a id="goSetting" href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;设置</a></li>
-                        <li><a id="hotkeys" href="#"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>&nbsp;快捷键</a></li>
+                        <li><a id="account" href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Account</a></li>
+                      	<li><a id="goSetting" href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Setting</a></li>
+                        <li><a id="hotkeys" href="#"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>&nbsp;Hotkeys</a></li>
                       	<li role="separator" class="divider"></li>
-                      	<li><a id="logout" href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;退出</a></li>
+                      	<li><a id="logout" href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
                       </ul>
                 </li>
              </div>
@@ -43,7 +43,7 @@
      <div class="row content">
        <div class="col-sm-3 sidebar">
           <div class="input-group">
-             <input type="text" id="searchTag" class="form-control" placeholder="查询标签...">
+             <input type="text" id="searchTag" class="form-control" placeholder="search tags...">
           </div>
           <ul class="nav nav-sidebar tagList">
             <li class="active"><a href="#">Java<span class="sr-only">(current)</span></a></li>
@@ -75,7 +75,7 @@
        </div>
        <div class="col-sm-9 mainarea">
           <!-- <div class="thumbnail">
-            <a href="https://azure.microsoft.com/en-us/develop/java/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/java.png" alt="..."></a>
+            <a href="https://azure.microsoft.com/en-us/develop/java/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/java.png" alt="..."></a>
             <div class="caption">
               <h5><b>Download Free Java Software</b></h5>
               <p class="desc">
@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/js.jpg" alt="..."></a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/js.jpg" alt="..."></a>
             <div class="caption">
               <h5><b>JavaScript Tutorial - W3Schools</b></h5>
               <p class="desc">
@@ -113,7 +113,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://maven.apache.org/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/maven.jpg" alt="..."></a>
+            <a href="https://maven.apache.org/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/maven.jpg" alt="..."></a>
             <div class="caption">
               <h5><b>Maven – Welcome to Apache Maven</b></h5>
               <p class="desc">
@@ -132,7 +132,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://www.facebook.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/fb.png" alt="..."></a>
+            <a href="https://www.facebook.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/fb.png" alt="..."></a>
             <div class="caption">
               <h5><b>Facebook - Log In or Sign Up</b></h5>
               <p class="desc">
@@ -151,7 +151,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://twitter.com/?lang=en" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/tw.png" alt="..."></a>
+            <a href="https://twitter.com/?lang=en" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/tw.png" alt="..."></a>
             <div class="caption">
               <h5><b>Twitter - see what's happening</b></h5>
               <p class="desc">
@@ -170,7 +170,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://trello.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/tr.png" alt="..."></a>
+            <a href="https://trello.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/tr.png" alt="..."></a>
             <div class="caption">
               <h5><b>Trello</b></h5>
               <p class="desc">
@@ -189,7 +189,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://www.pinterest.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/pin.jpg" alt="..."></a>
+            <a href="https://www.pinterest.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/pin.jpg" alt="..."></a>
             <div class="caption">
               <h5><b>Pinterest • The world's catalog of ideas</b></h5>
               <p class="desc">
@@ -208,7 +208,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://feedly.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/feedly.png" alt="..."></a>
+            <a href="https://feedly.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/feedly.png" alt="..."></a>
             <div class="caption">
               <h5><b>feedly</b></h5>
               <p class="desc">
@@ -228,7 +228,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://developers.google.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/g.png" alt="..."></a>
+            <a href="https://developers.google.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/g.png" alt="..."></a>
             <div class="caption">
               <h5><b>Google</b></h5>
               <p class="desc">
@@ -247,7 +247,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://www.yahoo.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/ya.jpg" alt="..."></a>
+            <a href="https://www.yahoo.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/ya.jpg" alt="..."></a>
             <div class="caption">
               <h5><b>Yahoo</b></h5>
               <p class="desc">
@@ -266,7 +266,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://www.microsoft.com/zh-cn" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/mr.png" alt="..."></a>
+            <a href="https://www.microsoft.com/zh-cn" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/mr.png" alt="..."></a>
             <div class="caption">
               <h5><b>Microsoft – Official Home Page</b></h5>
               <p class="desc">
@@ -286,7 +286,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="http://stackoverflow.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/so.jpg" alt="..."></a>
+            <a href="http://stackoverflow.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/so.jpg" alt="..."></a>
             <div class="caption">
               <h5><b>Stack Overflow</b></h5>
               <p class="desc">
@@ -305,7 +305,7 @@
             </div>
           </div>
           <div class="thumbnail">
-            <a href="https://www.snapchat.com/" target="_blank"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/test/images/download.png" alt="..."></a>
+            <a href="https://www.snapchat.com/" target="_blank"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/test/images/download.png" alt="..."></a>
             <div class="caption">
               <h5><b>Snapchat</b></h5>
               <p class="desc">
@@ -332,20 +332,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" style="position:relative;"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">分享</h4>
+        <h4 class="modal-title" id="myModalLabel">Share</h4>
       </div>
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
       </div>
     </div>
   </div>
   </div>
-	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/jquery/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/bootstrap/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/common.js"></script>
-  <script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/service.js"></script>
-	<script type="text/javascript" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/content/js/main.js"></script>
+	<script type="text/javascript" src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/content/js/common.js"></script>
+  <script type="text/javascript" src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/content/js/service.js"></script>
+	<script type="text/javascript" src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/content/js/main.js"></script>
 </body>
 </html>
