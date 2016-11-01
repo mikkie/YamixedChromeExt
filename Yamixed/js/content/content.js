@@ -11,7 +11,7 @@ CONTENT = (function(){
    YA_HIGHTLIGHT : 'yamixed-highlight'
   };
 
-  var host = 'https://localhost:3000';
+  var host = 'https://www.yamixed.com:3000';
 
   var parseMix = function(message){
   	 var title = message.tab.title;
