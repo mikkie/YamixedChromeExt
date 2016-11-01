@@ -90,7 +90,7 @@ Space = (function() {
                       '<th style="text-align:center;">',
                       '<div class="checkbox">',
                       '<label>',
-                      '<input type="checkbox" value="">写',
+                      '<input type="checkbox" value="">write',
                       '</label>',
                       '</div>', 
                       '</th>',
@@ -112,7 +112,7 @@ Space = (function() {
       },
       deleteSpace : function(){
         $('#' + ELS_IDS.DELETE_SPACE).click(function(){
-           if(confirm('确定删除该空间?')){
+           if(confirm('confirm to delete the space?')){
              var spaceId = Y_COMMON.getQueryString('spaceId')
              Service.disableSpace(spaceId).done(function(){
                Y_COMMON.service.syncLocalData(function(){
@@ -165,7 +165,7 @@ Space = (function() {
 
 
   var renderEditSpace = function(id){
-    $('#' + ELS_IDS.CREATE_SPACE).text('更新');
+    $('#' + ELS_IDS.CREATE_SPACE).text('update');
     Service.findSpaceById(id).done(function(data){
       if(data.success){
         var space = data.success;
@@ -182,7 +182,7 @@ Space = (function() {
                       '<th style="text-align:center;">',
                       '<div class="checkbox">',
                       '<label>',
-                      '<input type="checkbox" value=""'+ (group.permission == 'rw' ? ' checked="checked"' : '') + '>写',
+                      '<input type="checkbox" value=""'+ (group.permission == 'rw' ? ' checked="checked"' : '') + '>write',
                       '</label>',
                       '</div>', 
                       '</th>',

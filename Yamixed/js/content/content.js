@@ -11,7 +11,7 @@ CONTENT = (function(){
    YA_HIGHTLIGHT : 'yamixed-highlight'
   };
 
-  var host = 'https://www.yamixed.com:3000';
+  var host = 'https://localhost:3000';
 
   var parseMix = function(message){
   	 var title = message.tab.title;
@@ -421,7 +421,7 @@ CONTENT = (function(){
          var sentence = $.trim(getSelected().toString());
          if(sentence && $('.' + ELS_CLASS.YA_NOTE).length == 0){
            if(sentence.length > 10000){
-              alert('亲,所选文字太长了...');
+              alert('Sorry,content too long...');
               return false;
            }
            var $noteBtn = $('<div class="yamixed-note" style="z-index:999999;opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_24x24.jpg"/></div>');

@@ -85,7 +85,7 @@ NEW_MIX = (function($){
                          openNotofication(data.success);
                       }
                       else{
-                      	 COMMON.logError('服务器开小差了');
+                      	 COMMON.logError('server error');
                       }
                    }
                 });

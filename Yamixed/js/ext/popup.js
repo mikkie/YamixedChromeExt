@@ -43,7 +43,7 @@ POPUP = (function($){
 	   	    if(/^(http|https)/.test(tab.url)){
             sendMessageToActivePage({action : 'parseLink'},function(response) {
               if(!response){
-                 COMMON.logError('当前页面努力加载中...，请刷新重试(F5)');
+                 COMMON.logError('Page is loading...，please refresh(F5)');
                     return;
               }
               getCategories(function(categories){
@@ -52,13 +52,13 @@ POPUP = (function($){
                     window.location.href="newMix.html";
                  }
                  else{
-                    COMMON.logError('服务正在神游中...');
+                    COMMON.logError('server is busy');
                  }
               });
             });
           }
           else{
-              COMMON.logError('请在页面中发布链接');
+              COMMON.logError('please publish in open web page');
           }
         });
 	   });	
@@ -68,7 +68,7 @@ POPUP = (function($){
          chrome.tabs.query({active : true}, function(tabs) {
            var tab = tabs[0];
            if(/^chrome:/.test(tab.url)){
-              COMMON.logError('请在页面中打开书签管理');
+              COMMON.logError('please open bookmarks manager in open web page');
               return false;
            }
            sendMessageToActivePage({action : 'openUrm'},function(response) {
@@ -87,7 +87,7 @@ POPUP = (function($){
             });
           }
           else{
-            COMMON.logError('请在页面中收藏链接');
+            COMMON.logError('please bookmark in open web page');
           }
         });
      }); 

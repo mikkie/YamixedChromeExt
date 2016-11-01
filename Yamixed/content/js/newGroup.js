@@ -105,7 +105,7 @@ Space = (function() {
       },
       deleteGroup : function(){
         $('#' + ELS_IDS.DELETE_GROUP).click(function(){
-          if(confirm('确定删除该用户组?')){
+          if(confirm('confirm to delete this group?')){
              var groupId = Y_COMMON.getQueryString('groupId')
              Service.disableGroup(groupId).done(function(){
                chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/setting.html"), width : '900px',height : '600px'});
@@ -153,7 +153,7 @@ Space = (function() {
 
 
   var renderEditGroup = function(id){
-    $('#' + ELS_IDS.CREATE_GROUP).text('更新');
+    $('#' + ELS_IDS.CREATE_GROUP).text('update');
     Service.findGroupById(id).done(function(data){
       if(data.success){
         var group = data.success;

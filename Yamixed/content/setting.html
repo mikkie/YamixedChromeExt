@@ -12,9 +12,9 @@
 	   <div class="header row">
 	   	  <div class="col-md-12">
              <a href="#"><img id="logo" src="chrome-extension://fjkkoeppfmigfbienchpdjcinogmccai/images/logo_32x32.png" class="clickable"/></a>
-             <div style="float:left; margin-left: 50%;">
-               <button type="button" class="newSpace btn btn-warning">新建空间</button>
-               <button type="button" class="newGroup btn btn-success">新建用户组</button>
+             <div style="float:left; margin-left: 49%;">
+               <button type="button" class="newSpace btn btn-warning">new space</button>
+               <button type="button" class="newGroup btn btn-success">new group</button>
              </div>
              <div class="user" style="margin-left: 10%;">
              		<li role="presentation" class="dropdown">
@@ -23,7 +23,7 @@
                         <h4 class="userName"></h4>
                       </a>
                       <ul class="dropdown-menu">
-                      	<li><a id="logout" href="#">退出</a></li>
+                      	<li><a id="logout" href="#">Log out</a></li>
                       </ul>
                 </li>
              </div>
@@ -36,21 +36,16 @@
        <div class="col-sm-3 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active">
-              <a id="space" href="#" style="font-weight: bold">空间<span class="sr-only">(current)</span></a>
+              <a id="space" href="#" style="font-weight: bold">Space<span class="sr-only">(current)</span></a>
               <ul id="spaceUl" class="nav nav-sidebar">
                  <li id="spaceLi">
-                    <a href="#">Aqua的书签</a>
-                    <a href="#">ehealth的书签</a>
-                    <a href="#">yamixed的书签</a>
                  </li> 
               </ul>  
             </li>
             <li>
-              <a id="group" href="#" style="font-weight: bold">用户组</a>
+              <a id="group" href="#" style="font-weight: bold">Group</a>
               <ul id="groupUl" class="nav nav-sidebar">
                  <li id="groupLi">
-                    <a href="#">yamixed</a>
-                    <a href="#">ehealth</a>
                  </li> 
               </ul>
             </li>
@@ -58,21 +53,21 @@
        </div>
        <div class="col-sm-9 mainarea">
           <div id="spaceArea">
-          <h5>空间:</h5>
+          <h5>Space:</h5>
           <div id="spaceDiv" class="well well-lg" style="padding:8px;">
             <a href="#" class="newSpace">
               <div class="thumbnail space" style="background-color:#afaeb1;text-align:center;">
-                <b><span class="glyphicon glyphicon-plus-sign" aria-hidden="true">创建空间</span></b>
+                <b><span class="glyphicon glyphicon-plus-sign" aria-hidden="true">new space</span></b>
               </div>
             </a>  
           </div>
           </div>  
           <div id="groupArea">
-          <h5>用户组:</h5>
+          <h5>Group:</h5>
           <div id="groupDiv" class="well well-lg" style="padding:8px;">
             <a href="#" class="newGroup">
               <div class="thumbnail group" style="background-color:#afaeb1;text-align:center;">
-                <b><span class="glyphicon glyphicon-plus-sign" aria-hidden="true">创建用户组</span></b>
+                <b><span class="glyphicon glyphicon-plus-sign" aria-hidden="true">new group</span></b>
               </div>
             </a>  
           </div>
