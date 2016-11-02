@@ -11,7 +11,7 @@ ResetPwd = (function() {
 
   var ELS_CLASS = {
      CLOSE : 'close',
-     GO_BACK : 'goback' 
+     GO_BACK : 'goback'
   };
 
 
