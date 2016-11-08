@@ -1,7 +1,6 @@
 MAIN = (function() {
 
   var ELS_IDS = {
-  	 MAIN_AREA : 'mainArea',
      GO_SETTING : 'goSetting',
      HOT_KEYS : 'hotkeys',
      ACCOUNT : 'account',
@@ -25,8 +24,8 @@ MAIN = (function() {
      DEL_TAG : 'delTag',
      EDIT_TAG : 'editTag',
      SIDE_BAR : 'sidebar',
-     MAIN_AREA : 'mainarea',
-     AVATAR : 'avatar' 
+     AVATAR : 'avatar',
+     LOADING : 'loading' 
   };
 
 
@@ -237,7 +236,7 @@ MAIN = (function() {
 
 
   var showLinks = function(data){
-     var $main = $('.' + ELS_CLASS.MAIN_AREA);
+        var $main = $('.' + ELS_CLASS.MAIN_AREA);
         $main.empty();
         if(data.success && data.success.length > 0){
           var html = '';

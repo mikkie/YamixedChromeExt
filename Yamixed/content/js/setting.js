@@ -114,7 +114,7 @@ Setting = (function() {
   var renderSpace = function(){
     chrome.storage.sync.get('user',function(data){
        if(data.user){
-         Service.getUserCreatedSpaces(data.user._id).done(function(data){
+         Service.getUserCreatedSpaces(data.user._id,true).done(function(data){
           var $li = $('#' + ELS_IDS.SPACE_LI);
           var $div = $('#' + ELS_IDS.SPACE_DIV);
           $li.empty();
