@@ -200,8 +200,8 @@ Service = (function($) {
      return get({url : Y_COMMON.config.server.host + '/space/findSpaceById?spaceId=' + spaceId});
   };
 
-  service.getUserCreatedSpaces = function(userId){
-     return get({url : Y_COMMON.config.server.host + '/space/getUserCreatedSpaces?userId=' + userId});
+  service.getUserCreatedSpaces = function(userId,valid){
+     return get({url : Y_COMMON.config.server.host + '/space/getUserCreatedSpaces?userId=' + userId + (valid ? '&valid=' + valid : '')});
   };
 
   service.getUserCreatedGroups = function(userId){
