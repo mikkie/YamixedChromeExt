@@ -287,7 +287,7 @@ CONTENT = (function(){
 
   var parsePage = function(sendResponse){
      var data = {};
-     if(/^(http|https)/.test(window.location.href)){
+     if(/^(http|https|file)/.test(window.location.href)){
         data = getPageData();
      }
      sendResponse(data);
