@@ -123,6 +123,9 @@ MAIN = (function() {
                if(!new RegExp(tag,'ig').test($this.text())){
                   $this.hide();
                }
+               else{
+                  $this.show();
+               }
             }
             else{
               $this.show();
