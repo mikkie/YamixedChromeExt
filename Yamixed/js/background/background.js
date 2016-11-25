@@ -1,7 +1,22 @@
+(function init(){
+  chrome.tabs.query({},function(tabs){
+    for(var i in tabs){
+        var tab = tabs[i];
+        if (tab.url.indexOf('chrome://extensions/') != 0){
+          chrome.tabs.executeScript(tab.id, {file: "jquery/jquery-1.11.1.min.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/common/common.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/common/hotkeys.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/common/highlight.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/content/content.js",matchAboutBlank:true});
+        }
+    }
+  });
+})();
+  
 var checkForValidUrl = function(tab) {
-  //if (/^(http|https)/.test(tab.url)){
+  if (tab.url.indexOf('chrome://extensions/') != 0){
     chrome.pageAction.show(tab.id);
-  //}
+  }
 };
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 	checkForValidUrl(tab);
