@@ -7,6 +7,10 @@
     "default_icon": "icon.png",
     "default_popup" : "html/popup.html"
   },
+  "omnibox": { "keyword" : "yamixed" },
+  "icons": {
+    "16": "images/logo_16x16.png"
+  },
   "permissions": ["tabs","bookmarks","notifications","http://*/*","https://*/*","storage"],
   "manifest_version": 2,
   "background": {
