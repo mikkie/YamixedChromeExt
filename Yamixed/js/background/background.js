@@ -61,3 +61,37 @@ var sendMessageToActivePage = function(message,callback){
         });
      });
 };
+
+String.prototype.encodeHTML = function () {
+    return this.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&apos;');
+};
+
+chrome.omnibox.onInputChanged.addListener(function(text,suggest){
+   if(text && text.length > 1){
+      Y_COMMON.service.getLogindUser(function(data){
+        if(data.user){
+          Service.searchLinksFromAddressBar(data.user._id,$.trim(text)).done(function(data){
+            if(data.success && data.success.length > 0){
+              var result = [];
+              for(var i in data.success){
+                result.push({
+                  content : data.success[i].url,
+                  description : data.success[i].title.encodeHTML()
+                });
+              }
+              suggest(result);   
+            }
+          });
+        }  
+      });
+   }
+});
+
+
+chrome.omnibox.onInputEntered.addListener(function(text,disposition){
+   window.open(text);
+});

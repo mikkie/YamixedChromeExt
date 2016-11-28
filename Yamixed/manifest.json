@@ -1,6 +1,6 @@
 {
   "name": "Yamixed",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA83XRjH1b9BWQIQweOU4DJXRDGIGtjiP6/NlQ8vhRMT2dgto56iK+/kOGKeaByqJQz5nOosXFG/PHjzre3GagXjRS5YcQa6TSJWtzC6S57MyoNf4yLinVRTXk0IxccS2s3JBqjflb1SAS12Bbmkt3bTVv0PRLqkqVhl4FoQOca2cbnNFRoHby2Gvt+aP4OixtpeuAfcClynkqkO1OOBzi2MZ/gEstG1GDJbTO4c8Q8nHYu8Ud+RtMJMUpMEgwEoQSZZBZZBQbCadPORdELbcwY2FUVG+wRLYPwDW6vtqpBRT9QnY5olkWxTs/etFV9A7Us1vt88KfhV0M8PYU91Xx0QIDAQAB",
   "page_action":
   {
@@ -14,7 +14,7 @@
   "permissions": ["tabs","bookmarks","notifications","http://*/*","https://*/*","storage"],
   "manifest_version": 2,
   "background": {
-     "scripts": ["jquery/jquery-1.11.1.min.js","js/background/background.js"]
+     "scripts": ["jquery/jquery-1.11.1.min.js","js/background/background.js","content/js/service.js","content/js/common.js"]
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "content_scripts": [

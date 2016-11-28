@@ -93,6 +93,18 @@ Service = (function($) {
      return post(option);
   };
 
+  service.searchLinksFromAddressBar = function(userId,keyword){
+     var option = {
+        url : Y_COMMON.config.server.host + '/link/searchLinksFromAddressBar',
+        data : {
+          userId : userId,
+          keyword : keyword
+        }
+     };
+     return post(option);
+  };
+
+
 
   service.updateLinkVisitTime = function(linkId){
      var option = {
