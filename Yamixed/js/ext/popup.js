@@ -65,30 +65,15 @@ POPUP = (function($){
 	 },
    urm_start : function(){
      $('#' + ELS_IDS.URM).click(function(){
-         chrome.tabs.query({active : true}, function(tabs) {
-           var tab = tabs[0];
-           if(/^chrome:/.test(tab.url)){
-              COMMON.logError('please open bookmarks manager in open web page');
-              return false;
-           }
-           sendMessageToActivePage({action : 'openUrm'},function(response) {
-               window.close();
-           });
-         });
+        sendMessageToActivePage({action : 'openUrm'},function(response) {
+          window.close();
+        });
      });
    },
    bookmark : function(){
      $('#' + ELS_IDS.BOOK_MARK).click(function(){
-        chrome.tabs.query({active : true}, function(tabs) {
-          var tab = tabs[0];
-          if(/^(http|https)/.test(tab.url)){
-            sendMessageToActivePage({action : 'openBookmark'},function(response) {
-              window.close();
-            });
-          }
-          else{
-            COMMON.logError('please bookmark in open web page');
-          }
+        sendMessageToActivePage({action : 'openBookmark'},function(response) {
+          window.close();
         });
      }); 
    }	  

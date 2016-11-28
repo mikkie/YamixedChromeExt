@@ -1,7 +1,22 @@
+(function init(){
+  chrome.tabs.query({},function(tabs){
+    for(var i in tabs){
+        var tab = tabs[i];
+        if (tab.url.indexOf('chrome://extensions/') != 0){
+          chrome.tabs.executeScript(tab.id, {file: "jquery/jquery-1.11.1.min.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/common/common.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/common/hotkeys.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/common/highlight.js",matchAboutBlank:true});
+          chrome.tabs.executeScript(tab.id, {file: "js/content/content.js",matchAboutBlank:true});
+        }
+    }
+  });
+})();
+  
 var checkForValidUrl = function(tab) {
-  //if (/^(http|https)/.test(tab.url)){
+  if (tab.url.indexOf('chrome://extensions/') != 0){
     chrome.pageAction.show(tab.id);
-  //}
+  }
 };
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 	checkForValidUrl(tab);
@@ -46,3 +61,37 @@ var sendMessageToActivePage = function(message,callback){
         });
      });
 };
+
+String.prototype.encodeHTML = function () {
+    return this.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&apos;');
+};
+
+chrome.omnibox.onInputChanged.addListener(function(text,suggest){
+   if(text && text.length > 1){
+      Y_COMMON.service.getLogindUser(function(data){
+        if(data.user){
+          Service.searchLinksFromAddressBar(data.user._id,$.trim(text)).done(function(data){
+            if(data.success && data.success.length > 0){
+              var result = [];
+              for(var i in data.success){
+                result.push({
+                  content : data.success[i].url,
+                  description : data.success[i].title.encodeHTML()
+                });
+              }
+              suggest(result);   
+            }
+          });
+        }  
+      });
+   }
+});
+
+
+chrome.omnibox.onInputEntered.addListener(function(text,disposition){
+   window.open(text);
+});
