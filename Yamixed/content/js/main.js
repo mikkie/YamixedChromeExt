@@ -311,7 +311,7 @@ MAIN = (function() {
      });
      Service.getLinksBySpace(spaceId).done(function(data){
         showLinks(data);
-        renderTags(data);
+        renderTags(spaceId,data);
      });
   };
 
@@ -339,7 +339,7 @@ MAIN = (function() {
      }  
   };
 
-  var renderTags = function(data){
+  var renderTags = function(spaceId,data){
     var $list = $('.' + ELS_CLASS.TAG_LIST);
     $list.empty();
     var tags = [];
@@ -361,12 +361,16 @@ MAIN = (function() {
          }  
        }
        $list.append(html);
-       chrome.storage.sync.set({"tags" : tags});
+       var data = {};
+       data["tags" + spaceId] = tags;
+       chrome.storage.sync.set(data);
     }
     else{
        $('.' + ELS_CLASS.SIDE_BAR).hide();
        $('.' + ELS_CLASS.MAIN_AREA).addClass('col-sm-12').removeClass('col-sm-9');
-       chrome.storage.sync.set({"tags" : []});
+       var data = {};
+       data["tags" + spaceId] = [];
+       chrome.storage.sync.set(data);
     }
   };
 

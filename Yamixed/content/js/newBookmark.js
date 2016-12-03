@@ -179,14 +179,15 @@ Bookmark = (function() {
 
 
   var autoCompleteTag = function($input){
+     var spaceId = $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId')
      $('.' + ELS_CLASS.TAG_TIPS).remove();
      var val = $input.val();
      if(val){
-       chrome.storage.sync.get("tags",function(data){
-          if(data.tags && data.tags.length > 0){
+       chrome.storage.sync.get("tags" + spaceId,function(data){
+          if(data && data["tags" + spaceId] && data["tags" + spaceId].length > 0){
              var lis = '';
-             for(var i in data.tags){
-               var tag = data.tags[i];
+             for(var i in data["tags" + spaceId]){
+               var tag = data["tags" + spaceId][i];
                if(new RegExp('^' + val,'ig').test(tag)){
                  lis += '<li><a class="tagTipLi" href="#">'+ tag +'</a></li>'
                }
