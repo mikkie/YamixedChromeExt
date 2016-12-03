@@ -361,10 +361,12 @@ MAIN = (function() {
          }  
        }
        $list.append(html);
+       chrome.storage.sync.set({"tags" : tags});
     }
     else{
        $('.' + ELS_CLASS.SIDE_BAR).hide();
        $('.' + ELS_CLASS.MAIN_AREA).addClass('col-sm-12').removeClass('col-sm-9');
+       chrome.storage.sync.set({"tags" : []});
     }
   };
 

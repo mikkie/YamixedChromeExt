@@ -22,6 +22,8 @@ Bookmark = (function() {
   };	
 
   var ELS_CLASS = {
+     TAG_TIPS : 'tagTips',
+     TAG_TIP_LI : 'tagTipLi',
      CLOSE : 'close',
      USER_NAME : 'userName',
      TAG : 'tag',
@@ -36,6 +38,7 @@ Bookmark = (function() {
  
   
   var createNewTag = function(input){
+    $('.' + ELS_CLASS.TAG_TIPS).remove();
     var $this = $(input);
     var val = $.trim($this.val());
     if(val){
@@ -73,12 +76,23 @@ Bookmark = (function() {
             showPage("content/setting.html",'900px','600px');
          });
       },
+      tag_tip_click : function(){
+         $('#' + ELS_IDS.TAGS).on('mousedown','.' + ELS_CLASS.TAG_TIP_LI,function(){
+            var $this = $(this);
+            var tag = $this.text();
+            var $input = $this.parents('ul').prev();
+            $input.val(tag).trigger('focusout');
+         });
+      },
       new_tag : function(){
          $('#' + ELS_IDS.NEW_TAG).keyup(function(e){
              if(e.which == 13){
                 createNewTag(this);
              }
-         }).focusout(function(){
+             else{
+                autoCompleteTag($(this));
+             }
+         }).focusout(function(e){
              createNewTag(this);
          });
       },
@@ -161,6 +175,29 @@ Bookmark = (function() {
           $('#' + ELS_IDS.CURRENT_SPACE).html(text + '<span class="caret"></span>').attr('spaceId',id);
         });
       }
+  };
+
+
+  var autoCompleteTag = function($input){
+     $('.' + ELS_CLASS.TAG_TIPS).remove();
+     var val = $input.val();
+     if(val){
+       chrome.storage.sync.get("tags",function(data){
+          if(data.tags && data.tags.length > 0){
+             var lis = '';
+             for(var i in data.tags){
+               var tag = data.tags[i];
+               if(new RegExp('^' + val,'ig').test(tag)){
+                 lis += '<li><a class="tagTipLi" href="#">'+ tag +'</a></li>'
+               }
+             }
+             if(lis){
+                var left = $input.offset().left + 'px';
+                $input.after('<ul class="tagTips dropdown-menu" style="display:block;left:'+ left +'">' + lis + '</ul>');
+             } 
+          }
+       });
+     }
   };
 
   var renderHeader = function(imageData){
