@@ -178,6 +178,10 @@ MAIN = (function() {
         }
         var spaceId = $('#' + ELS_IDS.SEL_SPACE).val().split('-')[0];
         response.spaceId = spaceId;
+        var tag = $('#' + ELS_IDS.SEL_TAG).text();
+        if(tag != '@'){
+          response.tags = [tag.replace('@','')];
+        }
         chrome.storage.sync.set({'newPageData' : response},function(){
           showPage("content/newBookmark.html",'600px','600px');
         });
