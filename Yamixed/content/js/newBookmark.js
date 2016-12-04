@@ -254,6 +254,9 @@ Bookmark = (function() {
           if(newPageData.tags && newPageData.tags.length > 0){
             for(var i in newPageData.tags){
               $('#' + ELS_IDS.TAGS).prepend('<button type="button" class="tag btn btn-warning btn-sm" style="margin-left:10px;">'+ newPageData.tags[i] +'</button>');
+              if(newPageData.tags.length >= 3){
+                $('#' + ELS_IDS.NEW_TAG).hide();
+              }
             }
           }
           if(newPageData._id){
