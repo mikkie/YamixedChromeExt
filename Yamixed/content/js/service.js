@@ -256,7 +256,7 @@ Service = (function($) {
      return post(option);
   };
 
-  service.saveNote = function(id,space,content,sentence,url,x,y,owner){
+  service.saveNote = function(id,space,content,sentence,url,x,y,owner,tags){
     var option = {
         url : Y_COMMON.config.server.host + '/note/new',
         data : {
@@ -267,7 +267,8 @@ Service = (function($) {
           url : url,
           x : x,
           y : y,
-          owner : owner
+          owner : owner,
+          tags : tags
         }
      };
      return post(option);

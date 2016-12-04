@@ -6,13 +6,18 @@ Note = (function() {
     EDITOR : 'editor',
     SAVE : 'saveNote',
     SEL_SPACE : 'selSpace',
+    NEW_TAG : 'newTag',
+    TAGS : 'tags',
     DEL : 'delNote'
   };
 
   var ELS_CLASS = {
     USER_NAME : 'userName',
     CLOSE : 'close',
-    AVATAR : 'avatar'
+    AVATAR : 'avatar',
+    TAG_TIPS : 'tagTips',
+    TAG_TIP_LI : 'tagTipLi',
+    TAG : 'tag'
   };
 
 
@@ -39,6 +44,10 @@ Note = (function() {
       },
       save : function(){
         $('#' + ELS_IDS.SAVE).click(function(){
+           var tags = [];
+           $('#' + ELS_IDS.TAGS + ' button').each(function(){
+              tags.push($(this).text());
+           });
            var content = $('#' + ELS_IDS.EDITOR).val();
            chrome.storage.sync.get("yamixedNote",function(data){
               var id = data.yamixedNote._id;
@@ -48,7 +57,7 @@ Note = (function() {
               var y = data.yamixedNote.y;
               var space = $('#' + ELS_IDS.SEL_SPACE).val();
               Y_COMMON.service.getLogindUser(function(data){
-                 Service.saveNote(id,space,content,sentence,url,x,y,data.user._id).done(function(data){
+                 Service.saveNote(id,space,content,sentence,url,x,y,data.user._id,tags).done(function(data){
                     chrome.runtime.sendMessage({action:'close'});
                     if(data.success){
                       chrome.runtime.sendMessage({action:'highlight',note:data.success});
@@ -73,7 +82,83 @@ Note = (function() {
               });
            });
         });
+      },
+      tag_tip_click : function(){
+         $('#' + ELS_IDS.TAGS).on('mousedown','.' + ELS_CLASS.TAG_TIP_LI,function(){
+            var $this = $(this);
+            var tag = $this.text();
+            var $input = $this.parents('ul').prev();
+            $input.val(tag).trigger('focusout');
+         });
+      },
+      new_tag : function(){
+         $('#' + ELS_IDS.NEW_TAG).keyup(function(e){
+             if(e.which == 13){
+                createNewTag(this);
+             }
+             else{
+                autoCompleteTag($(this));
+             }
+         }).focusout(function(e){
+             createNewTag(this);
+         });
+      },
+      tags_click : function(){
+        $('#' + ELS_IDS.TAGS).on('click','.' + ELS_CLASS.TAG,function(){
+          $(this).remove();
+          $('#' + ELS_IDS.NEW_TAG).show();
+        }).on('mouseover','.' + ELS_CLASS.TAG, function(){
+           $(this).addClass('btn-danger').removeClass('btn-warning');
+        }).on('mouseout','.' + ELS_CLASS.TAG,function(){
+           $(this).addClass('btn-warning').removeClass('btn-danger'); 
+        });
       }
+  };
+
+  var createNewTag = function(input){
+    $('.' + ELS_CLASS.TAG_TIPS).remove();
+    var $this = $(input);
+    var val = $.trim($this.val());
+    if(val){
+      var found = false;
+      $('#' + ELS_IDS.TAGS + ' button').each(function(){
+        if($(this).text() == val){
+          found = true;
+          return false;
+        }
+      });
+      if(found){
+        return false;
+      }
+      $('#' + ELS_IDS.TAGS).prepend('<button type="button" class="tag btn btn-warning btn-sm" style="margin-left:10px;">'+ val +'</button>');
+      $this.val('');
+      if($('#' + ELS_IDS.TAGS).find('button').length >= 3){
+        $this.hide();
+      }
+    }
+  };
+
+  var autoCompleteTag = function($input){
+     var spaceId = $('#' + ELS_IDS.SEL_SPACE).val();
+     $('.' + ELS_CLASS.TAG_TIPS).remove();
+     var val = $input.val();
+     if(val){
+       chrome.storage.sync.get("tags" + spaceId,function(data){
+          if(data && data["tags" + spaceId] && data["tags" + spaceId].length > 0){
+             var lis = '';
+             for(var i in data["tags" + spaceId]){
+               var tag = data["tags" + spaceId][i];
+               if(new RegExp('^' + val,'ig').test(tag)){
+                 lis += '<li><a class="tagTipLi" href="#">'+ tag +'</a></li>'
+               }
+             }
+             if(lis){
+                var left = $input.offset().left + 'px';
+                $input.after('<ul class="tagTips dropdown-menu" style="top:33px;display:block;left:'+ left +'">' + lis + '</ul>');
+             } 
+          }
+       });
+     }
   };
 
 
@@ -98,6 +183,21 @@ Note = (function() {
     });
   };
 
+  var renderTags = function(linkId){
+     Service.getLinkById(linkId).done(function(data){
+        if(data.success){
+          var tags = data.success.tags;
+          if(tags && tags.length > 0){
+            for(var i in tags){
+              $('#' + ELS_IDS.TAGS).prepend('<button type="button" class="tag btn btn-warning btn-sm" style="margin-left:10px;">'+ tags[i] +'</button>');
+              if(tags.length >= 3){
+                $('#' + ELS_IDS.NEW_TAG).hide();
+              }
+            }
+          }
+        }
+     });
+  };
 
   var renderNote = function(){
     chrome.storage.sync.get("yamixedNote",function(data){
@@ -111,6 +211,9 @@ Note = (function() {
          var $space = $('#' + ELS_IDS.SEL_SPACE);
          if(data.yamixedNote.space){
            $space.val(data.yamixedNote.space);
+         }
+         if(data.yamixedNote.link){
+           renderTags(data.yamixedNote.link); 
          }  
          $space.attr('disabled','disabled');
        }
