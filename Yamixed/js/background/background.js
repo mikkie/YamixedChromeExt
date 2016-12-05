@@ -53,6 +53,15 @@ chrome.runtime.onMessage.addListener(function (msg, sender,sendResponse) {
 });
 
 
+chrome.bookmarks.onCreated.addListener(function(id,bookmark){
+   chrome.storage.sync.get('user',function(data){
+      if(data.user){
+         Service.syncSingleBookmarkToYamixed(bookmark,data.user.space.created[0],data.user._id);  
+      }
+   });
+});
+
+
 var sendMessageToActivePage = function(message,callback){
      chrome.tabs.query({active : true}, function(tabs) {
         var tab = tabs[0];

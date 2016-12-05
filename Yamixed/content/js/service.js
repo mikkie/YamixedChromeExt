@@ -256,6 +256,18 @@ Service = (function($) {
      return post(option);
   };
 
+  service.syncSingleBookmarkToYamixed = function(bookmark,spaceId,owner){
+    var option = {
+        url : Y_COMMON.config.server.host + '/space/syncBookmark',
+        data : {
+          bookmark : bookmark,
+          spaceId : spaceId,
+          owner : owner
+        }
+     };
+     return post(option);
+  };
+
   service.saveNote = function(id,space,content,sentence,url,x,y,owner,tags){
     var option = {
         url : Y_COMMON.config.server.host + '/note/new',
