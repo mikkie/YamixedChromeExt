@@ -230,7 +230,7 @@ CONTENT = (function(){
        openDialog(message.url,true,{width : message.width,height : message.height});
     } 
     else if('parsePage' == message.action){
-       parsePage(sendResponse);
+       parsePage(message,sendResponse);
     }
     else if('openBookmark' == message.action){
        openBookmark(sendResponse);
@@ -262,7 +262,7 @@ CONTENT = (function(){
   };
 
 
-  var getPageData = function(){
+  var getPageData = function(message){
      var title = $('title').text();
      var description = $('meta[name="description"]').attr('content');
      if(!description){
@@ -270,8 +270,14 @@ CONTENT = (function(){
      }
      var $images = $('img[src]');
      var images = [];
+     if(message){
+        if(message.tab.favIconUrl){
+           images[0] = message.tab.favIconUrl;
+        }
+     }
      $images.each(function(i,n){
-        if(i < 5){
+        var count = images.length == 0 ? 5 : 4;
+        if(i < count){
            var src = $(n).attr('src');
            src = absolute(src);
            images.push(src);
@@ -285,10 +291,10 @@ CONTENT = (function(){
      };
   };
 
-  var parsePage = function(sendResponse){
+  var parsePage = function(message,sendResponse){
      var data = {};
      if(/^(http|https|file)/.test(window.location.href)){
-        data = getPageData();
+        data = getPageData(message);
      }
      sendResponse(data);
   };
