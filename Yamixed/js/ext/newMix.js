@@ -145,6 +145,7 @@ NEW_MIX = (function($){
           for(var i in images){
              $image_holder.append('<a href="#"><img src="'+ images[i] +'" alt="..." class="img-thumbnail previewImg"></a>');
           }
+          $('#' + ELS_IDS.IMG_URL).val($('.' + ELS_CLASS.PREVIEW_IMG +':first').attr('src'));
        }
 	};
 	

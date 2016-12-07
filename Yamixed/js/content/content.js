@@ -25,8 +25,12 @@ CONTENT = (function(){
        description = descs[0].content == null ? '' : descs[0].content;
      } 
      var images = [];
+     if(message.tab.favIconUrl){
+           images[0] = message.tab.favIconUrl;
+     }
+     var count = images.length == 0 ? 20 : 19;
      $('img').each(function(i,n){
-       if(i < 20){
+       if(i < count){
          var src = $(n).attr('src');
          if(src){
            src = COMMON.absolute(src);
