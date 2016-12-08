@@ -1,7 +1,8 @@
 Y_COMMON = {
   config : {
     server : {
-  	   host : 'https://www.yamixed.com'
+  	   host : 'https://www.yamixed.com',
+       home : 'http://www.yamixed.com'
     }
   },
   form : {

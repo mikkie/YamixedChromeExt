@@ -4,6 +4,7 @@ MAIN = (function() {
      GO_SETTING : 'goSetting',
      HOT_KEYS : 'hotkeys',
      ACCOUNT : 'account',
+     LOGO : 'logo',
      LOGOUT : 'logout',
      SEL_SPACE : 'selSpace',
      LINK_TEMP : 'linkTemp',
@@ -35,6 +36,11 @@ MAIN = (function() {
 
   
   var bind = {
+      logo_click : function(){
+         $('#' + ELS_IDS.LOGO).click(function(){
+            window.open(Y_COMMON.config.server.home);
+         });
+      },
       close : function(){
          $('.' + ELS_CLASS.CLOSE).click(function(){
             chrome.runtime.sendMessage({action:'close'});
