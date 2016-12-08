@@ -263,7 +263,7 @@ MAIN = (function() {
                 link.description + '</p>', 
               '<p class="linkOP">', 
                 '<a href="#" class="editTag btn btn-primary btn-xs" role="button" title="edit">', 
-                  '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', 
+                  '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', 
                 '</a>', 
                 // '<a href="#" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#shareModal">', 
                 //   '<span class="glyphicon glyphicon-share" aria-hidden="true">', 
