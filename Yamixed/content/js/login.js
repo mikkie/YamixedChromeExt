@@ -49,10 +49,14 @@ Login = (function() {
            bind[m]();
         }
      }
-     chrome.storage.sync.remove('user');
+     chrome.storage.sync.remove('loginInfo');
      $('#' + ELS_IDS.LOGIN_FORM).ajaxForm({
       success : function(data){
         if(data.success){
+          chrome.storage.sync.set({"loginInfo" : {
+            email : data.success.email,
+            autoLoginToken : data.success.autoLoginToken
+          }});
           chrome.storage.sync.set({"user" : data.success});
           Service.getUserSpaces(data.success.space).done(function(){
              chrome.runtime.sendMessage({action:'showPage',url : chrome.extension.getURL("content/content.html"), width : '900px',height : '600px'});  

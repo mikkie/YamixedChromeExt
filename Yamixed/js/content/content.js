@@ -60,15 +60,15 @@ CONTENT = (function(){
 
 
   var checkAutoLogin = function(callback){
-     chrome.storage.sync.get('user',function(data){
-       if(data && data.user){
+     chrome.storage.sync.get('loginInfo',function(data){
+       if(data && data.loginInfo){
           $.ajax({
             url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
-              email : data.user.email,
-              token : data.user.autoLoginToken
+              email : data.loginInfo.email,
+              token : data.loginInfo.autoLoginToken
             }
           }).done(function(data){
               if(data.success){
@@ -103,15 +103,15 @@ CONTENT = (function(){
   };
 
   var openBookmark = function(callback){
-    chrome.storage.sync.get('user',function(data){
-       if(data && data.user){
+    chrome.storage.sync.get('loginInfo',function(data){
+       if(data && data.loginInfo){
           $.ajax({
             url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
-              email : data.user.email,
-              token : data.user.autoLoginToken
+              email : data.loginInfo.email,
+              token : data.loginInfo.autoLoginToken
             }
           }).done(function(data){
               if(data.success){
@@ -142,15 +142,15 @@ CONTENT = (function(){
   };
 
   var openNote = function(note){
-     chrome.storage.sync.get('user',function(data){
-       if(data && data.user){
+     chrome.storage.sync.get('loginInfo',function(data){
+       if(data && data.loginInfo){
           $.ajax({
             url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
-              email : data.user.email,
-              token : data.user.autoLoginToken
+              email : data.loginInfo.email,
+              token : data.loginInfo.autoLoginToken
             }
           }).done(function(data){
               if(data.success){
