@@ -4,6 +4,7 @@ MAIN = (function() {
      GO_SETTING : 'goSetting',
      HOT_KEYS : 'hotkeys',
      ACCOUNT : 'account',
+     LOGO : 'logo',
      LOGOUT : 'logout',
      SEL_SPACE : 'selSpace',
      LINK_TEMP : 'linkTemp',
@@ -35,6 +36,11 @@ MAIN = (function() {
 
   
   var bind = {
+      logo_click : function(){
+         $('#' + ELS_IDS.LOGO).click(function(){
+            window.open(Y_COMMON.config.server.home);
+         });
+      },
       close : function(){
          $('.' + ELS_CLASS.CLOSE).click(function(){
             chrome.runtime.sendMessage({action:'close'});
@@ -256,13 +262,13 @@ MAIN = (function() {
               '<p class="desc">', 
                 link.description + '</p>', 
               '<p class="linkOP">', 
-                '<a href="#" class="editTag btn btn-primary btn-xs" role="button">', 
-                  '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', 
+                '<a href="#" class="editTag btn btn-primary btn-xs" role="button" title="edit">', 
+                  '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', 
                 '</a>', 
                 // '<a href="#" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#shareModal">', 
                 //   '<span class="glyphicon glyphicon-share" aria-hidden="true">', 
                 // '</a>', 
-                '<a href="#" class="delTag btn btn-danger btn-xs" role="button">', 
+                '<a href="#" class="delTag btn btn-danger btn-xs" role="button" title="delete">', 
                   '<span class="glyphicon glyphicon-trash" aria-hidden="true">', 
                 '</a>',
               '</p>', 

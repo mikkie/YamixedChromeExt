@@ -25,8 +25,12 @@ CONTENT = (function(){
        description = descs[0].content == null ? '' : descs[0].content;
      } 
      var images = [];
+     if(message.tab.favIconUrl){
+           images[0] = message.tab.favIconUrl;
+     }
+     var count = images.length == 0 ? 20 : 19;
      $('img').each(function(i,n){
-       if(i < 20){
+       if(i < count){
          var src = $(n).attr('src');
          if(src){
            src = COMMON.absolute(src);
@@ -56,15 +60,15 @@ CONTENT = (function(){
 
 
   var checkAutoLogin = function(callback){
-     chrome.storage.sync.get('user',function(data){
-       if(data && data.user){
+     chrome.storage.sync.get('loginInfo',function(data){
+       if(data && data.loginInfo){
           $.ajax({
             url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
-              email : data.user.email,
-              token : data.user.autoLoginToken
+              email : data.loginInfo.email,
+              token : data.loginInfo.autoLoginToken
             }
           }).done(function(data){
               if(data.success){
@@ -99,15 +103,15 @@ CONTENT = (function(){
   };
 
   var openBookmark = function(callback){
-    chrome.storage.sync.get('user',function(data){
-       if(data && data.user){
+    chrome.storage.sync.get('loginInfo',function(data){
+       if(data && data.loginInfo){
           $.ajax({
             url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
-              email : data.user.email,
-              token : data.user.autoLoginToken
+              email : data.loginInfo.email,
+              token : data.loginInfo.autoLoginToken
             }
           }).done(function(data){
               if(data.success){
@@ -138,15 +142,15 @@ CONTENT = (function(){
   };
 
   var openNote = function(note){
-     chrome.storage.sync.get('user',function(data){
-       if(data && data.user){
+     chrome.storage.sync.get('loginInfo',function(data){
+       if(data && data.loginInfo){
           $.ajax({
             url : host + '/login/autoLogin',
             dataType : 'json',
             type : 'post',
             data : {
-              email : data.user.email,
-              token : data.user.autoLoginToken
+              email : data.loginInfo.email,
+              token : data.loginInfo.autoLoginToken
             }
           }).done(function(data){
               if(data.success){

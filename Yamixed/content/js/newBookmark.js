@@ -3,6 +3,7 @@ Bookmark = (function() {
   var ELS_IDS = {
     GO_BACK : 'logo',
     GO_SETTING : 'goSetting',
+    LOGOUT : 'logout',
     TITLE : 'title',
     DESC : 'desc',
     IMAGE_HOLDER : 'imageHolder',
@@ -70,6 +71,11 @@ Bookmark = (function() {
         $('#' + ELS_IDS.GO_BACK).click(function(){
             showPage("content/content.html?spaceId=" + $('#' + ELS_IDS.CURRENT_SPACE).attr('spaceId'),'900px','600px');
         });
+      },
+      logout : function(){
+         $('#' + ELS_IDS.LOGOUT).click(function(){
+            showPage("content/login.html",'400px','300px');
+         });
       },
       go_setting : function(){
          $('#' + ELS_IDS.GO_SETTING).click(function(){
