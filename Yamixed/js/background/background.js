@@ -1,3 +1,5 @@
+var gMousePos= {};
+
 (function init(){
   chrome.tabs.query({},function(tabs){
     for(var i in tabs){
@@ -39,6 +41,12 @@ chrome.runtime.onMessage.addListener(function (msg, sender,sendResponse) {
     chrome.bookmarks.getTree(function(nodes){
       sendResponse(nodes);
     });
+    return true;
+  }
+  else if(msg.action == 'mousePos'){
+    gMousePos.x = msg.x;
+    gMousePos.y = msg.y;
+    sendResponse({});
     return true;
   }
   sendMessageToActivePage(msg,function(response) {
@@ -101,6 +109,31 @@ chrome.omnibox.onInputChanged.addListener(function(text,suggest){
 });
 
 
+var fetchFavicon = function(url) {
+    return new Promise(function(resolve, reject) {
+        var img = new Image();
+        img.onload = function () {
+            var canvas = document.createElement("canvas");
+            canvas.width =this.width;
+            canvas.height =this.height;
+
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(this, 0, 0);
+
+            var dataURL = canvas.toDataURL("image/png");
+            resolve(dataURL);
+        };
+        img.src = 'chrome://favicon/' + url;
+    });
+};
+
+
 chrome.omnibox.onInputEntered.addListener(function(text,disposition){
    window.open(text);
 });
+
+chrome.contextMenus.create({"title" : "Write Note Here", "onclick" : function(info,tab){
+   chrome.tabs.sendMessage(tab.id,$.extend({},{tab : tab},{action : 'writeNote',pos : gMousePos}),function(response){
+      
+   });
+}}, function(){});

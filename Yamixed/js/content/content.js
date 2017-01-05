@@ -135,6 +135,7 @@ CONTENT = (function(){
     $.get(chrome.extension.getURL('/content/contentWrapper.html'), function(data) {
         $('#' + ELS_IDS.MAIN_BODY).remove();
         $('body').append(data);
+        note.siteIcon = getFavicon();
         chrome.storage.sync.set({"yamixedNote" : note},function(data){
           openDialog(chrome.extension.getURL('/content/note.html'),true,{width : '900px',height : '600px'});
         });
@@ -193,7 +194,9 @@ CONTENT = (function(){
       //1.remove old if exist  
       clearOldNote(note);
       //2.use line hight light
-      $('body').highlight(sentence,note);
+      if(sentence){
+        $('body').highlight(sentence,note);
+      }
       //3.if line high light not work
       if($('#yamixed-note-' + note._id).length == 0){
           var $noteBtn = $('<div class="yamixed-highlight" style="z-index:999999;opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/images/logo_24x24G.jpg"/></div>');
@@ -244,6 +247,9 @@ CONTENT = (function(){
     }
     else if('lowlight' == message.action){
        lowlightNote(message.note,sendResponse);
+    }
+    else if('writeNote' == message.action){
+       writeNote(message,sendResponse);
     }
   });
 
@@ -318,6 +324,20 @@ CONTENT = (function(){
       while( urlparts[0]=='..' ){baseparts.pop();urlparts.shift();} // remove .. parts from url and corresponding directory levels from base
       urla.pathname=baseparts.join('/')+'/'+urlparts.join('/');
       return urla.href;
+  };
+
+  var getFavicon = function(){
+      var favicon = undefined;
+      var nodeList = document.getElementsByTagName("link");
+      for (var i = 0; i < nodeList.length; i++){
+        if((nodeList[i].getAttribute("rel") == "icon")||(nodeList[i].getAttribute("rel") == "shortcut icon")){
+            favicon = nodeList[i].getAttribute("href");
+        }
+      }
+      if(favicon){
+        return absolute(favicon);
+      }//http://www.google.com/s2/favicons?domain=show
+      return 'http://statics.dnspod.cn/proxy_favicon/_/favicon?domain=' + window.location.host;   
   };
 
 
@@ -420,7 +440,26 @@ CONTENT = (function(){
   })();
 
 
+  var writeNote = function(message,sendResponse){
+     var $noteBtn = $('<div class="yamixed-note" style="z-index:999999;opacity:0.8;cursor:pointer;position:absolute;"><img src="chrome-extension://djfobohmipckdjpeackegnlbmmmnmaka/images/logo_24x24.jpg"/></div>');
+     var x = message.pos.x;
+     var y = message.pos.y;
+     $noteBtn.css('top',y + 'px');
+     $noteBtn.css('left',x + 'px');
+     $noteBtn.data('note',{sentence : '',x : x,y : y, url : window.location.href});
+     $('body').append($noteBtn);
+     openNote($noteBtn.data('note'));
+     if(sendResponse){
+       sendResponse();
+     }
+  };
+
   var bind = {
+    getMousePos : function(){
+      $(window).mouseup(function(e){
+         chrome.runtime.sendMessage({action : 'mousePos', x : e.pageX, y : e.pageY}, function(response) {});
+      });
+    },
     newNote : function(){
       var getSelected = function () {
         if (window.getSelection) return window.getSelection();
