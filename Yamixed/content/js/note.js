@@ -48,16 +48,22 @@ Note = (function() {
            $('#' + ELS_IDS.TAGS + ' button').each(function(){
               tags.push($(this).text());
            });
-           var content = $('#' + ELS_IDS.EDITOR).val();
+           var $editor = $('#' + ELS_IDS.EDITOR);
+           var content = $editor.val();
+           if(!content){
+              $editor.focus();
+              return false;
+           }
            chrome.storage.sync.get("yamixedNote",function(data){
               var id = data.yamixedNote._id;
               var sentence = data.yamixedNote.sentence;
+              var icon = data.yamixedNote.siteIcon;
               var url = data.yamixedNote.url;
               var x = data.yamixedNote.x;
               var y = data.yamixedNote.y;
               var space = $('#' + ELS_IDS.SEL_SPACE).val();
               Y_COMMON.service.getLogindUser(function(data){
-                 Service.saveNote(id,space,content,sentence,url,x,y,data.user._id,tags).done(function(data){
+                 Service.saveNote(id,space,content,sentence,icon,url,x,y,data.user._id,tags).done(function(data){
                     chrome.runtime.sendMessage({action:'close'});
                     if(data.success){
                       chrome.runtime.sendMessage({action:'highlight',note:data.success});

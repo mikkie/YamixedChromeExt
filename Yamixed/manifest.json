@@ -11,7 +11,7 @@
   "icons": {
     "16": "images/logo_16x16.png"
   },
-  "permissions": ["tabs","bookmarks","notifications","http://*/*","https://*/*","storage"],
+  "permissions": ["tabs","bookmarks","notifications","http://*/*","https://*/*","storage","contextMenus"],
   "manifest_version": 2,
   "background": {
      "scripts": ["jquery/jquery-1.11.1.min.js","js/background/background.js","content/js/service.js","content/js/common.js"]
